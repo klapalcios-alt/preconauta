@@ -1202,6 +1202,35 @@
         }
         return dirFactor * a.name.localeCompare(b.name, "pt-BR");
       }
+
+      async function fetchSiteData() {
+        const urlCandidates = [
+          `../data/${LEAGUE}/site.json`,
+          `/data/${LEAGUE}/site.json`,
+          `./data/${LEAGUE}/site.json`,
+        ];
+        let lastError = null;
+
+        for (const url of urlCandidates) {
+          try {
+            const res = await fetch(url, { cache: "no-store" });
+            if (!res.ok) {
+              lastError = new Error(`HTTP ${res.status} em ${url}`);
+              continue;
+            }
+            return await res.json();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+
+        const tried = urlCandidates.join(", ");
+        throw new Error(
+          `Dados reais indisponiveis (${tried}).` +
+            (lastError ? ` Ultimo erro: ${lastError.message || lastError}` : "")
+        );
+      }
+
       function LeagueQuarterly() {
         const [players, setPlayers] = useState([]);
         const [allMatches, setAllMatches] = useState([]);
@@ -1225,12 +1254,7 @@
             try {
               setLoading(true);
               setNotice("");
-              const res = await fetch(`../data/${LEAGUE}/site.json`, { cache: "no-store" });
-              if (!res.ok) {
-                throw new Error(NO_DATA_MESSAGE);
-              }
-
-              const data = await res.json();
+              const data = await fetchSiteData();
               const matches = Array.isArray(data.matches) ? data.matches : [];
               const scores = Array.isArray(data.event_scores)
                 ? data.event_scores
