@@ -1,0 +1,16 @@
+[
+  { "tid": "liga-mesao-online-s1-e01", "league": "online" },
+  { "tid": "liga-mesao-online-s1-e02", "league": "online" },
+  { "tid": "liga-mesao-online-s1-e03", "league": "online" },
+  { "tid": "liga-mesao-online-s1-e04", "league": "online" },
+  { "tid": "liga-mesao-online-s1-e05", "league": "online" },
+  { "tid": "liga-mesao-presencial-s1-e01", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e02", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e03", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e04", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e05", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e06", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e07", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e08", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s1-e09", "league": "presencial" }
+]

@@ -1,0 +1,16 @@
+Rodar servidor local:
+python -m http.server 8000
+
+bypass:
+Set-ExecutionPolicy -Scope Process Bypass -Force
+
+atualização:
+.\run_sync.ps1
+
+site host: 
+http://localhost:8000/site/index.html
+
+[
+  { "tid": "friday-nights-precon-etapa-28", "league": "presencial" },
+  { "tid": "friday-nights-precon-etapa-29", "league": "online" }
+]

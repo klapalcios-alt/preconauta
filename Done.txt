@@ -1,0 +1,10 @@
+Corrigir pontuação:
+- a pontuação ainda esta puxando a soma dos pontos do top deck.
+
+Criar um pagina de jogador:
+- mostrar um detalhamento do jogador, quantos pontos fez por evento e por mes
+- contra quem ele mais jogou, e o win rate dlee em cima de cada jogador que ja jogou contra.
+- os decks que ele mais jogou e melhor desempenhou
+
+corrigir elementos de ranking
+- falta Opp Wr%

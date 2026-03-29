@@ -1,0 +1,266 @@
+{
+  "project": "preconauta-league",
+  "version": "2026-03-05",
+  "leagues": [
+    "presencial",
+    "online"
+  ],
+  "topdeck": {
+    "api_base": "https://topdeck.gg/api",
+    "auth_header": "Authorization",
+    "env_var": "TOPDECK_API_KEY",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/v2/tournaments",
+        "payload": {
+          "columns": [
+            "decklist",
+            "wins",
+            "draws",
+            "losses"
+          ],
+          "rounds": true,
+          "tables": [
+            "table",
+            "players",
+            "winner"
+          ],
+          "players": [
+            "name",
+            "id",
+            "decklist"
+          ],
+          "TID": [
+            "<tid>"
+          ],
+          "game": "Magic: The Gathering",
+          "format": "EDH"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/v2/tournaments/{tid}/"
+      },
+      {
+        "method": "GET",
+        "path": "/v2/tournaments/{tid}/rounds"
+      }
+    ]
+  },
+  "input_files": {
+    "events_json": {
+      "path": "events.json",
+      "fields": [
+        {
+          "name": "tid",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "league",
+          "type": "string",
+          "required": false,
+          "allowed": [
+            "presencial",
+            "online"
+          ],
+          "default": "presencial"
+        }
+      ]
+    },
+    "deck_map_csv": {
+      "path": "Deck_map.csv",
+      "required_columns": [
+        "Link",
+        "Nome PT-BR",
+        "Nome ENG",
+        "ColeÃ§Ã£o"
+      ]
+    },
+    "player_aliases_json": {
+      "path": "player_aliases.json",
+      "optional": true
+    }
+  },
+  "outputs_per_league": {
+    "csv": {
+      "standings.csv": [
+        "tid",
+        "tournament_name",
+        "start_date",
+        "month",
+        "player_name",
+        "player_id",
+        "standing",
+        "points",
+        "win_rate",
+        "opp_win_rate",
+        "decklist",
+        "commanders",
+        "event_rank",
+        "event_points",
+        "event_players"
+      ],
+      "tables.csv": [
+        "tid",
+        "tournament_name",
+        "start_date",
+        "round",
+        "table",
+        "status"
+      ],
+      "matches.csv": [
+        "tid",
+        "tournament_name",
+        "start_date",
+        "month",
+        "round",
+        "table",
+        "status",
+        "winner_id",
+        "winner_name",
+        "player_id",
+        "player_name",
+        "is_winner",
+        "deck_url",
+        "deck_raw",
+        "deck_name_pt",
+        "deck_name_en",
+        "colecao"
+      ],
+      "event_summary.csv": [
+        "tid",
+        "player_name",
+        "tournament_name",
+        "start_date",
+        "month",
+        "matches",
+        "wins",
+        "draws",
+        "losses",
+        "points_match",
+        "win_rate",
+        "opp_win_rate",
+        "event_rank",
+        "event_points",
+        "event_players"
+      ],
+      "player.csv": [
+        "tid",
+        "tournament_name",
+        "start_date",
+        "event_day",
+        "month",
+        "round",
+        "table",
+        "player_id",
+        "player_name",
+        "player_deck",
+        "opponent_id",
+        "opponent_name",
+        "opponent_deck",
+        "result"
+      ],
+      "monthly_best.csv": [
+        "tid",
+        "player_name",
+        "tournament_name",
+        "start_date",
+        "month",
+        "matches",
+        "wins",
+        "draws",
+        "losses",
+        "points_match",
+        "win_rate",
+        "opp_win_rate",
+        "event_rank",
+        "event_points",
+        "event_players"
+      ],
+      "league_table.csv": [
+        "player_name",
+        "league_points",
+        "eventos",
+        "deck_principal"
+      ],
+      "deck_stats.csv": [
+        "deck_key",
+        "partidas_jogadas",
+        "vitorias",
+        "empates",
+        "jogadores_unicos",
+        "eventos",
+        "derrotas",
+        "win_rate",
+        "deck_name_pt",
+        "deck_name_en",
+        "colecao",
+        "deck_url"
+      ],
+      "unmapped_decks.csv": [
+        "tid",
+        "tournament_name",
+        "start_date",
+        "player_name",
+        "deck_url"
+      ]
+    },
+    "json": {
+      "site.json": {
+        "keys": [
+          "standings",
+          "tables",
+          "matches",
+          "event_scores",
+          "monthly_best",
+          "league_table",
+          "deck_stats"
+        ]
+      }
+    }
+  },
+  "core_formulas": {
+    "draw_detection": "winner_id=='draw' OR winner_name=='draw' OR status contains 'draw' OR 'empate' OR regex /\\bid\\b/",
+    "points_match": "wins*3 + draws*1",
+    "win_rate": "wins / matches",
+    "opp_win_rate_event": "average of opponents' player win_rate across table pairings",
+    "event_sort": [
+      "points_match desc",
+      "win_rate desc",
+      "opp_win_rate desc"
+    ],
+    "event_rank": "dense rank",
+    "event_points": {
+      "rank_1": 3,
+      "if_players_le_12": "ranks 2..4 = 2 else 1",
+      "if_players_le_24": "ranks 2..8 = 2 else 1",
+      "if_players_gt_24": "ranks 2..16 = 2 else 1"
+    },
+    "quarterly_points_backend": {
+      "less_than_4_events": "keep all",
+      "otherwise": [
+        "preserve best event per month in quarter",
+        "drop 3 worst among non-preserved by event_points asc, points_match asc, win_rate asc, opp_win_rate asc, start_date asc"
+      ],
+      "sum": "sum event_points of kept events"
+    },
+    "deck_ban_frontend": "partidas_jogadas >= 24 AND win_rate >= 0.3333333333"
+  },
+  "frontend_pages": {
+    "site/index.html": "League selector",
+    "site/players.html": "Global player ranking with event filters",
+    "site/liga.html": "Quarterly ranking with quarter+event filters",
+    "site/player.html": "Single player deep dive",
+    "site/decks.html": "Deck performance table + banned section",
+    "site/decks-banidos.html": "Banned decks page",
+    "site/regras.html": "Static rules page",
+    "site/privacidade.html": "Static privacy page"
+  },
+  "known_gaps": [
+    "README scoring text differs from implemented code for 25-36 player range",
+    "Frontend ranking logic in players/liga is simplified vs backend quarterly discard logic",
+    "Deck_map column name is legacy-encoded as ColeÃ§Ã£o"
+  ]
+}

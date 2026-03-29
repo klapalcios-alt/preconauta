@@ -1,0 +1,1922 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liga Preconauta - Liga Trimestral</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      :root {
+        --font-body: "Manrope", "Segoe UI", sans-serif;
+        --font-display: "Fraunces", "Georgia", serif;
+        --text: #0f172a;
+        --muted: #475569;
+        --bg-1: #f8fafc;
+        --bg-2: #e2e8f0;
+        --glass: rgba(255, 255, 255, 0.72);
+        --glass-border: rgba(148, 163, 184, 0.4);
+        --glass-highlight: rgba(255, 255, 255, 0.65);
+        --glass-strong: rgba(255, 255, 255, 0.9);
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+        --shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.12);
+        --accent-gold: #d8b45a;
+        --accent-silver: #c9cfdb;
+        --accent-bronze: #c28b62;
+        --accent-ink: #0f172a;
+        --chip-bg: rgba(255, 255, 255, 0.6);
+        --chip-border: rgba(148, 163, 184, 0.35);
+        --blob-1: rgba(248, 187, 99, 0.45);
+        --blob-2: rgba(99, 102, 241, 0.35);
+        --blob-3: rgba(16, 185, 129, 0.32);
+      }
+
+      html[data-theme="dark"] {
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --bg-1: #05060b;
+        --bg-2: #0f172a;
+        --glass: rgba(8, 12, 20, 0.65);
+        --glass-border: rgba(148, 163, 184, 0.18);
+        --glass-highlight: rgba(255, 255, 255, 0.08);
+        --glass-strong: rgba(15, 23, 42, 0.85);
+        --shadow: 0 30px 80px rgba(2, 6, 23, 0.6);
+        --shadow-soft: 0 20px 40px rgba(2, 6, 23, 0.45);
+        --chip-bg: rgba(15, 23, 42, 0.7);
+        --chip-border: rgba(148, 163, 184, 0.2);
+        --blob-1: rgba(251, 191, 36, 0.18);
+        --blob-2: rgba(96, 165, 250, 0.22);
+        --blob-3: rgba(236, 72, 153, 0.2);
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        color: var(--text);
+        background: radial-gradient(
+            1200px circle at 10% 10%,
+            rgba(248, 187, 99, 0.18),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px circle at 90% 20%,
+            rgba(99, 102, 241, 0.2),
+            transparent 60%
+          ),
+          linear-gradient(160deg, var(--bg-1), var(--bg-2));
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .font-display {
+        font-family: var(--font-display);
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .blob {
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.8;
+        mix-blend-mode: screen;
+        animation: float 16s ease-in-out infinite;
+      }
+
+      .blob-1 {
+        background: radial-gradient(circle at 30% 30%, var(--blob-1), transparent 65%);
+        top: -120px;
+        left: -80px;
+      }
+
+      .blob-2 {
+        background: radial-gradient(circle at 40% 40%, var(--blob-2), transparent 65%);
+        top: 10%;
+        right: -120px;
+        animation-delay: -4s;
+      }
+
+      .blob-3 {
+        background: radial-gradient(circle at 30% 40%, var(--blob-3), transparent 65%);
+        bottom: -140px;
+        left: 20%;
+        animation-delay: -8s;
+      }
+
+      .glass-card,
+      .glass-panel,
+      .glass-table {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        position: relative;
+      }
+
+      .glass-card::after,
+      .glass-panel::after,
+      .glass-table::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: inherit;
+        border: 1px solid var(--glass-highlight);
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      .glass-card {
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+
+      .glass-card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-soft);
+        border-color: var(--glass-highlight);
+      }
+
+      .glass-card[data-tilt]:hover {
+        transform: none;
+        box-shadow: var(--shadow);
+        border-color: var(--glass-border);
+      }
+
+      .glass-panel {
+        padding: 2rem;
+      }
+
+      .glass-table {
+        overflow: hidden;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        border: 1px solid var(--chip-border);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .pill.active {
+        color: var(--accent-ink);
+        background: linear-gradient(135deg, rgba(248, 187, 99, 0.3), rgba(148, 163, 184, 0.2));
+        border-color: rgba(248, 187, 99, 0.45);
+      }
+
+      .pill.accent {
+        color: #0f172a;
+        background: linear-gradient(120deg, rgba(248, 187, 99, 0.9), rgba(96, 165, 250, 0.75));
+        border-color: rgba(248, 187, 99, 0.6);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid var(--chip-border);
+        background: var(--glass-strong);
+        color: var(--text);
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--glass-highlight);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn-ghost {
+        background: transparent;
+      }
+
+      .input-glass,
+      select {
+        background: var(--glass-strong);
+        border: 1px solid var(--glass-border);
+        border-radius: 999px;
+        padding: 0.6rem 1rem;
+        color: var(--text);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .input-glass:focus,
+      select:focus {
+        outline: none;
+        border-color: rgba(248, 187, 99, 0.6);
+        box-shadow: 0 0 0 2px rgba(248, 187, 99, 0.15);
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible {
+        outline: 2px solid rgba(248, 187, 99, 0.8);
+        outline-offset: 2px;
+      }
+
+      .title-gradient {
+        background: linear-gradient(110deg, #f8e1a3, #f6b37a 40%, #60a5fa 70%, #f472b6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .rank-gold {
+        border-color: rgba(248, 187, 99, 0.6);
+        box-shadow: 0 0 0 1px rgba(248, 187, 99, 0.4), 0 16px 30px rgba(248, 187, 99, 0.2);
+      }
+
+      .rank-silver {
+        border-color: rgba(203, 213, 225, 0.6);
+        box-shadow: 0 0 0 1px rgba(203, 213, 225, 0.4), 0 16px 30px rgba(148, 163, 184, 0.2);
+      }
+
+      .rank-bronze {
+        border-color: rgba(194, 139, 98, 0.6);
+        box-shadow: 0 0 0 1px rgba(194, 139, 98, 0.4), 0 16px 30px rgba(194, 139, 98, 0.2);
+      }
+
+      .podium-card:hover {
+        transform: translateY(-4px) scale(1.03);
+      }
+
+      .podium-card[data-tilt]:hover {
+        transform: none;
+      }
+
+      .reveal {
+        animation: fadeUp 0.8s ease both;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+        50% {
+          transform: translateY(30px) translateX(-20px);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .blob,
+        .reveal,
+        .glass-card {
+          animation: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useEffect, useMemo, useState } = React;
+      const VALID_LEAGUES = new Set(["presencial", "online"]);
+
+      function getLeagueFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const league = params.get("league");
+        return VALID_LEAGUES.has(league) ? league : "presencial";
+      }
+
+      function withLeague(url, league) {
+        const [path, hash] = url.split("#");
+        const [base, query] = path.split("?");
+        const params = new URLSearchParams(query || "");
+        params.set("league", league);
+        const qs = params.toString();
+        return `${base}${qs ? `?${qs}` : ""}${hash ? `#${hash}` : ""}`;
+      }
+
+      const LEAGUE = getLeagueFromQuery();
+      const NO_DATA_MESSAGE = "Sem dados por enquanto, desculpe =(";
+
+      const IconBase = ({ children, size = 24, className = "", ...props }) => (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+          {...props}
+        >
+          {children}
+        </svg>
+      );
+
+      const Trophy = (p) => (
+        <IconBase {...p}>
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+          <path d="M4 22h16" />
+          <path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22" />
+          <path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22" />
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </IconBase>
+      );
+      const Search = (p) => (
+        <IconBase {...p}>
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </IconBase>
+      );
+      const User = (p) => (
+        <IconBase {...p}>
+          <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+          <circle cx="12" cy="7" r="4" />
+        </IconBase>
+      );
+      const Calendar = (p) => (
+        <IconBase {...p}>
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+          <line x1="16" x2="16" y1="2" y2="6" />
+          <line x1="8" x2="8" y1="2" y2="6" />
+          <line x1="3" x2="21" y1="10" y2="10" />
+        </IconBase>
+      );
+      const Shield = (p) => (
+        <IconBase {...p}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+        </IconBase>
+      );
+      const Crown = (p) => (
+        <IconBase {...p}>
+          <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+        </IconBase>
+      );
+      const Swords = (p) => (
+        <IconBase {...p}>
+          <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" />
+          <line x1="13" x2="19" y1="19" y2="13" />
+          <line x1="16" x2="20" y1="16" y2="20" />
+          <line x1="19" x2="21" y1="21" y2="19" />
+          <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5" />
+          <line x1="5" x2="9" y1="14" y2="18" />
+          <line x1="7" x2="4" y1="17" y2="20" />
+          <line x1="3" x2="5" y1="19" y2="21" />
+        </IconBase>
+      );
+      const Phone = (p) => (
+        <IconBase {...p}>
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+        </IconBase>
+      );
+      const Mail = (p) => (
+        <IconBase {...p}>
+          <rect width="20" height="16" x="2" y="4" rx="2" />
+          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+        </IconBase>
+      );
+      const Instagram = (p) => (
+        <IconBase {...p}>
+          <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+          <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+        </IconBase>
+      );
+      const Youtube = (p) => (
+        <IconBase {...p}>
+          <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
+          <path d="m10 15 5-3-5-3z" />
+        </IconBase>
+      );
+      const MessageCircle = (p) => (
+        <IconBase {...p}>
+          <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" />
+        </IconBase>
+      );
+      const TreePine = (p) => (
+        <IconBase {...p}>
+          <path d="M12 2l4 6h-3l3 4h-3l3 4H8l3-4H8l3-4H8l4-6z" />
+          <path d="M12 14v8" />
+        </IconBase>
+      );
+      const Users = (p) => (
+        <IconBase {...p}>
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </IconBase>
+      );
+      const FileText = (p) => (
+        <IconBase {...p}>
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+          <path d="M10 9H8" />
+          <path d="M16 13H8" />
+          <path d="M16 17H8" />
+        </IconBase>
+      );
+      const FileCheck = (p) => (
+        <IconBase {...p}>
+          <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
+          <path d="M14 2v4a2 2 0 0 0 2 2h4" />
+          <path d="m9 15 2 2 4-4" />
+        </IconBase>
+      );
+
+      const Card = ({ children, className = "", ...props }) => (
+        <div className={`glass-card ${className}`} {...props}>
+          {children}
+        </div>
+      );
+
+      const Badge = ({ rank }) => {
+        if (rank === 1)
+          return (
+            <span className="text-amber-300 inline-flex">
+              <Crown size={20} fill="currentColor" stroke="none" />
+            </span>
+          );
+        if (rank === 2)
+          return (
+            <span className="text-slate-200 inline-flex">
+              <Trophy size={18} />
+            </span>
+          );
+        if (rank === 3)
+          return (
+            <span className="text-amber-700 inline-flex">
+              <Trophy size={18} />
+            </span>
+          );
+        return <span className="text-slate-400 font-mono">#{rank}</span>;
+      };
+
+      function parseDateYYYYMMDD(s) {
+        if (!s) return null;
+        const d = new Date(s + "T00:00:00");
+        return Number.isNaN(d.getTime()) ? null : d;
+      }
+
+      function formatPtBR(d) {
+        return d ? d.toLocaleDateString("pt-BR") : "N/D";
+      }
+
+      function formatPercent(value) {
+        if (!Number.isFinite(value)) return "-";
+        return `${(value * 100).toFixed(1)}%`;
+      }
+
+      function buildWinsMap(matches) {
+        const map = new Map();
+        const seenByPlayer = new Map();
+        (matches || []).forEach((m) => {
+          const name = m.player_name;
+          const key = getTableKey(m);
+          const isWinner = Number(m.is_winner || 0) === 1;
+          if (!name || !key || !isWinner) return;
+          let seen = seenByPlayer.get(name);
+          if (!seen) {
+            seen = new Set();
+            seenByPlayer.set(name, seen);
+          }
+          if (seen.has(key)) return;
+          seen.add(key);
+          const w = Number(m.is_winner || 0);
+          map.set(name, (map.get(name) || 0) + w);
+        });
+        return map;
+      }
+
+      function getTableKey(m) {
+        const tid = typeof m?.tid === "string" && m.tid.trim() ? m.tid.trim() : null;
+        const round = m?.round;
+        const table = m?.table;
+        if (!tid || round == null || table == null) return null;
+        return `${tid}::${round}::${table}`;
+      }
+
+      function countDistinctTables(rows) {
+        const seen = new Set();
+        (rows || []).forEach((row) => {
+          const key = getTableKey(row);
+          if (key) seen.add(key);
+        });
+        return seen.size;
+      }
+
+      function buildMatchCounts(matches) {
+        const map = new Map();
+        const seenByPlayer = new Map();
+        (matches || []).forEach((m) => {
+          const name = m.player_name;
+          const key = getTableKey(m);
+          if (!name || !key) return;
+          let seen = seenByPlayer.get(name);
+          if (!seen) {
+            seen = new Set();
+            seenByPlayer.set(name, seen);
+          }
+          if (seen.has(key)) return;
+          seen.add(key);
+          map.set(name, (map.get(name) || 0) + 1);
+        });
+        return map;
+      }
+
+      function buildPlayerWinrateMap(matches) {
+        const winsMap = buildWinsMap(matches);
+        const matchCounts = buildMatchCounts(matches);
+        const names = new Set([...winsMap.keys(), ...matchCounts.keys()]);
+        const result = new Map();
+        names.forEach((name) => {
+          const wins = winsMap.get(name) || 0;
+          const total = matchCounts.get(name) || 0;
+          result.set(name, total > 0 ? wins / total : null);
+        });
+        return result;
+      }
+
+      function getEventKey(m) {
+        const tid = typeof m?.tid === "string" && m.tid.trim() ? m.tid.trim() : null;
+        if (tid) return tid;
+        const name =
+          typeof m?.tournament_name === "string" && m.tournament_name.trim()
+            ? m.tournament_name.trim()
+            : null;
+        const date =
+          typeof m?.start_date === "string" && m.start_date.trim() ? m.start_date.trim() : null;
+        if (name && date) return `${name}::${date}`;
+        return name || date || null;
+      }
+
+      function buildEventCounts(matches) {
+        const map = new Map();
+        const seen = new Map();
+        (matches || []).forEach((m) => {
+          const name = m.player_name;
+          if (!name) return;
+          const key = getEventKey(m);
+          if (!key) return;
+          let set = seen.get(name);
+          if (!set) {
+            set = new Set();
+            seen.set(name, set);
+          }
+          if (set.has(key)) return;
+          set.add(key);
+          map.set(name, (map.get(name) || 0) + 1);
+        });
+        return map;
+      }
+
+      function isDrawMatch(m) {
+        const status = String(m?.status || "").toLowerCase();
+        const winnerId = String(m?.winner_id || "").toLowerCase();
+        const winnerName = String(m?.winner_name || "").toLowerCase();
+        return (
+          winnerId === "draw" ||
+          winnerName === "draw" ||
+          status.includes("draw") ||
+          status.includes("empate") ||
+          /\bid\b/.test(status)
+        );
+      }
+
+      function quarterKeyFromRow(row) {
+        const monthRaw = typeof row?.month === "string" ? row.month.trim() : "";
+        if (/^\d{4}-\d{2}$/.test(monthRaw)) {
+          const [yearText, monthText] = monthRaw.split("-");
+          const year = Number(yearText);
+          const month = Number(monthText);
+          if (Number.isFinite(year) && Number.isFinite(month) && month >= 1 && month <= 12) {
+            const quarter = Math.floor((month - 1) / 3) + 1;
+            return `${year}-Q${quarter}`;
+          }
+        }
+        const d = parseDateYYYYMMDD(row?.start_date);
+        if (!d) return null;
+        return `${d.getFullYear()}-Q${Math.floor(d.getMonth() / 3) + 1}`;
+      }
+
+      function toLeagueScoreRows(eventScores) {
+        const rows = [];
+        (eventScores || []).forEach((row) => {
+          const name = row?.player_name;
+          const quarter = quarterKeyFromRow(row);
+          const eventKey = getEventKey(row);
+          if (!name || !quarter || !eventKey) return;
+          const d = parseDateYYYYMMDD(row?.start_date);
+          rows.push({
+            player_name: name,
+            quarter,
+            event_key: eventKey,
+            event_points: Number.isFinite(Number(row?.event_points)) ? Number(row.event_points) : 0,
+            points_match: Number.isFinite(Number(row?.points_match)) ? Number(row.points_match) : 0,
+            win_rate: Number.isFinite(Number(row?.win_rate)) ? Number(row.win_rate) : 0,
+            opp_win_rate: Number.isFinite(Number(row?.opp_win_rate)) ? Number(row.opp_win_rate) : 0,
+            date_sort: d ? d.getTime() : Number.POSITIVE_INFINITY,
+            start_date: row?.start_date || null,
+            month: row?.month || null,
+            tournament_name: row?.tournament_name || null,
+          });
+        });
+        return rows;
+      }
+
+      function expandAbsencesWithZeroRows(scoreRows) {
+        const eventsByQuarter = new Map();
+        const playersByQuarter = new Map();
+        const presentByQuarterPlayer = new Map();
+
+        (scoreRows || []).forEach((row) => {
+          const quarter = row.quarter;
+          const eventKey = row.event_key;
+          const name = row.player_name;
+          if (!quarter || !eventKey || !name) return;
+
+          let eventMap = eventsByQuarter.get(quarter);
+          if (!eventMap) {
+            eventMap = new Map();
+            eventsByQuarter.set(quarter, eventMap);
+          }
+          if (!eventMap.has(eventKey)) {
+            eventMap.set(eventKey, {
+              event_key: eventKey,
+              date_sort: row.date_sort,
+              start_date: row.start_date,
+              month: row.month,
+              tournament_name: row.tournament_name,
+            });
+          }
+
+          let players = playersByQuarter.get(quarter);
+          if (!players) {
+            players = new Set();
+            playersByQuarter.set(quarter, players);
+          }
+          players.add(name);
+
+          const presenceKey = `${quarter}::${name}`;
+          let presentSet = presentByQuarterPlayer.get(presenceKey);
+          if (!presentSet) {
+            presentSet = new Set();
+            presentByQuarterPlayer.set(presenceKey, presentSet);
+          }
+          presentSet.add(eventKey);
+        });
+
+        const expanded = [...(scoreRows || [])];
+        eventsByQuarter.forEach((eventMap, quarter) => {
+          const players = playersByQuarter.get(quarter);
+          if (!players) return;
+          players.forEach((name) => {
+            const presenceKey = `${quarter}::${name}`;
+            const presentSet = presentByQuarterPlayer.get(presenceKey) || new Set();
+            eventMap.forEach((meta, eventKey) => {
+              if (presentSet.has(eventKey)) return;
+              expanded.push({
+                player_name: name,
+                quarter,
+                event_key: eventKey,
+                event_points: 0,
+                points_match: 0,
+                win_rate: 0,
+                opp_win_rate: 0,
+                date_sort: meta.date_sort,
+                start_date: meta.start_date,
+                month: meta.month,
+                tournament_name: meta.tournament_name,
+              });
+            });
+          });
+        });
+        return expanded;
+      }
+
+      function compareScoreRowsAsc(a, b) {
+        if (a.event_points !== b.event_points) return a.event_points - b.event_points;
+        if (a.points_match !== b.points_match) return a.points_match - b.points_match;
+        if (a.win_rate !== b.win_rate) return a.win_rate - b.win_rate;
+        if (a.opp_win_rate !== b.opp_win_rate) return a.opp_win_rate - b.opp_win_rate;
+        if (a.date_sort !== b.date_sort) return a.date_sort - b.date_sort;
+        return String(a.event_key || "").localeCompare(String(b.event_key || ""), "pt-BR");
+      }
+
+      function buildLeaguePointsMap(eventScores) {
+        const rules =
+          LEAGUE === "online"
+            ? { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 2 }
+            : { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 3 };
+        const baseRows = toLeagueScoreRows(eventScores);
+        const rows = rules.includeAbsencesAsZero ? expandAbsencesWithZeroRows(baseRows) : baseRows;
+
+        const groups = new Map();
+        rows.forEach((row) => {
+          const key = `${row.player_name}::${row.quarter}`;
+          let group = groups.get(key);
+          if (!group) {
+            group = { player_name: row.player_name, rows: [] };
+            groups.set(key, group);
+          }
+          group.rows.push(row);
+        });
+
+        const totals = new Map();
+        groups.forEach((group) => {
+          const rowsByQuarter = group.rows;
+          let keptRows = rowsByQuarter;
+          if (rules.discardWorstResults && rowsByQuarter.length >= 4) {
+            const sorted = [...rowsByQuarter].sort(compareScoreRowsAsc);
+            const dropped = new Set(sorted.slice(0, rules.discardCount || 3));
+            keptRows = rowsByQuarter.filter((row) => !dropped.has(row));
+          }
+          const subtotal = keptRows.reduce((sum, row) => sum + (Number(row.event_points) || 0), 0);
+          totals.set(group.player_name, (totals.get(group.player_name) || 0) + subtotal);
+        });
+
+        return totals;
+      }
+
+      function buildOppWinrateMap(scores) {
+        const sum = new Map();
+        const weight = new Map();
+        (scores || []).forEach((row) => {
+          const name = row?.player_name;
+          const opp = Number(row?.opp_win_rate);
+          if (!name || !Number.isFinite(opp)) return;
+          const w = Number(row?.matches);
+          const weightVal = Number.isFinite(w) && w > 0 ? w : 1;
+          sum.set(name, (sum.get(name) || 0) + opp * weightVal);
+          weight.set(name, (weight.get(name) || 0) + weightVal);
+        });
+        const result = new Map();
+        sum.forEach((total, name) => {
+          const w = weight.get(name) || 0;
+          result.set(name, w ? total / w : 0);
+        });
+        return result;
+      }
+
+      function buildDeckUrlByName(matches) {
+        const map = new Map();
+        (matches || []).forEach((m) => {
+          const deckUrl = typeof m.deck_url === "string" && m.deck_url.trim() ? m.deck_url.trim() : null;
+          const deckName = [m.deck_name_en, m.deck_name_pt].find(
+            (v) => typeof v === "string" && v.trim()
+          );
+          if (!deckUrl || !deckName) return;
+          const key = deckName.trim();
+          if (!map.has(key)) map.set(key, deckUrl);
+        });
+        return map;
+      }
+
+      function buildPlayerDeckSummary(matches, deckUrlByName) {
+        const urlToName = new Map();
+        (matches || []).forEach((m) => {
+          const deckUrl = typeof m.deck_url === "string" && m.deck_url.trim() ? m.deck_url.trim() : null;
+          const deckName = [m.deck_name_en, m.deck_name_pt].find(
+            (v) => typeof v === "string" && v.trim()
+          );
+          if (deckUrl && deckName) {
+            urlToName.set(deckUrl, deckName.trim());
+          }
+        });
+
+        const counts = new Map();
+        (matches || []).forEach((m) => {
+          const name = m.player_name;
+          if (!name) return;
+
+          const deckUrl = typeof m.deck_url === "string" && m.deck_url.trim() ? m.deck_url.trim() : null;
+          const deckName = [m.deck_name_pt, m.deck_name_en].find(
+            (v) => typeof v === "string" && v.trim()
+          );
+          const deckNameResolved = deckName ? deckName.trim() : deckUrl ? urlToName.get(deckUrl) : null;
+          const deckKey = deckNameResolved || deckUrl;
+          if (!deckKey) return;
+
+          const deckLabel = deckNameResolved || deckKey;
+          const deckUrlResolved =
+            (deckUrl && deckUrl.trim()) ||
+            (deckNameResolved ? deckUrlByName.get(deckNameResolved) : null) ||
+            null;
+
+          let deckCounts = counts.get(name);
+          if (!deckCounts) {
+            deckCounts = new Map();
+            counts.set(name, deckCounts);
+          }
+
+          const current = deckCounts.get(deckKey) || {
+            games: 0,
+            wins: 0,
+            label: deckLabel,
+            deckUrl: deckUrlResolved,
+          };
+          current.games += 1;
+          current.wins += Number(m.is_winner || 0);
+          if (!current.deckUrl && deckUrlResolved) current.deckUrl = deckUrlResolved;
+          if (!current.label || current.label === deckKey) {
+            current.label = deckLabel;
+          }
+          deckCounts.set(deckKey, current);
+        });
+
+        const result = new Map();
+        counts.forEach((deckCounts, name) => {
+          let bestKey = "";
+          let bestGames = -1;
+          let bestWins = 0;
+          let bestLabel = "";
+          let bestDeckUrl = null;
+          deckCounts.forEach((stats, deckKey) => {
+            if (stats.games > bestGames) {
+              bestKey = deckKey;
+              bestGames = stats.games;
+              bestWins = stats.wins;
+              bestLabel = stats.label || deckKey;
+              bestDeckUrl = stats.deckUrl || null;
+              return;
+            }
+            if (stats.games === bestGames) {
+              const currentLabel = stats.label || deckKey;
+              if (currentLabel.localeCompare(bestLabel, "pt-BR") < 0) {
+                bestKey = deckKey;
+                bestWins = stats.wins;
+                bestLabel = currentLabel;
+                bestDeckUrl = stats.deckUrl || null;
+              }
+            }
+          });
+          if (bestKey) {
+            result.set(name, {
+              deck: bestLabel || bestKey,
+              deckUrl: bestDeckUrl,
+              games: bestGames,
+              wins: bestWins,
+              winrate: bestGames > 0 ? bestWins / bestGames : 0,
+            });
+          }
+        });
+        return result;
+      }
+
+      function mostRecentDateFrom(data) {
+        let best = null;
+        const scan = (arr) => {
+          (arr || []).forEach((x) => {
+            const d = parseDateYYYYMMDD(x.start_date);
+            if (d && (!best || d > best)) best = d;
+          });
+        };
+        scan(data?.standings);
+        scan(data?.matches);
+        return best;
+      }
+
+      function mostRecentDateFromMatches(matches) {
+        let best = null;
+        (matches || []).forEach((m) => {
+          const d = parseDateYYYYMMDD(m?.start_date);
+          if (d && (!best || d > best)) best = d;
+        });
+        return best;
+      }
+
+      function buildEventOptions(rows) {
+        const map = new Map();
+        (rows || []).forEach((row) => {
+          const key = getEventKey(row);
+          if (!key) return;
+          const dateRaw =
+            typeof row?.start_date === "string" && row.start_date.trim() ? row.start_date.trim() : "";
+          const date = parseDateYYYYMMDD(dateRaw);
+          const name =
+            typeof row?.tournament_name === "string" && row.tournament_name.trim()
+              ? row.tournament_name.trim()
+              : key;
+          const current = map.get(key);
+          if (!current || (date && (!current.dateObj || date > current.dateObj))) {
+            map.set(key, { key, name, dateRaw, dateObj: date });
+          }
+        });
+
+        return Array.from(map.values())
+          .sort((a, b) => {
+            if (a.dateObj && b.dateObj && a.dateObj.getTime() !== b.dateObj.getTime()) {
+              return b.dateObj - a.dateObj;
+            }
+            if (a.dateObj && !b.dateObj) return -1;
+            if (!a.dateObj && b.dateObj) return 1;
+            return a.name.localeCompare(b.name, "pt-BR");
+          })
+          .map((event) => {
+            const dateLabel = event.dateObj ? formatPtBR(event.dateObj) : event.dateRaw || "";
+            const label = dateLabel ? `${dateLabel} - ${event.name}` : event.name;
+            return { key: event.key, label };
+          });
+      }
+
+      function getQuarter(date) {
+        if (!date) return null;
+        const monthIndex = date.getMonth();
+        return Math.floor(monthIndex / 3) + 1;
+      }
+
+      function filterMatchesByQuarter(matches, quarter, year) {
+        return (matches || []).filter((m) => {
+          const d = parseDateYYYYMMDD(m?.start_date);
+          if (!d) return false;
+          if (year && d.getFullYear() !== year) return false;
+          return getQuarter(d) === quarter;
+        });
+      }
+
+      function filterScoresByQuarter(scores, quarter, year) {
+        return (scores || []).filter((row) => {
+          const d = parseDateYYYYMMDD(row?.start_date);
+          if (!d) return false;
+          if (year && d.getFullYear() !== year) return false;
+          return getQuarter(d) === quarter;
+        });
+      }
+
+      function formatQuarterLabel(quarter) {
+        if (!quarter) return "Trimestre";
+        return `${quarter}\u00b0 trimestre`;
+      }
+
+      function isHttpUrl(s) {
+        return typeof s === "string" && /^https?:\/\//i.test(s);
+      }
+
+      function DeckCell({ deck, url }) {
+        const label = deck || "N/D";
+        const href = url || (isHttpUrl(label) ? label : null);
+        if (href) {
+          return (
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-200 underline underline-offset-4"
+              title="Abrir deck (Moxfield)"
+            >
+              {isHttpUrl(label) ? "Moxfield" : label}
+            </a>
+          );
+        }
+        return <span>{label}</span>;
+      }
+
+      function playerDetailUrl(name) {
+        const base = `player.html?name=${encodeURIComponent(name || "")}`;
+        return withLeague(base, LEAGUE);
+      }
+
+      function buildLeagueFromMatches(matches, eventScores) {
+        const winsMap = buildWinsMap(matches);
+        const leaguePointsMap = buildLeaguePointsMap(eventScores);
+        const oppWinrateMap = buildOppWinrateMap(eventScores);
+        const matchCounts = buildMatchCounts(matches);
+        const playerWinrateMap = buildPlayerWinrateMap(matches);
+        const eventCounts = buildEventCounts(matches);
+        const deckUrlByName = buildDeckUrlByName(matches);
+        const deckSummaryMap = buildPlayerDeckSummary(matches, deckUrlByName);
+
+        const names = new Set();
+        (matches || []).forEach((m) => {
+          if (m?.player_name) names.add(m.player_name);
+        });
+        leaguePointsMap.forEach((_, name) => names.add(name));
+
+        const league = Array.from(names).map((name) => {
+          const deckSummary = deckSummaryMap.get(name);
+          const fallbackDeckUrl =
+            deckSummary && deckSummary.deck && deckUrlByName.has(deckSummary.deck)
+              ? deckUrlByName.get(deckSummary.deck)
+              : null;
+          return {
+            name,
+            points: leaguePointsMap.get(name) || 0,
+            wins: winsMap.get(name) || 0,
+            matches: matchCounts.get(name) || 0,
+            participations: eventCounts.get(name) || 0,
+            favoriteDeck: (deckSummary && deckSummary.deck) || "N/D",
+            favoriteDeckUrl: (deckSummary && deckSummary.deckUrl) || fallbackDeckUrl || null,
+            deckWinrate: playerWinrateMap.get(name) ?? null,
+            oppWinrate: oppWinrateMap.get(name) ?? null,
+          };
+        });
+
+        league.sort((a, b) => {
+          if (b.points !== a.points) return b.points - a.points;
+          if (b.wins !== a.wins) return b.wins - a.wins;
+          return a.name.localeCompare(b.name, "pt-BR");
+        });
+
+        return league.map((row, idx) => ({ ...row, rank: idx + 1 }));
+      }
+
+      function buildMockPlayers() {
+        const names = [
+          "Ana Bittencourt",
+          "Bruno Salomao",
+          "Carla Watanabe",
+          "Diego Rios",
+          "Elisa Moraes",
+          "Felipe Tavares",
+          "Giovana Cruz",
+          "Henrique Paes",
+          "Isabela Monteiro",
+          "Joao Nobre",
+          "Karen Duarte",
+          "Lucas Andrade",
+          "Marina Farias",
+          "Nicolas Peres",
+          "Olivia Pires",
+          "Pedro Barbosa",
+          "Rafaela Luz",
+          "Sofia Bastos",
+          "Tiago Xavier",
+          "Valeria Couto",
+        ];
+
+        const decks = [
+          "Azorius Crescente",
+          "Golgari Raizes",
+          "Izzet Forja",
+          "Boros Honra",
+          "Dimir Susurros",
+          "Gruul Investida",
+          "Selesnya Harmonia",
+          "Rakdos Pacto",
+          "Orzhov Reliquias",
+          "Simic Fluxo",
+          "Temur Tempestade",
+          "Jund Abismo",
+          "Esper Oraculos",
+          "Naya Horizonte",
+          "Bant Aurora",
+          "Jeskai Prisma",
+          "Mardu Legiao",
+          "Abzan Juramento",
+          "Grixis Cicatriz",
+          "Azorius Vigia",
+        ];
+
+        const list = names.map((name, index) => {
+          const matches = index >= 17 ? 0 : 8 + (index % 6) * 3;
+          const wins = matches ? Math.round(matches * (0.42 + (index % 5) * 0.06)) : 0;
+          const draws = matches ? Math.round((matches - wins) * 0.12) : 0;
+          const points = wins * 3 + draws;
+          const participations = matches ? Math.max(1, Math.round(matches / 4)) : 0;
+          return {
+            name,
+            points,
+            wins,
+            matches,
+            participations,
+            favoriteDeck: decks[index % decks.length],
+            deckWinrate: matches ? wins / matches : null,
+            oppWinrate: matches ? 0.35 + (index % 6) * 0.05 : null,
+          };
+        });
+
+        list.sort((a, b) => {
+          if (b.points !== a.points) return b.points - a.points;
+          if (b.wins !== a.wins) return b.wins - a.wins;
+          return a.name.localeCompare(b.name, "pt-BR");
+        });
+
+        return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
+      }
+
+      const MOCK_UPDATED_AT = new Date("2026-01-08");
+
+      function comparePlayers(a, b, field, dir) {
+        if (!field || field === "none") return 0;
+        const dirFactor = dir === "asc" ? 1 : -1;
+        const getValue = () => {
+          switch (field) {
+            case "league2026":
+              return [0, 0, "number"];
+            case "points":
+              return [a.points, b.points, "number"];
+            case "wins":
+              return [a.wins, b.wins, "number"];
+            case "matches":
+              return [a.matches, b.matches, "number"];
+            case "participations":
+              return [a.participations, b.participations, "number"];
+            case "deckWinrate":
+              return [a.deckWinrate ?? -1, b.deckWinrate ?? -1, "number"];
+            case "oppWinrate":
+              return [a.oppWinrate ?? -1, b.oppWinrate ?? -1, "number"];
+            case "favoriteDeck":
+              return [a.favoriteDeck || "", b.favoriteDeck || "", "string"];
+            case "name":
+              return [a.name || "", b.name || "", "string"];
+            default:
+              return [0, 0, "number"];
+          }
+        };
+
+        const [va, vb, type] = getValue();
+        if (type === "string") {
+          return dirFactor * String(va).localeCompare(String(vb), "pt-BR", { sensitivity: "base" });
+        }
+        const na = Number.isFinite(va) ? va : -Infinity;
+        const nb = Number.isFinite(vb) ? vb : -Infinity;
+        if (na === nb) return 0;
+        return dirFactor * (na > nb ? 1 : -1);
+      }
+
+      function safeNumber(value) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : -Infinity;
+      }
+
+      function compareLeague2026(a, b, dir) {
+        const dirFactor = dir === "asc" ? 1 : -1;
+        const chain = [
+          safeNumber(a.points) - safeNumber(b.points),
+          safeNumber(a.deckWinrate) - safeNumber(b.deckWinrate),
+          safeNumber(a.oppWinrate) - safeNumber(b.oppWinrate),
+          safeNumber(a.participations) - safeNumber(b.participations),
+        ];
+        for (const diff of chain) {
+          if (diff === 0) continue;
+          return dirFactor * (diff > 0 ? 1 : -1);
+        }
+        return dirFactor * a.name.localeCompare(b.name, "pt-BR");
+      }
+      function LeagueQuarterly() {
+        const [players, setPlayers] = useState([]);
+        const [allMatches, setAllMatches] = useState([]);
+        const [allScores, setAllScores] = useState([]);
+        const [eventOptions, setEventOptions] = useState([]);
+        const [selectedEvents, setSelectedEvents] = useState([]);
+        const [currentYear, setCurrentYear] = useState(null);
+        const [quarter, setQuarter] = useState(1);
+        const [updatedAt, setUpdatedAt] = useState("N/D");
+        const [searchTerm, setSearchTerm] = useState("");
+        const [loading, setLoading] = useState(true);
+        const [notice, setNotice] = useState("");
+        const [sortPrimary, setSortPrimary] = useState("league2026");
+        const [sortPrimaryDir, setSortPrimaryDir] = useState("desc");
+        const [page, setPage] = useState(1);
+        const pageSize = 20;
+        const quarterOptions = [1, 2, 3, 4];
+
+        useEffect(() => {
+          async function loadReal() {
+            try {
+              setLoading(true);
+              setNotice("");
+              const res = await fetch(`../data/${LEAGUE}/site.json`, { cache: "no-store" });
+              if (!res.ok) {
+                throw new Error(NO_DATA_MESSAGE);
+              }
+
+              const data = await res.json();
+              const matches = Array.isArray(data.matches) ? data.matches : [];
+              const scores = Array.isArray(data.event_scores)
+                ? data.event_scores
+                : Array.isArray(data.standings)
+                ? data.standings
+                : [];
+              const lastDate = mostRecentDateFrom(data);
+
+              if (!matches.length) {
+                throw new Error(NO_DATA_MESSAGE);
+              }
+
+              const resolvedYear = lastDate ? lastDate.getFullYear() : null;
+              const resolvedQuarter = lastDate ? getQuarter(lastDate) : 1;
+
+              setAllMatches(matches);
+              setAllScores(scores);
+              setCurrentYear(resolvedYear);
+              setQuarter(resolvedQuarter || 1);
+              setSelectedEvents([]);
+            } catch (e) {
+              setNotice(String(e.message || e));
+              setPlayers([]);
+              setUpdatedAt("N/D");
+              setAllMatches([]);
+              setAllScores([]);
+              setEventOptions([]);
+              setSelectedEvents([]);
+              setCurrentYear(null);
+              setQuarter(1);
+            } finally {
+              setLoading(false);
+            }
+          }
+
+          loadReal();
+        }, []);
+
+        useEffect(() => {
+          if (!allMatches.length) {
+            setEventOptions([]);
+            return;
+          }
+          const quarterMatches = filterMatchesByQuarter(allMatches, quarter, currentYear);
+          setEventOptions(buildEventOptions(quarterMatches));
+        }, [allMatches, quarter, currentYear]);
+
+        useEffect(() => {
+          setSelectedEvents((prev) => prev.filter((key) => eventOptions.some((opt) => opt.key === key)));
+        }, [eventOptions]);
+
+        useEffect(() => {
+          if (!allMatches.length) return;
+          const quarterMatches = filterMatchesByQuarter(allMatches, quarter, currentYear);
+          const quarterScores = filterScoresByQuarter(allScores, quarter, currentYear);
+          const selectedSet = new Set(selectedEvents);
+          const filteredMatches = selectedSet.size
+            ? quarterMatches.filter((row) => selectedSet.has(getEventKey(row)))
+            : quarterMatches;
+          const filteredScores = selectedSet.size
+            ? quarterScores.filter((row) => selectedSet.has(getEventKey(row)))
+            : quarterScores;
+          const league = buildLeagueFromMatches(filteredMatches, filteredScores);
+          const lastDate = mostRecentDateFromMatches(filteredMatches);
+          setPlayers(league);
+          setUpdatedAt(formatPtBR(lastDate));
+        }, [allMatches, allScores, quarter, currentYear, selectedEvents]);
+
+        useEffect(() => {
+          setPage(1);
+        }, [searchTerm, sortPrimary, sortPrimaryDir, quarter, selectedEvents]);
+
+        const filteredPlayers = useMemo(() => {
+          const term = searchTerm.trim().toLowerCase();
+          return players.filter((p) => {
+            const searchOk =
+              !term ||
+              p.name.toLowerCase().includes(term) ||
+              String(p.favoriteDeck || "").toLowerCase().includes(term);
+            return searchOk;
+          });
+        }, [players, searchTerm]);
+
+        const rankedPlayers = useMemo(() => {
+          const list = [...filteredPlayers];
+          list.sort((a, b) => {
+            const primary =
+              sortPrimary === "league2026"
+                ? compareLeague2026(a, b, sortPrimaryDir)
+                : comparePlayers(a, b, sortPrimary, sortPrimaryDir);
+            if (primary !== 0) return primary;
+            return a.name.localeCompare(b.name, "pt-BR");
+          });
+          return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
+        }, [filteredPlayers, sortPrimary, sortPrimaryDir]);
+
+
+        const totalPages = Math.max(1, Math.ceil(rankedPlayers.length / pageSize));
+
+        useEffect(() => {
+          if (page > totalPages) setPage(totalPages);
+        }, [page, totalPages]);
+
+        const pagedPlayers = useMemo(
+          () => rankedPlayers.slice((page - 1) * pageSize, page * pageSize),
+          [rankedPlayers, page]
+        );
+        const pageStart = rankedPlayers.length ? (page - 1) * pageSize + 1 : 0;
+        const pageEnd = Math.min(page * pageSize, rankedPlayers.length);
+
+        const champion = useMemo(() => rankedPlayers[0] || null, [rankedPlayers]);
+        const top3 = useMemo(() => rankedPlayers.slice(0, 3), [rankedPlayers]);
+
+        useEffect(() => {
+          document.querySelectorAll("[data-tilt]").forEach(attachTilt);
+        }, [top3.length, loading]);
+        const quarterLabel = formatQuarterLabel(quarter);
+        const quarterTitle = currentYear ? `${quarterLabel} ${currentYear}` : quarterLabel;
+
+        const totalMatches = useMemo(() => {
+          if (!allMatches.length || !currentYear) return 0;
+          const quarterMatches = filterMatchesByQuarter(allMatches, quarter, currentYear);
+          const selectedSet = new Set(selectedEvents);
+          const filtered = selectedSet.size
+            ? quarterMatches.filter((row) => selectedSet.has(getEventKey(row)))
+            : quarterMatches;
+          return countDistinctTables(filtered);
+        }, [allMatches, quarter, currentYear, selectedEvents]);
+
+        const sortOptions = [
+          { value: "league2026", label: "Liga 2026" },
+          { value: "points", label: "Pontos" },
+          { value: "participations", label: "Participacoes" },
+          { value: "deckWinrate", label: "Winrate" },
+          { value: "oppWinrate", label: "Opp WR%" },
+          { value: "favoriteDeck", label: "Deck" },
+          { value: "name", label: "Nome" },
+        ];
+        const selectedEventsCount = selectedEvents.length;
+        const isAllEventsSelected =
+          selectedEventsCount === 0 ||
+          (eventOptions.length > 0 && selectedEventsCount === eventOptions.length);
+        const selectedEventsSet = useMemo(() => new Set(selectedEvents), [selectedEvents]);
+        const toggleEventSelection = (eventKey) => {
+          setSelectedEvents((prev) => {
+            if (!prev.length) return [eventKey];
+            const next = prev.includes(eventKey)
+              ? prev.filter((key) => key !== eventKey)
+              : [...prev, eventKey];
+            if (eventOptions.length && next.length === eventOptions.length) return [];
+            return next;
+          });
+        };
+        const handleSelectAllEvents = () => {
+          setSelectedEvents([]);
+        };
+        return (
+          <div className="min-h-screen relative">
+            <div className="ambient" aria-hidden="true">
+              <span className="blob blob-1"></span>
+              <span className="blob blob-2"></span>
+              <span className="blob blob-3"></span>
+            </div>
+
+            <div className="relative z-10 px-4 md:px-8 pb-16">
+              <header className="max-w-6xl mx-auto pt-10 pb-8">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.35em] text-slate-500 mb-4">
+                      Liga Preconauta
+                    </p>
+                    <h1 className="text-4xl md:text-6xl font-display tracking-tight title-gradient mb-3">
+                      Liga Trimestral
+                    </h1>
+                    <p className="text-slate-500 flex flex-wrap items-center gap-2">
+                      <Calendar size={16} />
+                      Ultima atualizacao: {updatedAt}
+                      <span className="pill accent">{quarterTitle}</span>
+                      <span className="pill accent">
+                        <Shield size={14} />
+                        {players.length} jogadores
+                      </span>
+                      <span className="pill accent">
+                        <Swords size={14} />
+                        {totalMatches} partidas
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <nav className="flex gap-2">
+                      <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
+                        Players
+                      </a>
+                      <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
+                        Decks
+                      </a>
+                      <a className="btn" href={withLeague("liga.html", LEAGUE)}>
+                        Liga
+                      </a>
+                    </nav>
+                    <a className="btn" href="index.html">Home</a>
+                  </div>
+                </div>
+
+                {notice && <p className="mt-4 text-xs text-amber-300/90">{notice}</p>}
+                {loading && <p className="mt-4 text-sm text-slate-500">Carregando dados...</p>}
+              </header>
+
+              <section className="max-w-6xl mx-auto mb-8">
+                <div className="glass-panel">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-display flex items-center gap-2">
+                        <Shield className="text-amber-300" />
+                        Trimestres da Liga
+                      </h2>
+                      <p className="text-sm text-slate-500">
+                        Filtre por trimestre para ver o campeao e o ranking completo.
+                      </p>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {quarterOptions.map((q) => (
+                        <button
+                          key={q}
+                          className={`pill ${q === quarter ? "active" : ""}`}
+                          onClick={() => setQuarter(q)}
+                          disabled={loading}
+                        >
+                          {formatQuarterLabel(q)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className="text-xs uppercase text-slate-500">Eventos do trimestre</span>
+                      <span className="pill">
+                        {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
+                      </span>
+                      <button
+                        className="btn btn-ghost text-xs"
+                        onClick={handleSelectAllEvents}
+                        disabled={loading || !eventOptions.length || isAllEventsSelected}
+                      >
+                        Selecionar todos
+                      </button>
+                      <button
+                        className="btn btn-ghost text-xs"
+                        onClick={() => setSelectedEvents([])}
+                        disabled={loading || !selectedEventsCount}
+                      >
+                        Limpar
+                      </button>
+                    </div>
+                    <div className="mt-2">
+                      <details className="w-full">
+                        <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
+                          {selectedEventsCount
+                            ? `${selectedEventsCount} evento(s) selecionado(s)`
+                            : "Todos os eventos do trimestre"}
+                        </summary>
+                        <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
+                          <label
+                            className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                              isAllEventsSelected
+                                ? "bg-amber-300/15 text-amber-100"
+                                : "text-slate-300 hover:bg-white/10"
+                            }`}
+                          >
+                            <input
+                              type="checkbox"
+                              className="h-4 w-4 accent-amber-400"
+                              checked={isAllEventsSelected}
+                              onChange={handleSelectAllEvents}
+                              disabled={loading || !eventOptions.length}
+                            />
+                            <span className="text-sm leading-tight">Todos os eventos do trimestre</span>
+                          </label>
+
+                          {!eventOptions.length && (
+                            <p className="text-sm text-slate-500 px-2 py-2">Sem eventos disponiveis.</p>
+                          )}
+                          {eventOptions.map((event) => {
+                            const isChecked = !isAllEventsSelected && selectedEventsSet.has(event.key);
+                            return (
+                              <label
+                                key={event.key}
+                                className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                                  isChecked
+                                    ? "bg-amber-300/15 text-amber-100"
+                                    : "text-slate-300 hover:bg-white/10"
+                                }`}
+                              >
+                                <input
+                                  type="checkbox"
+                                  className="h-4 w-4 accent-amber-400"
+                                  checked={isChecked}
+                                  onChange={() => toggleEventSelection(event.key)}
+                                  disabled={loading}
+                                />
+                                <span className="text-sm leading-tight">{event.label}</span>
+                              </label>
+                            );
+                          })}
+                        </div>
+                      </details>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              <section className="max-w-6xl mx-auto mb-12">
+                {!loading && champion && (
+                  <Card className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 rank-gold reveal">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 rounded-full flex items-center justify-center border border-white/10 bg-black/10">
+                        <Crown size={32} className="text-amber-200" />
+                      </div>
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.25em] text-slate-500">
+                          Campeao do trimestre
+                        </p>
+                        <h3 className="text-2xl font-display">{champion.name}</h3>
+                        <p className="text-sm text-slate-400">
+                          <DeckCell deck={champion.favoriteDeck} url={champion.favoriteDeckUrl} />
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-wrap gap-3 text-xs text-slate-500">
+                      <span className="pill">Pts {champion.points}</span>
+                      <span className="pill">Participacoes {champion.participations}</span>
+                      <span className="pill">Winrate {formatPercent(champion.deckWinrate)}</span>
+                      <span className="pill">Opp WR {formatPercent(champion.oppWinrate)}</span>
+                    </div>
+                  </Card>
+                )}
+                {!loading && !champion && (
+                  <div className="glass-panel text-sm text-slate-500">
+                    Nenhum resultado para este trimestre.
+                  </div>
+                )}
+              </section>
+
+              <section className="max-w-6xl mx-auto mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {!loading &&
+                    top3.map((player, index) => {
+                      const medal = index + 1;
+                      const rankClass =
+                        medal === 1
+                          ? "rank-gold"
+                          : medal === 2
+                          ? "rank-silver"
+                          : "rank-bronze";
+                      return (
+                          <Card
+                            key={player.name}
+                            className={`flex flex-col items-center text-center ${rankClass} reveal podium-card`}
+                            data-tilt="true"
+                            style={{ animationDelay: `${index * 0.1}s` }}
+                          >
+                          <div className="text-sm text-slate-500 mb-2">Top {medal}</div>
+                          <div className="w-20 h-20 rounded-full mb-4 flex items-center justify-center border border-white/10 bg-black/10">
+                            <User size={38} className="text-amber-200" />
+                          </div>
+                          <h3 className="text-xl font-display">{player.name}</h3>
+                          <p className="text-slate-400 text-sm mt-1">
+                            <DeckCell deck={player.favoriteDeck} url={player.favoriteDeckUrl} />
+                          </p>
+                          <p className="text-slate-500 text-xs mt-2">
+                            Winrate: {formatPercent(player.deckWinrate)}
+                          </p>
+                          <p className="text-slate-500 text-xs">
+                            Opp WR: {formatPercent(player.oppWinrate)}
+                          </p>
+                          <div className="mt-4 flex items-center justify-center gap-3">
+                            <span className="text-3xl font-semibold text-amber-200">
+                              {player.points}
+                            </span>
+                            <span className="text-xs text-slate-500">pts</span>
+                          </div>
+                        </Card>
+                      );
+                    })}
+                </div>
+                {!loading && top3.length === 0 && (
+                  <div className="glass-panel text-sm text-slate-500 mt-6">
+                    Nenhum resultado para este filtro.
+                  </div>
+                )}
+              </section>
+
+              <section className="max-w-6xl mx-auto">
+                <div className="glass-panel mb-6">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-display flex items-center gap-2">
+                        <Shield className="text-amber-300" />
+                        Ranking do trimestre
+                      </h2>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <div className="relative">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                        <input
+                          type="text"
+                          placeholder="Buscar jogador ou deck..."
+                          className="input-glass pl-11 pr-4 w-full sm:w-72"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          disabled={loading}
+                        />
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs uppercase text-slate-500">Ordenar por</span>
+                        <select value={sortPrimary} onChange={(e) => setSortPrimary(e.target.value)}>
+                          {sortOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          className="btn btn-ghost text-xs"
+                          onClick={() => setSortPrimaryDir(sortPrimaryDir === "asc" ? "desc" : "asc")}
+                        >
+                          {sortPrimaryDir === "asc" ? "Asc" : "Desc"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="md:hidden grid gap-4">
+                  {!loading &&
+                    pagedPlayers.map((player, index) => (
+                      <Card key={`${player.name}-${index}`} className="reveal" style={{ animationDelay: `${index * 0.03}s` }}>
+                        <div className="flex items-center justify-between">
+                          <div>
+                            <p className="text-sm text-slate-500">Rank {player.rank}</p>
+                            <h3 className="text-lg font-display">{player.name}</h3>
+                          </div>
+                          <Badge rank={player.rank} />
+                        </div>
+                        <p className="text-sm text-slate-500 mt-2">
+                          <DeckCell deck={player.favoriteDeck} url={player.favoriteDeckUrl} />
+                        </p>
+                        <div className="mt-3 flex flex-wrap gap-3 text-xs text-slate-500">
+                          <span className="pill">Pts {player.points}</span>
+                          <span className="pill">Winrate {formatPercent(player.deckWinrate)}</span>
+                          <span className="pill">Opp WR {formatPercent(player.oppWinrate)}</span>
+                          <span className="pill">Participacoes {player.participations}</span>
+                        </div>
+                        <div className="mt-4">
+                          <a className="btn btn-ghost text-xs" href={playerDetailUrl(player.name)}>
+                            Detalhar
+                          </a>
+                        </div>
+                      </Card>
+                    ))}
+                </div>
+
+                <div className="glass-table hidden md:block">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-white/5">
+                          <th className="p-4 w-16 text-center">#</th>
+                          <th className="p-4">Jogador</th>
+                          <th className="p-4 hidden lg:table-cell">Deck principal</th>
+                          <th className="p-4 text-right">Pontos</th>
+                          <th className="p-4 text-center hidden lg:table-cell">Winrate</th>
+                          <th className="p-4 text-center hidden lg:table-cell">Opp WR%</th>
+                          <th className="p-4 text-center">Participacoes</th>
+                          <th className="p-4 text-center">Detalhar</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {!loading &&
+                          pagedPlayers.map((player) => (
+                            <tr key={player.name} className="transition-colors hover:bg-white/5">
+                              <td className="p-4 text-center font-bold text-slate-300">
+                                <Badge rank={player.rank} />
+                              </td>
+                              <td className="p-4 font-medium text-slate-100">{player.name}</td>
+                              <td className="p-4 text-slate-400 text-sm hidden lg:table-cell">
+                                <DeckCell deck={player.favoriteDeck} url={player.favoriteDeckUrl} />
+                              </td>
+                              <td className="p-4 text-right font-semibold text-amber-200">
+                                {player.points}
+                              </td>
+                              <td className="p-4 text-center text-slate-400 hidden lg:table-cell">
+                                {formatPercent(player.deckWinrate)}
+                              </td>
+                              <td className="p-4 text-center text-slate-400 hidden lg:table-cell">
+                                {formatPercent(player.oppWinrate)}
+                              </td>
+                              <td className="p-4 text-center text-slate-400">
+                                {player.participations}
+                              </td>
+                              <td className="p-4 text-center">
+                                <a className="btn btn-ghost text-xs" href={playerDetailUrl(player.name)}>
+                                  Detalhar
+                                </a>
+                              </td>
+                            </tr>
+                          ))}
+
+                        {!loading && rankedPlayers.length === 0 && (
+                          <tr>
+                            <td className="p-4 text-slate-500" colSpan="8">
+                              Nenhum jogador encontrado.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+                  <span>
+                    Mostrando {pageStart}-{pageEnd} de {rankedPlayers.length}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="btn btn-ghost"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                    >
+                      Anterior
+                    </button>
+                    <span className="pill">
+                      Pagina {page} de {totalPages}
+                    </span>
+                    <button
+                      className="btn btn-ghost"
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={page === totalPages}
+                    >
+                      Proxima
+                    </button>
+                  </div>
+                </div>
+              </section>
+
+              <footer className="max-w-6xl mx-auto mt-16">
+                <div className="glass-panel">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div>
+                      <h3 className="font-display text-lg mb-4 bg-gradient-to-r from-amber-400 to-amber-500 bg-clip-text text-transparent">
+                        Liga Preconauta
+                      </h3>
+                      <p className="text-sm text-slate-500 mb-3">
+                        O Maior canal de Precon do Brasil. Junte-se a comunidade e mostre suas habilidades.
+                      </p>
+                        <p className="text-xs text-slate-500 italic">
+                          "Outros criadores apenas mostram precons. Preconautas mostram o que os torna mÃ¡gicos"
+                        </p>
+                    </div>
+                      <div>
+                        <h4 className="font-semibold mb-4 text-slate-100">Contato</h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <a
+                              href="https://chat.whatsapp.com/CcmWGGMiBze6l3Fj8YT4Fe"
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Phone size={16} /> WhatsApp
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="https://www.instagram.com/preconautamtg/"
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Instagram size={16} /> @PreconautaMTG
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href="https://www.youtube.com/@Preconauta"
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <Youtube size={16} /> YouTube
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    <div>
+                      <h4 className="font-semibold mb-4 text-slate-100">Parceiros</h4>
+                      <div className="space-y-3 mb-4">
+                        <div className="h-12 rounded-lg bg-gradient-to-br from-slate-200/40 to-slate-300/40 flex items-center justify-center text-xs text-slate-500">
+                          Logo Parceiro
+                        </div>
+                        <div className="h-12 rounded-lg bg-gradient-to-br from-slate-200/40 to-slate-300/40 flex items-center justify-center text-xs text-slate-500">
+                          Logo Parceiro
+                        </div>
+                      </div>
+                      <a
+                        href="#"
+                        className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-gradient-to-r from-amber-400/20 to-amber-500/20 text-amber-300 hover:from-amber-400/30 hover:to-amber-500/30 transition-all font-medium"
+                      >
+                        <Users size={16} /> Quero ser parceiro
+                      </a>
+                    </div>
+                      <div>
+                        <h4 className="font-semibold mb-4 text-slate-100">Suporte</h4>
+                        <ul className="space-y-2">
+                          <li>
+                            <a
+                              href="https://lnk.bio/Preconauta"
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              <TreePine size={16} /> Ãrvore de links
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href={withLeague("regras.html")}
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                            >
+                              <FileText size={16} /> Regras de Uso
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              href={withLeague("privacidade.html")}
+                              className="flex items-center gap-2 text-sm text-slate-500 hover:text-amber-300 transition-colors"
+                            >
+                              <Shield size={16} /> Privacidade
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                  </div>
+
+                  <div className="mt-8 pt-6 border-t border-white/10 text-xs text-slate-500">
+                    Â© 2026 Liga Preconauta. Todos os direitos reservados.
+                  </div>
+                </div>
+              </footer>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LeagueQuarterly />);
+
+      function attachTilt(el) {
+        if (el.dataset.tiltBound === "1") return;
+        el.dataset.tiltBound = "1";
+        const maxRot = 7;
+        let rect;
+        const onMove = (e) => {
+          rect = rect || el.getBoundingClientRect();
+          const x = (e.clientX - rect.left) / rect.width;
+          const y = (e.clientY - rect.top) / rect.height;
+          const rx = (0.5 - y) * (maxRot * 2);
+          const ry = (x - 0.5) * (maxRot * 2);
+          el.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
+          el.style.transition = "transform 40ms linear";
+        };
+        const onLeave = () => {
+          el.style.transition = "transform 400ms cubic-bezier(.2,.8,.2,1)";
+          el.style.transform = "";
+          rect = null;
+        };
+        el.addEventListener("mousemove", onMove);
+        el.addEventListener("mouseleave", onLeave);
+      }
+
+      document.querySelectorAll("[data-tilt]").forEach(attachTilt);
+    </script>
+  </body>
+</html>
+
+

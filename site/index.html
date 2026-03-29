@@ -1,0 +1,279 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liga Preconauta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      :root {
+        --font-body: "Manrope", "Segoe UI", sans-serif;
+        --font-display: "Fraunces", "Georgia", serif;
+        --text: #0f172a;
+        --muted: #475569;
+        --bg-1: #f8fafc;
+        --bg-2: #e2e8f0;
+        --glass: rgba(255, 255, 255, 0.72);
+        --glass-border: rgba(148, 163, 184, 0.4);
+        --glass-highlight: rgba(255, 255, 255, 0.65);
+        --shadow: 0 20px 50px rgba(15, 23, 42, 0.18);
+        --shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.12);
+        --accent-presencial: #f59e0b;
+        --accent-online: #38bdf8;
+        --blob-1: rgba(248, 187, 99, 0.45);
+        --blob-2: rgba(59, 130, 246, 0.35);
+        --blob-3: rgba(16, 185, 129, 0.3);
+      }
+
+      html[data-theme="dark"] {
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --bg-1: #05060b;
+        --bg-2: #0f172a;
+        --glass: rgba(8, 12, 20, 0.65);
+        --glass-border: rgba(148, 163, 184, 0.18);
+        --glass-highlight: rgba(255, 255, 255, 0.08);
+        --shadow: 0 30px 80px rgba(2, 6, 23, 0.6);
+        --shadow-soft: 0 20px 40px rgba(2, 6, 23, 0.45);
+        --blob-1: rgba(251, 191, 36, 0.18);
+        --blob-2: rgba(56, 189, 248, 0.22);
+        --blob-3: rgba(236, 72, 153, 0.2);
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        color: var(--text);
+        background: radial-gradient(1200px circle at 10% 10%, rgba(248, 187, 99, 0.18), transparent 55%),
+          radial-gradient(900px circle at 90% 20%, rgba(59, 130, 246, 0.2), transparent 60%),
+          linear-gradient(160deg, var(--bg-1), var(--bg-2));
+        overflow-x: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 20px;
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .blob {
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.8;
+        mix-blend-mode: screen;
+        animation: float 16s ease-in-out infinite;
+      }
+
+      .blob-1 {
+        background: radial-gradient(circle at 30% 30%, var(--blob-1), transparent 65%);
+        top: -120px;
+        left: -80px;
+      }
+
+      .blob-2 {
+        background: radial-gradient(circle at 40% 40%, var(--blob-2), transparent 65%);
+        top: 15%;
+        right: -120px;
+        animation-delay: -4s;
+      }
+
+      .blob-3 {
+        background: radial-gradient(circle at 30% 40%, var(--blob-3), transparent 65%);
+        bottom: -140px;
+        left: 20%;
+        animation-delay: -8s;
+      }
+
+      main {
+        position: relative;
+        z-index: 1;
+        max-width: 980px;
+        width: 100%;
+      }
+
+      .hero {
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      .hero p {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 auto;
+        max-width: 640px;
+      }
+
+      h1 {
+        font-family: var(--font-display);
+        font-size: clamp(2.4rem, 4vw, 3.4rem);
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+      }
+
+      .card {
+        position: relative;
+        padding: 24px;
+        border-radius: 24px;
+        border: 1px solid var(--glass-border);
+        background: var(--glass);
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        text-decoration: none;
+        color: inherit;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+
+      .card::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: inherit;
+        border: 1px solid var(--glass-highlight);
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      .card:hover {
+        transform: translateY(-6px);
+        box-shadow: var(--shadow-soft);
+        border-color: var(--glass-highlight);
+      }
+
+      .card h2 {
+        font-family: var(--font-display);
+        font-size: 1.6rem;
+        margin: 0 0 6px;
+      }
+
+      .card p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+        font-weight: 600;
+      }
+
+      .badge.presencial {
+        background: rgba(245, 158, 11, 0.2);
+        color: var(--accent-presencial);
+        border: 1px solid rgba(245, 158, 11, 0.4);
+      }
+
+      .badge.online {
+        background: rgba(56, 189, 248, 0.2);
+        color: var(--accent-online);
+        border: 1px solid rgba(56, 189, 248, 0.4);
+      }
+
+      .cta {
+        margin-top: 12px;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        font-weight: 600;
+      }
+
+      .cta span {
+        display: inline-block;
+        transform: translateX(0);
+        transition: transform 0.2s ease;
+      }
+
+      .card:hover .cta span {
+        transform: translateX(6px);
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+        50% {
+          transform: translateY(30px) translateX(-20px);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .blob,
+        .card,
+        .cta span {
+          animation: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <span class="blob blob-1"></span>
+      <span class="blob blob-2"></span>
+      <span class="blob blob-3"></span>
+    </div>
+
+    <main>
+      <header class="hero">
+        <p class="badge presencial" style="margin: 0 auto 12px;">
+          Liga Preconauta
+        </p>
+        <h1>Escolha sua liga</h1>
+        <p>
+          Selecione a modalidade para ver rankings, decks e estatisticas atualizadas.
+        </p>
+      </header>
+
+      <section class="cards">
+        <a class="card" href="liga.html?league=presencial">
+          <h2>Liga Presencial</h2>
+          <p>Resultados, jogadores e metagame dos encontros ao vivo.</p>
+          <div class="badge presencial">Mesa fisica</div>
+          <div class="cta">Entrar<span>→</span></div>
+        </a>
+
+        <a class="card" href="liga.html?league=online">
+          <h2>Liga Online</h2>
+          <p>Partidas remotas, stats e desempenho da comunidade online.</p>
+          <div class="badge online">Conexao remota</div>
+          <div class="cta">Entrar<span>→</span></div>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
+
+

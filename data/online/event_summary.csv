@@ -1,0 +1,90 @@
+tid,player_name,tournament_name,start_date,month,matches,wins,draws,losses,points_match,win_rate,opp_win_rate,event_rank,event_points,event_players
+liga-mesao-online-s1-e01,Mateus Vinicius Mota de Santana,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,1,0,4,0.5,0.16666666666666666,1,3,21
+liga-mesao-online-s1-e01,Carbeauty,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,1,0,4,0.5,0.1,2,2,21
+liga-mesao-online-s1-e01,Gustavo de Cordova Baron,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,1,0,4,0.5,0.0,3,2,21
+liga-mesao-online-s1-e01,Langa,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,1,0,3,0.5,0.0,6,2,21
+liga-mesao-online-s1-e01,Marlon Prudente,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,1,0,3,0.5,0.0,5,2,21
+liga-mesao-online-s1-e01,Arthur Alves Sartori,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,1,0,1,3,0.5,0.1,4,2,21
+liga-mesao-online-s1-e01,Marcos Sartori ,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,2,0.0,0.25,7,2,21
+liga-mesao-online-s1-e01,Edebauer Marasati,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,2,0.0,0.16666666666666666,8,2,21
+liga-mesao-online-s1-e01,REVAILTO VAILON,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,1,0.0,0.16666666666666666,12,1,21
+liga-mesao-online-s1-e01,Alex Romeu Pezzini,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,1,0.0,0.1,14,1,21
+liga-mesao-online-s1-e01,Bruno B.C. (TendiNietzsche),Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,1,0.0,0.08333333333333333,13,1,21
+liga-mesao-online-s1-e01,Vitor Hugo Ferreira,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,2,0,2,0.0,0.0,9,1,21
+liga-mesao-online-s1-e01,Thiago Borini,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,1,0.0,0.3,10,1,21
+liga-mesao-online-s1-e01,Fernando Boone da Fonseca,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,0,0.0,0.2,20,1,21
+liga-mesao-online-s1-e01,Juliano,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,1,0.0,0.2,11,1,21
+liga-mesao-online-s1-e01,Crothen (Thiago Moreira),Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,1,0.0,0.125,15,1,21
+liga-mesao-online-s1-e01,Guilherme Henrique de Freitas Meirelles,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,0,0.0,0.1,21,1,21
+liga-mesao-online-s1-e01,Matheus,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,1,1,1,0.0,0.1,16,1,21
+liga-mesao-online-s1-e01,Marcelo Fernández Baca dos Santos,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,0,2,0,0.0,0.3,18,1,21
+liga-mesao-online-s1-e01,Vicente Alejandro Aleman Daye,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,0,2,0,0.0,0.3,17,1,21
+liga-mesao-online-s1-e01,ERICK PROTAZIO DOMINGUES,Liga Mesão Online S1 - E01,2026-01-22,2026-01,2,0,0,2,0,0.0,0.25,19,1,21
+liga-mesao-online-s1-e02,Arthur Alves Sartori,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,2,0,0,6,1.0,0.125,1,3,17
+liga-mesao-online-s1-e02,Fernando Boone da Fonseca,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,1,1,0,4,0.5,0.0,3,2,17
+liga-mesao-online-s1-e02,Marlon Prudente,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,1,1,0,4,0.5,0.0,2,2,17
+liga-mesao-online-s1-e02,REVAILTO VAILON,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,1,0,1,3,0.5,0.25,4,2,17
+liga-mesao-online-s1-e02,Vanderlei junior ,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,2,0,2,0.0,0.1,5,2,17
+liga-mesao-online-s1-e02,Samuel Lopes Maia,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,2,0,1,0.0,0.08333333333333333,12,1,17
+liga-mesao-online-s1-e02,Guilherme Henrique de Freitas Meirelles,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,2,0,2,0.0,0.0,6,2,17
+liga-mesao-online-s1-e02,Marcos Sartori ,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,2,0,1,0.0,0.0,15,1,17
+liga-mesao-online-s1-e02,Mateus Vinicius Mota de Santana,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,2,0,1,0.0,0.0,14,1,17
+liga-mesao-online-s1-e02,Carbeauty,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.5,7,2,17
+liga-mesao-online-s1-e02,Matheus,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.2,9,1,17
+liga-mesao-online-s1-e02,Thiago Borini,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.2,8,2,17
+liga-mesao-online-s1-e02,Vitor Hugo Ferreira,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.2,11,1,17
+liga-mesao-online-s1-e02,ERICK PROTAZIO DOMINGUES,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,0,0.0,0.1,17,1,17
+liga-mesao-online-s1-e02,Glauber Villa,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.1,13,1,17
+liga-mesao-online-s1-e02,Vicente Alejandro Aleman Daye,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,1,1,1,0.0,0.1,10,1,17
+liga-mesao-online-s1-e02,Paulo Ferreira,Liga Mesão Online S1 - E02,2026-02-12,2026-02,2,0,0,2,0,0.0,0.375,16,1,17
+liga-mesao-online-s1-e03,Carbeauty,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,2,0,0,6,1.0,0.1,1,3,18
+liga-mesao-online-s1-e03,Vanderlei junior ,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,1,1,0,3,0.5,0.08333333333333333,5,2,18
+liga-mesao-online-s1-e03,BRUNO O AZEVEDO,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,1,0,1,3,0.5,0.25,2,2,18
+liga-mesao-online-s1-e03,Matheus,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,1,0,1,3,0.5,0.16666666666666666,3,2,18
+liga-mesao-online-s1-e03,Marcos Sartori ,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,1,0,1,3,0.5,0.1,4,2,18
+liga-mesao-online-s1-e03,Marlon Prudente,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,1,0,1,3,0.5,0.1,6,2,18
+liga-mesao-online-s1-e03,Gabriel Fievet Marques,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,2,0,0,0.0,0.08333333333333333,18,1,18
+liga-mesao-online-s1-e03,Glauber Villa,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,2,0,2,0.0,0.08333333333333333,7,2,18
+liga-mesao-online-s1-e03,REVAILTO VAILON,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,2,0,2,0.0,0.0,8,2,18
+liga-mesao-online-s1-e03,Paulo Ferreira,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,1,1,0,0.0,0.3,15,1,18
+liga-mesao-online-s1-e03,Mateus Vinicius Mota de Santana,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,1,1,1,0.0,0.2,9,1,18
+liga-mesao-online-s1-e03,Fernando Boone da Fonseca,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,1,1,1,0.0,0.16666666666666666,10,1,18
+liga-mesao-online-s1-e03,Vicente Alejandro Aleman Daye,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,1,1,1,0.0,0.125,11,1,18
+liga-mesao-online-s1-e03,Thiago Borini,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,0,2,0,0.0,0.4166666666666667,12,1,18
+liga-mesao-online-s1-e03,Crothen (Thiago Moreira),Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,0,2,0,0.0,0.4,13,1,18
+liga-mesao-online-s1-e03,Lucas Passos de Melo,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,0,2,0,0.0,0.375,14,1,18
+liga-mesao-online-s1-e03,Arthur Alves Sartori,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,0,2,0,0.0,0.3333333333333333,16,1,18
+liga-mesao-online-s1-e03,Ian Drumond,Liga Mesão Online S1 - E03,2026-02-26,2026-02,2,0,0,2,0,0.0,0.3,17,1,18
+liga-mesao-online-s1-e04,Arthur Alves Sartori,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,1,0,4,0.5,0.1,1,3,17
+liga-mesao-online-s1-e04,Thiago Borini,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,1,0,3,0.5,0.1,7,2,17
+liga-mesao-online-s1-e04,Fernando Boone da Fonseca,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,0,1,3,0.5,0.375,3,2,17
+liga-mesao-online-s1-e04,Vinicius Martins ,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,0,1,3,0.5,0.375,2,2,17
+liga-mesao-online-s1-e04,Carbeauty,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,0,1,3,0.5,0.2,4,2,17
+liga-mesao-online-s1-e04,Crothen (Thiago Moreira),Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,0,1,3,0.5,0.125,5,2,17
+liga-mesao-online-s1-e04,Vicente Alejandro Aleman Daye,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,1,0,1,3,0.5,0.125,6,2,17
+liga-mesao-online-s1-e04,Antônio Miguel ,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,2,0,1,0.0,0.08333333333333333,11,1,17
+liga-mesao-online-s1-e04,Marlon Prudente,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,2,0,2,0.0,0.08333333333333333,8,2,17
+liga-mesao-online-s1-e04,Rodrigo Fiorini de Lazaro ,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,2,0,2,0.0,0.08333333333333333,9,1,17
+liga-mesao-online-s1-e04,luis felipe garcia birsk,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,2,0,2,0.0,0.08333333333333333,10,1,17
+liga-mesao-online-s1-e04,Ian Drumond,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,1,1,1,0.0,0.16666666666666666,13,1,17
+liga-mesao-online-s1-e04,REVAILTO VAILON,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,1,1,1,0.0,0.16666666666666666,12,1,17
+liga-mesao-online-s1-e04,Alexandre Melo,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,0,2,0,0.0,0.375,16,1,17
+liga-mesao-online-s1-e04,Marcos Sartori ,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,0,2,0,0.0,0.375,15,1,17
+liga-mesao-online-s1-e04,Mateus Vinicius Mota de Santana,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,0,2,0,0.0,0.375,14,1,17
+liga-mesao-online-s1-e04,Vanderlei junior ,Liga Mesão Online S1 - E04,2026-03-12,2026-03,2,0,0,2,0,0.0,0.2,17,1,17
+liga-mesao-online-s1-e05,Marcos Sartori ,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,2,0,0,6,1.0,0.0,1,3,16
+liga-mesao-online-s1-e05,Rogério Nascimento,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,1,1,0,3,0.5,0.1,2,2,16
+liga-mesao-online-s1-e05,Arthur Alves Sartori,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,1,0,1,3,0.5,0.08333333333333333,3,2,16
+liga-mesao-online-s1-e05,Fernando Boone da Fonseca,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,2,0,2,0.0,0.0,5,2,16
+liga-mesao-online-s1-e05,REVAILTO VAILON,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,2,0,2,0.0,0.0,6,2,16
+liga-mesao-online-s1-e05,Samuel Lopes Maia,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,2,0,2,0.0,0.0,4,2,16
+liga-mesao-online-s1-e05,Marlon Prudente,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.3,11,1,16
+liga-mesao-online-s1-e05,Vanderlei junior ,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.3,7,2,16
+liga-mesao-online-s1-e05,Carbeauty,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.16666666666666666,8,2,16
+liga-mesao-online-s1-e05,Rodrigo Fiorini de Lazaro ,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.16666666666666666,10,1,16
+liga-mesao-online-s1-e05,Thiago Borini,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,0,0.0,0.16666666666666666,16,1,16
+liga-mesao-online-s1-e05,Vicente Alejandro Aleman Daye,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.16666666666666666,9,1,16
+liga-mesao-online-s1-e05,Carlos Chueiry,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.08333333333333333,13,1,16
+liga-mesao-online-s1-e05,Mateus Vinicius Mota de Santana,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,1,1,1,0.0,0.08333333333333333,12,1,16
+liga-mesao-online-s1-e05,Guilherme Henrique de Freitas Meirelles,Liga Mesão Online S1 - E05,2026-03-26,2026-03,1,0,0,1,0,0.0,0.3333333333333333,14,1,16
+liga-mesao-online-s1-e05,Ian Drumond,Liga Mesão Online S1 - E05,2026-03-26,2026-03,2,0,0,2,0,0.0,0.25,15,1,16

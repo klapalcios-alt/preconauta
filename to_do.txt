@@ -1,0 +1,24 @@
+Proximos passos: 
+
+corrigir pontuação no detalhamento
+
+Criar um filtro de data ( podendo selecionar o mes, ou varios meses)
+
+ver possibilidade de um filtro Lateral
+
+Detalhamento de decks.
+- na aba de decks colocar uma sessão de decks banidos.
+- COlocar um detalhamento dos decks, mostrando os players que melhor performaram com ele.
+- contra quais decks ele melhor lidou e contra quais pior lidou. 
+- Ajustar o calculo de winrate para cada deck
+
+Corrigir tema dark/claro
+
+incluir imagem do comandante do Deck
+
+Hall da fama
+- Criar um hall da fama com os campeoes das ligas dos ultimos anos e seus decks vencedores escolhidos.
+
+Login com o google
+
+Marketplace

@@ -1,0 +1,11 @@
+topdeck_key.txt
+topdeck_key.local.txt
+.env
+.env.*
+!.env.example
+
+__pycache__/
+*.pyc
+.venv/
+.qodo/
+data/raw/
