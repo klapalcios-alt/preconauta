@@ -1213,8 +1213,6 @@
         const [searchTerm, setSearchTerm] = useState("");
         const [loading, setLoading] = useState(true);
         const [notice, setNotice] = useState("");
-        const [sortPrimary, setSortPrimary] = useState("league2026");
-        const [sortPrimaryDir, setSortPrimaryDir] = useState("desc");
         const [page, setPage] = useState(1);
         const pageSize = 20;
 
@@ -1283,7 +1281,7 @@
 
         useEffect(() => {
           setPage(1);
-        }, [searchTerm, sortPrimary, sortPrimaryDir, selectedEvents]);
+        }, [searchTerm, selectedEvents]);
 
         const filteredPlayers = useMemo(() => {
           const term = searchTerm.trim().toLowerCase();
@@ -1299,28 +1297,22 @@
         const rankedPlayers = useMemo(() => {
           const list = [...filteredPlayers];
           list.sort((a, b) => {
-            const primary =
-              sortPrimary === "league2026"
-                ? compareLeague2026(a, b, sortPrimaryDir)
-                : comparePlayers(a, b, sortPrimary, sortPrimaryDir);
+            const primary = compareLeague2026(a, b, "desc");
             if (primary !== 0) return primary;
             return a.name.localeCompare(b.name, "pt-BR");
           });
           return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
-        }, [filteredPlayers, sortPrimary, sortPrimaryDir]);
+        }, [filteredPlayers]);
 
         const rankedAllPlayers = useMemo(() => {
           const list = [...players];
           list.sort((a, b) => {
-            const primary =
-              sortPrimary === "league2026"
-                ? compareLeague2026(a, b, sortPrimaryDir)
-                : comparePlayers(a, b, sortPrimary, sortPrimaryDir);
+            const primary = compareLeague2026(a, b, "desc");
             if (primary !== 0) return primary;
             return a.name.localeCompare(b.name, "pt-BR");
           });
           return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
-        }, [players, sortPrimary, sortPrimaryDir]);
+        }, [players]);
 
         const totalPages = Math.max(1, Math.ceil(rankedPlayers.length / pageSize));
 
@@ -1343,19 +1335,7 @@
 
         const totalMatches = useMemo(() => countDistinctTables(matchesData), [matchesData]);
 
-        const sortOptions = [
-          { value: "league2026", label: "Liga 2026" },
-          { value: "points", label: "Pontos" },
-          { value: "participations", label: "Participacoes" },
-          { value: "deckWinrate", label: "Winrate" },
-          { value: "oppWinrate", label: "Opp WR%" },
-          { value: "favoriteDeck", label: "Deck" },
-          { value: "name", label: "Nome" },
-        ];
         const selectedEventsCount = selectedEvents.length;
-        const isAllEventsSelected =
-          selectedEventsCount === 0 ||
-          (eventOptions.length > 0 && selectedEventsCount === eventOptions.length);
         const selectedEventsSet = useMemo(() => new Set(selectedEvents), [selectedEvents]);
         const toggleEventSelection = (eventKey) => {
           setSelectedEvents((prev) => {
@@ -1366,9 +1346,6 @@
             if (eventOptions.length && next.length === eventOptions.length) return [];
             return next;
           });
-        };
-        const handleSelectAllEvents = () => {
-          setSelectedEvents([]);
         };
         return (
           <div className="min-h-screen relative">
@@ -1472,66 +1449,36 @@
 
               <section className="max-w-6xl mx-auto">
                 <div className="glass-panel mb-6">
-                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    <div>
+                  <div className="grid gap-5 xl:grid-cols-[220px_minmax(0,1fr)] xl:items-end">
+                    <div className="space-y-2">
                       <h2 className="text-2xl font-display flex items-center gap-2">
                         <Shield className="text-amber-300" />
                         Classificacao Geral
                       </h2>
+                      <p className="text-sm text-slate-500">
+                        Ranking padrao da Liga 2026 com busca por jogador ou deck.
+                      </p>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_320px] xl:items-end">
                       <div className="relative">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                           type="text"
                           placeholder="Buscar jogador ou deck..."
-                          className="input-glass pl-11 pr-4 w-full sm:w-72"
+                          className="input-glass pl-11 pr-4 w-full"
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                           disabled={loading}
                         />
                       </div>
-                      <div className="flex items-center gap-3">
-                        <span className="text-xs uppercase text-slate-500">Ordenar por</span>
-                        <select value={sortPrimary} onChange={(e) => setSortPrimary(e.target.value)}>
-                          {sortOptions.map((opt) => (
-                            <option key={opt.value} value={opt.value}>
-                              {opt.label}
-                            </option>
-                          ))}
-                        </select>
-                        <button
-                          className="btn btn-ghost text-xs"
-                          onClick={() => setSortPrimaryDir(sortPrimaryDir === "asc" ? "desc" : "asc")}
-                        >
-                          {sortPrimaryDir === "asc" ? "Asc" : "Desc"}
-                        </button>
-                      </div>
-                    </div>
-
-                    <div className="mt-4">
-                      <div className="flex flex-wrap items-center gap-2 mb-2">
-                        <span className="text-xs uppercase text-slate-500">Eventos</span>
-                        <span className="pill">
-                          {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
-                        </span>
-                        <button
-                          className="btn btn-ghost text-xs"
-                          onClick={handleSelectAllEvents}
-                          disabled={loading || !eventOptions.length || isAllEventsSelected}
-                        >
-                          Selecionar todos
-                        </button>
-                        <button
-                          className="btn btn-ghost text-xs"
-                          onClick={() => setSelectedEvents([])}
-                          disabled={loading || !selectedEventsCount}
-                        >
-                          Limpar
-                        </button>
-                      </div>
-                      <div className="mt-2">
+                      <div>
+                        <div className="flex items-center justify-between gap-3 mb-2">
+                          <span className="text-xs uppercase text-slate-500">Eventos</span>
+                          <span className="text-xs text-slate-500">
+                            {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos os eventos"}
+                          </span>
+                        </div>
                         <details className="w-full">
                           <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
                             {selectedEventsCount
@@ -1539,28 +1486,11 @@
                               : "Todos os eventos"}
                           </summary>
                           <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
-                            <label
-                              className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
-                                isAllEventsSelected
-                                  ? "bg-amber-300/15 text-amber-100"
-                                  : "text-slate-300 hover:bg-white/10"
-                              }`}
-                            >
-                              <input
-                                type="checkbox"
-                                className="h-4 w-4 accent-amber-400"
-                                checked={isAllEventsSelected}
-                                onChange={handleSelectAllEvents}
-                                disabled={loading || !eventOptions.length}
-                              />
-                              <span className="text-sm leading-tight">Todos os eventos</span>
-                            </label>
-
                             {!eventOptions.length && (
                               <p className="text-sm text-slate-500 px-2 py-2">Sem eventos disponiveis.</p>
                             )}
                             {eventOptions.map((event) => {
-                              const isChecked = !isAllEventsSelected && selectedEventsSet.has(event.key);
+                              const isChecked = selectedEventsSet.has(event.key);
                               return (
                                 <label
                                   key={event.key}
