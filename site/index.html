@@ -56,20 +56,40 @@
         min-height: 100vh;
         font-family: var(--font-body);
         color: var(--text);
-        background: radial-gradient(1200px circle at 10% 10%, rgba(248, 187, 99, 0.18), transparent 55%),
-          radial-gradient(900px circle at 90% 20%, rgba(59, 130, 246, 0.2), transparent 60%),
-          linear-gradient(160deg, var(--bg-1), var(--bg-2));
+        background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
         overflow-x: hidden;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 48px 20px;
+        position: relative;
+      }
+
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background:
+          linear-gradient(180deg, rgba(2, 6, 23, 0.22), rgba(2, 6, 23, 0.82)),
+          radial-gradient(1200px circle at 12% 12%, rgba(248, 187, 99, 0.18), transparent 55%),
+          radial-gradient(900px circle at 88% 18%, rgba(59, 130, 246, 0.18), transparent 60%),
+          url("./assets/home-hero.webp") center center / cover no-repeat;
+        transform: scale(1.03);
+      }
+
+      .backdrop::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(160deg, rgba(5, 6, 11, 0.2), rgba(5, 6, 11, 0.72)),
+          radial-gradient(900px circle at center, transparent 25%, rgba(5, 6, 11, 0.35) 100%);
       }
 
       .ambient {
         position: fixed;
         inset: 0;
-        z-index: 0;
+        z-index: 1;
         pointer-events: none;
         overflow: hidden;
       }
@@ -107,9 +127,16 @@
 
       main {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         max-width: 980px;
         width: 100%;
+        padding: 36px;
+        border-radius: 32px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: linear-gradient(180deg, rgba(6, 10, 18, 0.4), rgba(6, 10, 18, 0.18));
+        box-shadow: 0 28px 80px rgba(2, 6, 23, 0.45);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
       }
 
       .hero {
@@ -129,6 +156,7 @@
         font-size: clamp(2.4rem, 4vw, 3.4rem);
         margin: 0 0 12px;
         letter-spacing: -0.02em;
+        text-shadow: 0 10px 24px rgba(2, 6, 23, 0.45);
       }
 
       .cards {
@@ -237,9 +265,21 @@
           transition: none;
         }
       }
+
+      @media (max-width: 720px) {
+        body {
+          padding: 24px 16px;
+        }
+
+        main {
+          padding: 24px;
+          border-radius: 24px;
+        }
+      }
     </style>
   </head>
   <body>
+    <div class="backdrop" aria-hidden="true"></div>
     <div class="ambient" aria-hidden="true">
       <span class="blob blob-1"></span>
       <span class="blob blob-2"></span>
