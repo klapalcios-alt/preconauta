@@ -15,6 +15,7 @@
       :root {
         --font-body: "Manrope", "Segoe UI", sans-serif;
         --font-display: "Fraunces", "Georgia", serif;
+        --home-hero-image: url("./assets/home-hero.webp");
         --text: #0f172a;
         --muted: #475569;
         --bg-1: #f8fafc;
@@ -73,7 +74,7 @@
           linear-gradient(180deg, rgba(2, 6, 23, 0.22), rgba(2, 6, 23, 0.82)),
           radial-gradient(1200px circle at 12% 12%, rgba(248, 187, 99, 0.18), transparent 55%),
           radial-gradient(900px circle at 88% 18%, rgba(59, 130, 246, 0.18), transparent 60%),
-          url("./assets/home-hero.webp") center center / cover no-repeat;
+          var(--home-hero-image) center center / cover no-repeat;
         transform: scale(1.03);
       }
 
@@ -277,6 +278,15 @@
         }
       }
     </style>
+    <script>
+      (function () {
+        const isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
+        const pathParts = window.location.pathname.split("/").filter(Boolean);
+        const repoBase = isGitHubPages && pathParts.length ? `/${pathParts[0]}` : "";
+        const assetPath = isGitHubPages ? `${repoBase}/assets/home-hero.webp` : "./assets/home-hero.webp";
+        document.documentElement.style.setProperty("--home-hero-image", `url("${assetPath}")`);
+      })();
+    </script>
   </head>
   <body>
     <div class="backdrop" aria-hidden="true"></div>
