@@ -1,0 +1,5 @@
+cd "C:\Users\Edd\Desktop\Codes\Liga preconauta\preconauta-league"
+.\run_sync.ps1
+git add .
+git commit -m "Atualiza dados do site"
+git push
