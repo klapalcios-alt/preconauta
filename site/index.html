@@ -230,6 +230,18 @@
         border: 1px solid rgba(56, 189, 248, 0.4);
       }
 
+      .hero-logo {
+        margin: 0 auto 18px;
+        width: min(420px, 82vw);
+      }
+
+      .hero-logo img {
+        display: block;
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.35));
+      }
+
       .cta {
         margin-top: 12px;
         display: inline-flex;
@@ -298,9 +310,9 @@
 
     <main>
       <header class="hero">
-        <p class="badge presencial" style="margin: 0 auto 12px;">
-          Liga Preconauta
-        </p>
+        <div class="hero-logo">
+          <img src="./assets/preconauta-logo.png" alt="Preconauta" />
+        </div>
         <h1>Escolha sua liga</h1>
         <p>
           Selecione a modalidade para ver rankings, decks e estatisticas atualizadas.
