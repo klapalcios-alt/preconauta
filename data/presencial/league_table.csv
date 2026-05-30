@@ -1,9 +1,11 @@
 player_name,league_points,eventos,deck_principal
-Carlos Alberto Bueno dos Reis Júnior ,21,16,Counter Inteligence
+Carlos Alberto Bueno dos Reis Júnior,21,16,Counter Inteligence
+Dellani,21,13,Veloci-E-Rápido
 Metusalen Rocha,20,15,Jump Scare!
 Eduardo Bueno,18,13,Blight Curse
 Jurantokens,18,13,Blame Game
-Murilo Oyafuso ,18,12,World Shaper
+Paulo Berka,18,13,Dance of the Elements
+Murilo Oyafuso,18,12,World Shaper
 Pedro souza,18,12,Veloci-E-Rápido
 Rudzzt,17,14,Peace Offering
 Gustavo de Cordova Baron,17,11,Silverquill Influence
@@ -15,8 +17,8 @@ Lewy Caron de Lima,14,13,Blight Curse
 Carlos Alexandre Vieira Manfrinato,14,12,Renascer da Rebelião
 Henrique Guzzo Teixeira,14,11,Blame Game
 Alan Santos Dias,14,10,Exploradores das Profundezas
-_00AADellani,14,9,Temur Roar
 Gustavo Dias Gonçalves,12,11,Squirreled Away
+Zangas 🕸️,12,11,Endless Punishment
 Yasmin Dellani,12,10,Sworn to Darkness
 David Carvalho,12,8,"Ave, Caesar"
 LUIZ HENRIQUE DE ALMEIDA,12,8,Desert Blom
@@ -24,47 +26,41 @@ Banshee,11,9,Turtle Power!
 Arthur Castanhari,11,8,Lorehold Spirit
 Bruno Alves,11,8,Devorarrrdores de Mentes
 Ruan,11,7,Turtle Power!
-Paulo Berka,11,6,Dance of the Elements
-Gustavo Alexandre,10,7,Hora das Engenhocas
+Gustavo Alexandre,10,9,Hora das Engenhocas
 Jonathan schmidt,10,6,As Hostes de Mordor
-Luís eduardo ,10,6,Counter Blitz
 Oscar Hideki Takekawa Toeda,10,5,Scions & Spellcraft
 felipe depetriz marques,9,9,Masters of Evil
-Paulo Berka ,9,7,Witherbloom Pestilence
 Pudeulko,9,6,Caos Encarnado
-Lucas Silveira Nogueira ,8,6,Mardu Surge
-Diego Trindade ,7,7,Blight Curse
-Dellani,7,4,Exploradores das Profundezas
+Lucas Silveira Nogueira,8,6,Mardu Surge
+Diego Trindade,7,7,Blight Curse
 Kaylle Olmedo di Nisio,7,3,Legado das Lendas
+HENRIQUE ALEXANDRE LANGA,6,5,As Hostes de Mordor
 Luiz Freire,6,5,Masters of Evil
 Gabi,6,4,Endless Punishment
 Guilherme Gardemann,6,4,Counter Inteligence
 CRISTIANO ESTEVAO DE OLIVEIRA CHIQUITI,5,5,Virtude e Valor
-Zangas 🕸️ ,5,5,Endless Punishment
 André Romano,5,4,Urza's Iron Alliance
-HENRIQUE ALEXANDRE LANGA,5,4,As Hostes de Mordor
 Adriano Alves,5,3,Squirreled Away
 Paulo Ricardo De Oliveira Franceschi,4,4,Dance of the Elements
 Denilson Luiz Morais Junior,4,3,Death Toll
 Guilherme Portela,4,3,Creative Energy
 Mickael lutz,4,3,Blight Curse
+marcus vinicius werneck esteves,4,3,Animated Army
 Douglas matos,3,3,Jump Scare!
 Bernardo,3,2,Içar Velas
 Carlos Chueiry,3,2,Dance of the Elements
-Marcus Vinicius ,3,2,Animated Army
+Marcus Vinicius,3,2,Animated Army
 Nathalia Tamura,3,2,Witherbloom Pestilence
 Rogerio Coelho,3,2,Içar Velas
 Shaolin Matador de Porco,3,2,Domine as Marés
 Vinicius Tasca,3,2,Dance of the Elements
-Vitor Rodrigues Izidoro ,3,2,Blast from the Past
-Gustavo,2,2,Hora das Engenhocas
+Vitor Rodrigues Izidoro,3,2,Blast from the Past
 Max Coelho,2,2,Liberação de Eldrazi
 Mário Retondo,2,2,Revival Trance
 Osni de Melo Martins Junior,2,2,Witherbloom Pestilence
 Adriano Alves Bezerra,2,1,Squirreled Away
 Carlos Kit,2,1,Rituais de Sangue
 Gabriel Schmidt,2,1,Blight Curse
-Langa,2,1,As Hostes de Mordor
 Leonardo Anghinoni,2,1,Dance of the Elements
 Luis Eduardo,2,1,Scions & Spellcraft
 Nathan Marques,2,1,Lorehold Spirit
@@ -72,15 +68,14 @@ Ruddzt,2,1,Revenant Recon
 Salu Salu,2,1,"Ave, Caesar"
 Sheldon Tavares,2,1,Ameaça Mutante
 Theo Leal,2,1,Sultai Arisen
-Werneck,2,1,Temur Roar
-Yuri Sato dos Reis ,2,1,Revival Trance
+Yuri Sato dos Reis,2,1,Revival Trance
 Zubk,2,1,Silverquill Influence
 ANSELMO GERONASSO JUNIOR,1,1,Turtle Power!
 Adriano,1,1,Prismari Artistry
 Adriano Alvez,1,1,Prismari Artistry
 Andre Romano,1,1,Blight Curse
 Antony Strapa,1,1,Exploradores das Profundezas
-Antônio Luiz Vian Oliveira ,1,1,Rituais de Sangue
+Antônio Luiz Vian Oliveira,1,1,Rituais de Sangue
 Beck,1,1,Içar Velas
 Bruno Guimarães,1,1,Blight Curse
 Bruno Mendes,1,1,Endless Punishment
@@ -97,21 +92,19 @@ IORI YAMANOUCHI FUGII,1,1,Scions & Spellcraft
 ISABELA TRANCOSO VIEIRA,1,1,Counter Inteligence
 Igor Rodrigues,1,1,Scions & Spellcraft
 Ingrid Souza,1,1,Temur Roar
-Isa stohler bertolaccini ,1,1,Limit Break
+Isa stohler bertolaccini,1,1,Limit Break
 Joao Pedro Miranda Maronezi,1,1,Counter Blitz
 Joaquin Diogo Carvajo Cantarin,1,1,Temur Roar
 João Guilherme Wolff Athayde,1,1,Sultai Arisen
 LETICIA LUCIANI,1,1,World Shaper
 Lucas White,1,1,Silverquill Influence
 Luciano Reis Costa,1,1,Eternal Might
-Marcus Werneck,1,1,Animated Army
 Martin Stachera Neto,1,1,Blight Curse
 Naty,1,1,Invenção Requintada
 Paulo Araujo,1,1,Revival Trance
 Rafael Ferrato,1,1,Turtle Power!
 Rogério luz,1,1,Squirreled Away
-Rômulo Augusto ,1,1,Dance of the Elements
+Rômulo Augusto,1,1,Dance of the Elements
 Sra. Werneck,1,1,Domínio das Fadinas
 Vinicius Gris,1,1,Comida e Sociedade
 Yuri Sahao,1,1,Peace Offering
-marcus vinicius werneck esteves,1,1,Graveyard Overdrive

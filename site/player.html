@@ -552,6 +552,18 @@
         return String(name || "").trim().toLowerCase();
       }
 
+      function resolvePlayerAlias(data, rawName) {
+        const target = normalizeName(rawName);
+        if (!target) return rawName || "";
+        const aliases = data?.player_aliases || {};
+        for (const [alias, canonical] of Object.entries(aliases)) {
+          if (normalizeName(alias) === target && canonical) {
+            return canonical;
+          }
+        }
+        return rawName || "";
+      }
+
       function getEventKey(row) {
         const tid = typeof row?.tid === "string" && row.tid.trim() ? row.tid.trim() : null;
         if (tid) return tid;
@@ -601,7 +613,8 @@
       }
 
       function resolvePlayerName(data, rawName) {
-        const target = normalizeName(rawName);
+        const aliasName = resolvePlayerAlias(data, rawName);
+        const target = normalizeName(aliasName);
         if (!target) return "";
         const candidates = [];
         (data?.league_table || []).forEach((row) => {
@@ -614,7 +627,7 @@
             candidates.push(row.player_name);
           }
         });
-        return candidates[0] || rawName || "";
+        return candidates[0] || aliasName || rawName || "";
       }
 
       function quarterKeyFromRow(row) {

@@ -193,10 +193,59 @@ def fix_moxfield(url: str | None) -> str | None:
     return url
 
 
-def normalize_player_name(name: str | None) -> str | None:
-    if not name or not isinstance(name, str):
+def clean_player_name(name: object) -> str | None:
+    if name is None:
         return None
-    return re.sub(r"\s+", " ", name).strip().lower()
+    try:
+        if pd.isna(name):
+            return None
+    except Exception:
+        pass
+
+    text = re.sub(r"\s+", " ", str(name)).strip()
+    return text or None
+
+
+def normalize_player_name(name: object) -> str | None:
+    text = clean_player_name(name)
+    if not text:
+        return None
+    return text.lower()
+
+
+def load_player_aliases(path: str = "player_aliases.json") -> dict[str, str]:
+    if not os.path.exists(path):
+        return {}
+
+    with open(path, "r", encoding="utf-8-sig") as f:
+        raw_aliases = json.load(f)
+
+    if not isinstance(raw_aliases, dict):
+        raise SystemExit(f"{path}: esperado um objeto JSON com aliases de jogadores.")
+
+    aliases = {}
+    for raw_name, alias_name in raw_aliases.items():
+        key = clean_player_name(raw_name)
+        value = clean_player_name(alias_name)
+        if key and value:
+            aliases[key] = value
+    return aliases
+
+
+def resolve_player_alias(name: object, aliases: dict[str, str]) -> str | None:
+    clean_name = clean_player_name(name)
+    if not clean_name:
+        return None
+    exact = aliases.get(clean_name)
+    if exact:
+        return exact
+
+    norm_name = normalize_player_name(clean_name)
+    for alias_name, canonical_name in aliases.items():
+        if normalize_player_name(alias_name) == norm_name:
+            return canonical_name
+
+    return clean_name
 
 
 def looks_like_url(u: str | None) -> bool:
@@ -416,6 +465,11 @@ def compute_event_points(standings_df: pd.DataFrame) -> pd.DataFrame:
         return standings_df
 
     df = standings_df.copy()
+    df["player_name"] = df["player_name"].map(clean_player_name)
+    df = df.dropna(subset=["player_name"])
+    if df.empty:
+        return standings_df.iloc[0:0].copy()
+
     df["points_val"] = pd.to_numeric(df.get("points"), errors="coerce").fillna(-10**9)
     df["win_rate_val"] = pd.to_numeric(df.get("win_rate"), errors="coerce").fillna(-10**9)
     df["opp_win_rate_val"] = pd.to_numeric(df.get("opp_win_rate"), errors="coerce").fillna(-10**9)
@@ -503,6 +557,7 @@ def compute_event_scores_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=empty_cols)
 
     df = matches_df.copy()
+    df["player_name"] = df["player_name"].map(clean_player_name)
     df = df.dropna(subset=["tid", "player_name"])
     if df.empty:
         return pd.DataFrame(columns=empty_cols)
@@ -883,6 +938,7 @@ def build_player_matchups(matches_df: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame(columns=cols)
 
     df = matches_df.copy()
+    df["player_name"] = df["player_name"].map(clean_player_name)
     df = df.dropna(subset=["tid", "player_name"])
     if df.empty:
         return pd.DataFrame(columns=cols)
@@ -916,6 +972,9 @@ def build_player_matchups(matches_df: pd.DataFrame) -> pd.DataFrame:
             player_name = player.get("player_name")
             if not isinstance(player_name, str) or not player_name.strip():
                 continue
+            player_name = clean_player_name(player_name)
+            if not player_name:
+                continue
 
             player_id = player.get("player_id")
             norm_player = normalize_player_name(player_name)
@@ -935,6 +994,9 @@ def build_player_matchups(matches_df: pd.DataFrame) -> pd.DataFrame:
 
                 opp_name = opp.get("player_name")
                 if not isinstance(opp_name, str) or not opp_name.strip():
+                    continue
+                opp_name = clean_player_name(opp_name)
+                if not opp_name:
                     continue
 
                 opp_id = opp.get("player_id")
@@ -1044,6 +1106,8 @@ def compute_quarterly_points(
         return pd.DataFrame(columns=["player_name", "league_points"])
 
     df = events_df.dropna(subset=["month", "player_name"]).copy()
+    df["player_name"] = df["player_name"].map(clean_player_name)
+    df = df.dropna(subset=["player_name"])
     if df.empty:
         return pd.DataFrame(columns=["player_name", "league_points"])
 
@@ -1171,10 +1235,7 @@ def main():
     with open("events.json", "r", encoding="utf-8-sig") as f:
         events = json.load(f)
 
-    aliases = {}
-    if os.path.exists("player_aliases.json"):
-        with open("player_aliases.json", "r", encoding="utf-8-sig") as f:
-            aliases = json.load(f)
+    aliases = load_player_aliases("player_aliases.json")
 
     deck_map = load_deck_map_csv("deck_map.csv")
     print(f"Aliases carregados: {len(aliases)} | Deck map carregado: {len(deck_map)}")
@@ -1218,6 +1279,7 @@ def main():
 
         deck_by_pid = {}
         deck_by_name = {}
+        player_name_by_pid = {}
 
         for e in events:
             tid = str(e["tid"])
@@ -1264,11 +1326,13 @@ def main():
             mkey = month_key(start_ts)
 
             for s in data.get("standings", []):
-                name = aliases.get(s.get("name"), s.get("name"))
+                name = resolve_player_alias(s.get("name"), aliases)
                 win_rate = s.get("winRate", s.get("successRate"))
                 opp_wr = s.get("opponentWinRate", s.get("opponentSuccessRate"))
                 pid = s.get("id")
                 pid = str(pid) if pid is not None else None
+                if pid and name:
+                    player_name_by_pid[(tid, pid)] = name
 
                 deck_url = canonicalize_url(extract_deck_url(s))
                 name_key = normalize_player_name(name)
@@ -1338,11 +1402,18 @@ def main():
                         winner_id = winner_id or winner_name.get("id")
                         winner_name = winner_name.get("name")
                     winner_id = str(winner_id) if winner_id is not None else None
+                    winner_name = (
+                        player_name_by_pid.get((tid, winner_id))
+                        if winner_id
+                        else None
+                    ) or resolve_player_alias(winner_name, aliases)
 
                     for p in tbl.get("players", []):
-                        pname = aliases.get(p.get("name"), p.get("name"))
+                        pname = resolve_player_alias(p.get("name"), aliases)
                         pid = p.get("id")
                         pid = str(pid) if pid is not None else None
+                        if pid:
+                            pname = player_name_by_pid.get((tid, pid), pname)
 
                         deck_raw = extract_decklist(p)
                         deck_url = canonicalize_url(extract_deck_url(p))
@@ -1423,6 +1494,16 @@ def main():
         df = pd.DataFrame(rows).reindex(columns=standings_cols)
         tables_df = pd.DataFrame(table_rows).reindex(columns=tables_cols)
         matches_df = pd.DataFrame(match_rows).reindex(columns=matches_cols)
+
+        for frame, columns in (
+            (df, ["player_name"]),
+            (matches_df, ["winner_name", "player_name"]),
+        ):
+            if frame.empty:
+                continue
+            for col in columns:
+                if col in frame.columns:
+                    frame[col] = frame[col].map(clean_player_name)
 
         if event_tids:
             df = df[df["tid"].isin(event_tids)]
@@ -1699,6 +1780,7 @@ def main():
             "monthly_best": monthly_best.to_dict(orient="records"),
             "league_table": league.to_dict(orient="records"),
             "deck_stats": deck_stats_df.to_dict(orient="records"),
+            "player_aliases": aliases,
         }
         with open(os.path.join(out_dir, "site.json"), "w", encoding="utf-8") as f:
             json.dump(clean_nan(site), f, ensure_ascii=False, allow_nan=False)
