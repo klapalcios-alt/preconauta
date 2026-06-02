@@ -600,6 +600,47 @@
         return null;
       }
 
+      function pickDeckFromMatch(match) {
+        const label = pickDeckLabelFromMatch(match);
+        if (!label) return null;
+        return {
+          label,
+          url: typeof match?.deck_url === "string" && match.deck_url.trim() ? match.deck_url.trim() : null,
+        };
+      }
+
+      function pickTeamDecksFromMatch(match) {
+        const decks = [];
+        [1, 2].forEach((slot) => {
+          const label = [
+            match?.[`deck_name_pt_${slot}`],
+            match?.[`deck_name_en_${slot}`],
+            match?.[`deck_${slot}`],
+            match?.[`deck_url_${slot}`],
+          ].find((value) => typeof value === "string" && value.trim());
+          if (!label) return;
+          const cleanLabel = label.trim();
+          const url = match?.[`deck_url_${slot}`];
+          decks.push({
+            label: isHttpUrl(cleanLabel) ? "Moxfield" : cleanLabel,
+            url: typeof url === "string" && url.trim() ? url.trim() : null,
+          });
+        });
+
+        if (!decks.length) {
+          const fallback = pickDeckFromMatch(match);
+          if (fallback) decks.push(fallback);
+        }
+
+        const seen = new Set();
+        return decks.filter((deck) => {
+          const key = `${deck.label || ""}::${deck.url || ""}`;
+          if (seen.has(key)) return false;
+          seen.add(key);
+          return true;
+        });
+      }
+
       function mostRecentDateFrom(data) {
         let best = null;
         const scan = (arr) => {
@@ -860,23 +901,25 @@
       function buildPlayerDeckStats(matches) {
         const map = new Map();
         (matches || []).forEach((m) => {
-          const deckName = [m.deck_name_en, m.deck_name_pt].find(
-            (v) => typeof v === "string" && v.trim()
-          );
-          const deckLabel = deckName || m.deck_url || m.deck_raw || "Deck desconhecido";
-          let entry = map.get(deckLabel);
-          if (!entry) {
-            entry = {
-              deck: deckLabel,
-              games: 0,
-              wins: 0,
-              points: 0,
-            };
-            map.set(deckLabel, entry);
-          }
-          entry.games += 1;
-          entry.wins += Number(m.is_winner || 0);
-          entry.points += pointsForMatch(m);
+          const deckItems = IS_2X2 ? pickTeamDecksFromMatch(m) : [pickDeckFromMatch(m)].filter(Boolean);
+          const fallbackDeck = { label: m.deck_url || m.deck_raw || "Deck desconhecido", url: null };
+          (deckItems.length ? deckItems : [fallbackDeck]).forEach((deckItem) => {
+            const deckKey = `${deckItem.label || "Deck desconhecido"}::${deckItem.url || ""}`;
+            let entry = map.get(deckKey);
+            if (!entry) {
+              entry = {
+                deck: deckItem,
+                deckKey,
+                games: 0,
+                wins: 0,
+                points: 0,
+              };
+              map.set(deckKey, entry);
+            }
+            entry.games += 1;
+            entry.wins += Number(m.is_winner || 0);
+            entry.points += pointsForMatch(m);
+          });
         });
 
         return Array.from(map.values()).map((row) => ({
@@ -914,21 +957,42 @@
           const targetWon = Number(targetRow.is_winner || 0) === 1;
           const matchDate = parseDateYYYYMMDD(group.date);
 
-          players.forEach((p) => {
-            if (normalizeName(p.player_name) === target) return;
-            const oppName = p.player_name;
-            let entry = results.get(oppName);
+          const opponents = [];
+          if (IS_2X2) {
+            const targetTeamKey = targetRow.team_key || targetRow.team_name || targetRow.raw_team || "";
+            const seenTeams = new Set();
+            players.forEach((p) => {
+              const opponentTeamKey = p.team_key || p.team_name || p.raw_team || p.player_name;
+              if (!opponentTeamKey || opponentTeamKey === targetTeamKey || seenTeams.has(opponentTeamKey)) {
+                return;
+              }
+              seenTeams.add(opponentTeamKey);
+              opponents.push({
+                key: opponentTeamKey,
+                name: p.team_name || p.raw_team || p.player_name,
+              });
+            });
+          } else {
+            players.forEach((p) => {
+              if (normalizeName(p.player_name) === target) return;
+              opponents.push({ key: p.player_name, name: p.player_name });
+            });
+          }
+
+          opponents.forEach((opponent) => {
+            const oppName = opponent.name;
+            let entry = results.get(opponent.key);
             if (!entry) {
-              entry = { opponent: oppName, matches: 0, wins: 0, losses: 0, lastDate: null };
-              results.set(oppName, entry);
+              entry = { opponent: oppName, matches: 0, wins: 0, draws: 0, losses: 0, lastDate: null };
+              results.set(opponent.key, entry);
             }
             entry.matches += 1;
-            if (!group.isDraw) {
-              if (targetWon) {
-                entry.wins += 1;
-              } else {
-                entry.losses += 1;
-              }
+            if (group.isDraw) {
+              entry.draws += 1;
+            } else if (targetWon) {
+              entry.wins += 1;
+            } else {
+              entry.losses += 1;
             }
             if (matchDate && (!entry.lastDate || matchDate > entry.lastDate)) {
               entry.lastDate = matchDate;
@@ -979,27 +1043,29 @@
           if (!entry.date && m.start_date) entry.date = m.start_date;
           if (!entry.month && m.month) entry.month = m.month;
 
-          const deck = pickDeckLabelFromMatch(m);
-          if (deck) {
-            const deckStats = entry.decks.get(deck) || { games: 0, wins: 0 };
+          const deckItems = IS_2X2 ? pickTeamDecksFromMatch(m) : [pickDeckFromMatch(m)].filter(Boolean);
+          deckItems.forEach((deck) => {
+            const deckKey = `${deck.label || ""}::${deck.url || ""}`;
+            const deckStats = entry.decks.get(deckKey) || { deck, games: 0, wins: 0 };
             deckStats.games += 1;
             deckStats.wins += won ? 1 : 0;
-            entry.decks.set(deck, deckStats);
-          }
+            entry.decks.set(deckKey, deckStats);
+          });
         });
 
         const getDeckForEvent = (entry) => {
           if (!entry || !(entry.decks instanceof Map) || entry.decks.size === 0) return null;
-          const ranked = Array.from(entry.decks.entries()).map(([deck, stats]) => ({
-            deck,
+          const ranked = Array.from(entry.decks.values()).map((stats) => ({
+            deck: stats.deck,
             games: Number(stats?.games || 0),
             wins: Number(stats?.wins || 0),
           }));
           ranked.sort((a, b) => {
             if (b.games !== a.games) return b.games - a.games;
             if (b.wins !== a.wins) return b.wins - a.wins;
-            return String(a.deck || "").localeCompare(String(b.deck || ""), "pt-BR");
+            return String(a.deck?.label || "").localeCompare(String(b.deck?.label || ""), "pt-BR");
           });
+          if (IS_2X2) return ranked.map((row) => row.deck).slice(0, 4);
           return ranked[0]?.deck || null;
         };
 
@@ -1198,7 +1264,43 @@
         return typeof s === "string" && /^https?:\/\//i.test(s);
       }
 
+      function deckDisplayLabel(deck) {
+        if (Array.isArray(deck)) return deck.map(deckDisplayLabel).join(" + ");
+        if (deck && typeof deck === "object") return deck.label || deck.url || "";
+        return String(deck || "");
+      }
+
       function DeckCell({ deck }) {
+        if (Array.isArray(deck)) {
+          if (!deck.length) return <span>N/D</span>;
+          return (
+            <span className="inline-flex flex-wrap gap-2">
+              {deck.map((item, index) => (
+                <span key={`${item?.label || item || "deck"}-${index}`} className="pill">
+                  <DeckCell deck={item} />
+                </span>
+              ))}
+            </span>
+          );
+        }
+
+        if (deck && typeof deck === "object") {
+          const label = deck.label || deck.url || "N/D";
+          const href = deck.url || (isHttpUrl(label) ? label : null);
+          if (!href) return <span>{label}</span>;
+          return (
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="text-amber-200 underline underline-offset-4"
+              title="Abrir deck (Moxfield)"
+            >
+              {isHttpUrl(label) ? "Moxfield" : label}
+            </a>
+          );
+        }
+
         const label = deck || "N/D";
         if (isHttpUrl(label)) {
           return (
@@ -1386,7 +1488,7 @@
           list.sort((a, b) => {
             if (b.games !== a.games) return b.games - a.games;
             if (b.winRate !== a.winRate) return b.winRate - a.winRate;
-            return String(a.deck || "").localeCompare(String(b.deck || ""), "pt-BR");
+            return deckDisplayLabel(a.deck).localeCompare(deckDisplayLabel(b.deck), "pt-BR");
           });
           return list.slice(0, 3);
         }, [deckStats]);
@@ -1467,7 +1569,7 @@
 
         const topUsedDecks = useMemo(() => {
           const list = [...deckStats];
-          list.sort((a, b) => b.games - a.games || b.winRate - a.winRate);
+          list.sort((a, b) => b.games - a.games || b.winRate - a.winRate || deckDisplayLabel(a.deck).localeCompare(deckDisplayLabel(b.deck), "pt-BR"));
           return list;
         }, [deckStats]);
 
@@ -1475,7 +1577,8 @@
           const list = deckStats.filter((row) => row.games >= minMatches);
           list.sort((a, b) => {
             if (b.winRate !== a.winRate) return b.winRate - a.winRate;
-            return b.games - a.games;
+            if (b.games !== a.games) return b.games - a.games;
+            return deckDisplayLabel(a.deck).localeCompare(deckDisplayLabel(b.deck), "pt-BR");
           });
           return list;
         }, [deckStats, minMatches]);
@@ -1804,7 +1907,7 @@
                   <div className="flex items-center justify-between">
                     <h3 className="text-2xl font-display flex items-center gap-2">
                       <Trophy className="text-amber-300" />
-                      Top 3 decks mais jogados
+                      {IS_2X2 ? "Top 3 decks usados pela dupla" : "Top 3 decks mais jogados"}
                     </h3>
                     <span className="pill">Ordenado por partidas</span>
                   </div>
@@ -1824,7 +1927,7 @@
                           medal === 1 ? "rank-gold" : medal === 2 ? "rank-silver" : "rank-bronze";
                         return (
                           <Card
-                            key={`${deck.deck}-${index}`}
+                            key={`${deck.deckKey || deckDisplayLabel(deck.deck)}-${index}`}
                             className={`reveal ${rankClass}`}
                             style={{ animationDelay: `${index * 0.1}s` }}
                           >
@@ -1867,10 +1970,12 @@
                     <div>
                       <h3 className="text-2xl font-display flex items-center gap-2">
                         <Swords className="text-amber-300" />
-                        Contra quem ele jogou
+                        {IS_2X2 ? "Duplas enfrentadas" : "Contra quem ele jogou"}
                       </h3>
                       <p className="text-sm text-slate-500">
-                        Apenas adversarios ja enfrentados. Rival destacado.
+                        {IS_2X2
+                          ? "Desempenho contra cada dupla adversaria."
+                          : "Apenas adversarios ja enfrentados. Rival destacado."}
                       </p>
                     </div>
 
@@ -1879,7 +1984,7 @@
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
                         <input
                           type="text"
-                          placeholder="Buscar adversario..."
+                          placeholder={IS_2X2 ? "Buscar dupla..." : "Buscar adversario..."}
                           className="input-glass pl-11 pr-4 w-full sm:w-64"
                           value={headSearch}
                           onChange={(e) => setHeadSearch(e.target.value)}
@@ -1905,11 +2010,15 @@
                 {sortedHead.length === 0 ? (
                   <EmptyState
                     title="Sem dados suficientes para exibir"
-                    description="Nao ha confrontos registrados para este jogador."
+                    description={
+                      IS_2X2
+                        ? "Nao ha duplas adversarias registradas para este jogador."
+                        : "Nao ha confrontos registrados para este jogador."
+                    }
                   />
                 ) : (
                   <>
-                    {(bestWinsRow || bestLossRow) && (
+                    {!IS_2X2 && (bestWinsRow || bestLossRow) && (
                       <div className="mb-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                         {bestWinsRow && (
                           <div className="glass-card">
@@ -1943,9 +2052,10 @@
                         <table className="w-full text-left border-collapse">
                           <thead>
                             <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-white/5">
-                              <th className="p-4">Adversario</th>
+                              <th className="p-4">{IS_2X2 ? "Dupla adversaria" : "Adversario"}</th>
                               <th className="p-4 text-center">Partidas</th>
                               <th className="p-4 text-center">Vitorias</th>
+                              <th className="p-4 text-center">Empates</th>
                               <th className="p-4 text-center">Derrotas</th>
                               <th className="p-4 text-center">Win rate</th>
                               {headToHead.hasLastDate && (
@@ -1958,17 +2068,18 @@
                               <tr
                                 key={row.opponent}
                                 className={`transition-colors hover:bg-white/5 ${
-                                  row.opponent === headToHead.rival ? "bg-amber-500/10" : ""
+                                  !IS_2X2 && row.opponent === headToHead.rival ? "bg-amber-500/10" : ""
                                 }`}
                               >
                                 <td className="p-4 font-medium text-slate-100">
                                   {row.opponent}
-                                  {row.opponent === headToHead.rival && (
+                                  {!IS_2X2 && row.opponent === headToHead.rival && (
                                     <span className="pill ml-3">Rival</span>
                                   )}
                                 </td>
                                 <td className="p-4 text-center text-slate-400">{row.matches}</td>
                                 <td className="p-4 text-center text-slate-400">{row.wins}</td>
+                                <td className="p-4 text-center text-slate-400">{row.draws || 0}</td>
                                 <td className="p-4 text-center text-slate-400">{row.losses}</td>
                                 <td className="p-4 text-center text-slate-400">
                                   {formatPercent(row.winRate)}
@@ -2011,10 +2122,16 @@
                         <div className="flex items-end gap-3 h-36 min-w-max pr-2">
                           {pointsByEvent.map((row, idx) => (
                             <div key={row.key} className="flex flex-col items-center gap-2">
-                              <div
-                                className="w-10 rounded-t-lg bg-amber-400/70"
-                                style={{ height: `${Math.max(12, (row.points / barMaxEvent) * 130)}px` }}
-                              ></div>
+                              <div className="h-36 flex flex-col items-center justify-end gap-1">
+                                <span className="text-xs font-semibold text-amber-200">
+                                  {Number(row.points || 0)}
+                                </span>
+                                <div
+                                  className="w-10 rounded-t-lg bg-amber-400/70"
+                                  style={{ height: `${Math.max(12, (row.points / barMaxEvent) * 112)}px` }}
+                                  title={`${Number(row.points || 0)} ponto(s)`}
+                                ></div>
+                              </div>
                               <span className="text-[10px] text-slate-500">E{idx + 1}</span>
                             </div>
                           ))}
@@ -2027,7 +2144,7 @@
                             <thead>
                               <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-white/5">
                                 <th className="p-4">Evento</th>
-                                <th className="p-4">Deck no dia</th>
+                                <th className="p-4">{IS_2X2 ? "Decks da dupla" : "Deck no dia"}</th>
                                 <th className="p-4 text-center">Data</th>
                                 <th className="p-4 text-center">Pontos</th>
                                 <th className="p-4 text-center">Win rate no dia</th>
@@ -2070,10 +2187,12 @@
                     <div>
                       <h3 className="text-2xl font-display flex items-center gap-2">
                         <Trophy className="text-amber-300" />
-                        Decks do jogador
+                        {IS_2X2 ? "Decks usados pela dupla" : "Decks do jogador"}
                       </h3>
                       <p className="text-sm text-slate-500">
-                        Mais usados x melhor desempenho com filtro minimo.
+                        {IS_2X2
+                          ? "Decks usados nas duplas do jogador, com partidas, win rate e pontos."
+                          : "Mais usados x melhor desempenho com filtro minimo."}
                       </p>
                     </div>
                     <div className="flex items-center gap-3">
@@ -2092,7 +2211,7 @@
                     <div className="mt-6">
                       <EmptyState
                         title="Sem dados suficientes para exibir"
-                        description="Nao ha decks suficientes para este jogador."
+                        description={IS_2X2 ? "Nao ha decks suficientes para as duplas deste jogador." : "Nao ha decks suficientes para este jogador."}
                       />
                     </div>
                   ) : (
@@ -2113,7 +2232,7 @@
                             </thead>
                             <tbody className="divide-y divide-white/5">
                               {topUsedDecks.map((row) => (
-                                <tr key={row.deck} className="transition-colors hover:bg-white/5">
+                                <tr key={row.deckKey || deckDisplayLabel(row.deck)} className="transition-colors hover:bg-white/5">
                                   <td className="p-4 font-medium text-slate-100">
                                     <DeckCell deck={row.deck} />
                                   </td>
@@ -2142,18 +2261,19 @@
                                 <th className="p-4">Deck</th>
                                 <th className="p-4 text-center">Win rate</th>
                                 <th className="p-4 text-center">Partidas</th>
+                                <th className="p-4 text-center">Pontos</th>
                               </tr>
                             </thead>
                             <tbody className="divide-y divide-white/5">
                               {bestPerformanceDecks.length === 0 && (
                                 <tr>
-                                  <td className="p-4 text-slate-500" colSpan="3">
+                                  <td className="p-4 text-slate-500" colSpan="4">
                                     Nenhum deck atende o minimo de partidas selecionado.
                                   </td>
                                 </tr>
                               )}
                               {bestPerformanceDecks.map((row) => (
-                                <tr key={row.deck} className="transition-colors hover:bg-white/5">
+                                <tr key={row.deckKey || deckDisplayLabel(row.deck)} className="transition-colors hover:bg-white/5">
                                   <td className="p-4 font-medium text-slate-100">
                                     <DeckCell deck={row.deck} />
                                   </td>
@@ -2161,6 +2281,9 @@
                                     {formatPercent(row.winRate)}
                                   </td>
                                   <td className="p-4 text-center text-slate-400">{row.games}</td>
+                                  <td className="p-4 text-center text-amber-200 font-semibold">
+                                    {Number(row.points || 0)}
+                                  </td>
                                 </tr>
                               ))}
                             </tbody>
