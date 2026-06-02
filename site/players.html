@@ -755,7 +755,7 @@
 
       function buildLeaguePointsMap(eventScores) {
         const rules =
-          LEAGUE === "online"
+          LEAGUE === "online" || LEAGUE === "online2x2"
             ? { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 2 }
             : { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 3 };
         const baseRows = toLeagueScoreRows(eventScores);
@@ -967,6 +967,25 @@
             const label = dateLabel ? `${dateLabel} - ${event.name}` : event.name;
             return { key: event.key, label };
           });
+      }
+
+      function getQuarter(date) {
+        if (!date) return null;
+        return Math.floor(date.getMonth() / 3) + 1;
+      }
+
+      function filterRowsByQuarter(rows, quarter, year) {
+        return (rows || []).filter((row) => {
+          const d = parseDateYYYYMMDD(row?.start_date);
+          if (!d) return false;
+          if (year && d.getFullYear() !== year) return false;
+          return getQuarter(d) === quarter;
+        });
+      }
+
+      function formatQuarterLabel(quarter) {
+        if (!quarter) return "Trimestre";
+        return `${quarter}\u00b0 trimestre`;
       }
 
       function buildLeagueFromMatches(matches, eventScores) {
@@ -1210,12 +1229,15 @@
         const [matchesData, setMatchesData] = useState([]);
         const [eventOptions, setEventOptions] = useState([]);
         const [selectedEvents, setSelectedEvents] = useState([]);
+        const [currentYear, setCurrentYear] = useState(null);
+        const [quarter, setQuarter] = useState(1);
         const [updatedAt, setUpdatedAt] = useState("N/D");
         const [searchTerm, setSearchTerm] = useState("");
         const [loading, setLoading] = useState(true);
         const [notice, setNotice] = useState("");
         const [page, setPage] = useState(1);
         const pageSize = 20;
+        const quarterOptions = [1, 2, 3, 4];
 
         useEffect(() => {
           async function loadReal() {
@@ -1231,13 +1253,19 @@
               if (!matches.length) {
                 throw new Error(NO_DATA_MESSAGE);
               }
+              const lastDate = mostRecentDateFrom(data);
+              const resolvedYear = lastDate ? lastDate.getFullYear() : null;
+              const resolvedQuarter = lastDate ? getQuarter(lastDate) : 1;
+              const quarterMatches = filterRowsByQuarter(matches, resolvedQuarter || 1, resolvedYear);
 
               setAllMatches(matches);
               setAllScores(scoreSource);
-              setEventOptions(buildEventOptions(matches));
+              setCurrentYear(resolvedYear);
+              setQuarter(resolvedQuarter || 1);
+              setEventOptions(buildEventOptions(quarterMatches));
               setSelectedEvents([]);
-              setMatchesData(matches);
-              setUpdatedAt(formatPtBR(mostRecentDateFrom(data)));
+              setMatchesData(quarterMatches);
+              setUpdatedAt(formatPtBR(mostRecentDateFromMatches(quarterMatches)));
             } catch (e) {
               setNotice(String(e.message || e));
               setAllMatches([]);
@@ -1246,6 +1274,8 @@
               setSelectedEvents([]);
               setMatchesData([]);
               setPlayers([]);
+              setCurrentYear(null);
+              setQuarter(1);
               setUpdatedAt("N/D");
             } finally {
               setLoading(false);
@@ -1254,6 +1284,15 @@
 
           loadReal();
         }, []);
+
+        useEffect(() => {
+          if (!allMatches.length) {
+            setEventOptions([]);
+            return;
+          }
+          const quarterMatches = filterRowsByQuarter(allMatches, quarter, currentYear);
+          setEventOptions(buildEventOptions(quarterMatches));
+        }, [allMatches, quarter, currentYear]);
 
         useEffect(() => {
           setSelectedEvents((prev) => prev.filter((key) => eventOptions.some((opt) => opt.key === key)));
@@ -1267,22 +1306,24 @@
             return;
           }
 
+          const quarterMatches = filterRowsByQuarter(allMatches, quarter, currentYear);
+          const quarterScores = filterRowsByQuarter(allScores, quarter, currentYear);
           const selectedSet = new Set(selectedEvents);
           const filteredMatches = selectedSet.size
-            ? allMatches.filter((row) => selectedSet.has(getEventKey(row)))
-            : allMatches;
+            ? quarterMatches.filter((row) => selectedSet.has(getEventKey(row)))
+            : quarterMatches;
           const filteredScores = selectedSet.size
-            ? allScores.filter((row) => selectedSet.has(getEventKey(row)))
-            : allScores;
+            ? quarterScores.filter((row) => selectedSet.has(getEventKey(row)))
+            : quarterScores;
 
           setMatchesData(filteredMatches);
           setPlayers(buildLeagueFromMatches(filteredMatches, filteredScores));
           setUpdatedAt(formatPtBR(mostRecentDateFromMatches(filteredMatches)));
-        }, [allMatches, allScores, selectedEvents]);
+        }, [allMatches, allScores, quarter, currentYear, selectedEvents]);
 
         useEffect(() => {
           setPage(1);
-        }, [searchTerm, selectedEvents]);
+        }, [searchTerm, quarter, selectedEvents]);
 
         const filteredPlayers = useMemo(() => {
           const term = searchTerm.trim().toLowerCase();
@@ -1338,6 +1379,8 @@
 
         const selectedEventsCount = selectedEvents.length;
         const selectedEventsSet = useMemo(() => new Set(selectedEvents), [selectedEvents]);
+        const quarterLabel = formatQuarterLabel(quarter);
+        const quarterTitle = currentYear ? `${quarterLabel} ${currentYear}` : quarterLabel;
         const toggleEventSelection = (eventKey) => {
           setSelectedEvents((prev) => {
             if (!prev.length) return [eventKey];
@@ -1369,6 +1412,7 @@
                     <p className="text-slate-500 flex flex-wrap items-center gap-2">
                       <Calendar size={16} />
                       Ultima atualizacao: {updatedAt}
+                      <span className="pill accent">{quarterTitle}</span>
                       <span className="pill accent">
                         <Shield size={14} />
                         {players.length} jogadores
@@ -1462,63 +1506,79 @@
                         Classificação Geral
                       </h2>
                       <p className="text-sm text-slate-500">
-                        Ranking padrão da Liga 2026 com busca por jogador ou deck.
+                        Ranking da Liga 2026 com filtro por trimestre, evento, jogador ou deck.
                       </p>
                     </div>
 
-                    <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_320px] xl:items-end">
-                      <div className="relative">
-                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                        <input
-                          type="text"
-                          placeholder="Buscar jogador ou deck..."
-                          className="input-glass pl-11 pr-4 w-full"
-                          value={searchTerm}
-                          onChange={(e) => setSearchTerm(e.target.value)}
-                          disabled={loading}
-                        />
+                    <div className="space-y-4">
+                      <div className="flex flex-wrap gap-2">
+                        {quarterOptions.map((q) => (
+                          <button
+                            key={q}
+                            type="button"
+                            className={`pill ${q === quarter ? "active" : ""}`}
+                            onClick={() => setQuarter(q)}
+                            disabled={loading}
+                          >
+                            {formatQuarterLabel(q)}
+                          </button>
+                        ))}
                       </div>
-                      <div>
-                        <div className="flex items-center justify-between gap-3 mb-2">
-                          <span className="text-xs uppercase text-slate-500">Eventos</span>
-                          <span className="text-xs text-slate-500">
-                            {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos os eventos"}
-                          </span>
+
+                      <div className="grid gap-4 md:grid-cols-[minmax(0,1fr)_320px] xl:items-end">
+                        <div className="relative">
+                          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                          <input
+                            type="text"
+                            placeholder="Buscar jogador ou deck..."
+                            className="input-glass pl-11 pr-4 w-full"
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            disabled={loading}
+                          />
                         </div>
-                        <details className="w-full">
-                          <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
-                            {selectedEventsCount
-                              ? `${selectedEventsCount} evento(s) selecionado(s)`
-                              : "Todos os eventos"}
-                          </summary>
-                          <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
-                            {!eventOptions.length && (
-                              <p className="text-sm text-slate-500 px-2 py-2">Sem eventos disponiveis.</p>
-                            )}
-                            {eventOptions.map((event) => {
-                              const isChecked = selectedEventsSet.has(event.key);
-                              return (
-                                <label
-                                  key={event.key}
-                                  className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
-                                    isChecked
-                                      ? "bg-amber-300/15 text-amber-100"
-                                      : "text-slate-300 hover:bg-white/10"
-                                  }`}
-                                >
-                                  <input
-                                    type="checkbox"
-                                    className="h-4 w-4 accent-amber-400"
-                                    checked={isChecked}
-                                    onChange={() => toggleEventSelection(event.key)}
-                                    disabled={loading}
-                                  />
-                                  <span className="text-sm leading-tight">{event.label}</span>
-                                </label>
-                              );
-                            })}
+                        <div>
+                          <div className="flex items-center justify-between gap-3 mb-2">
+                            <span className="text-xs uppercase text-slate-500">Eventos do trimestre</span>
+                            <span className="text-xs text-slate-500">
+                              {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
+                            </span>
                           </div>
-                        </details>
+                          <details className="w-full">
+                            <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
+                              {selectedEventsCount
+                                ? `${selectedEventsCount} evento(s) selecionado(s)`
+                                : "Todos os eventos do trimestre"}
+                            </summary>
+                            <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
+                              {!eventOptions.length && (
+                                <p className="text-sm text-slate-500 px-2 py-2">Sem eventos disponiveis.</p>
+                              )}
+                              {eventOptions.map((event) => {
+                                const isChecked = selectedEventsSet.has(event.key);
+                                return (
+                                  <label
+                                    key={event.key}
+                                    className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                                      isChecked
+                                        ? "bg-amber-300/15 text-amber-100"
+                                        : "text-slate-300 hover:bg-white/10"
+                                    }`}
+                                  >
+                                    <input
+                                      type="checkbox"
+                                      className="h-4 w-4 accent-amber-400"
+                                      checked={isChecked}
+                                      onChange={() => toggleEventSelection(event.key)}
+                                      disabled={loading}
+                                    />
+                                    <span className="text-sm leading-tight">{event.label}</span>
+                                  </label>
+                                );
+                              })}
+                            </div>
+                          </details>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1776,4 +1836,3 @@
     </script>
   </body>
 </html>
-

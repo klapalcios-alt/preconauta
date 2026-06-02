@@ -1,14 +1,14 @@
 tid,player_name,tournament_name,start_date,month,matches,wins,draws,losses,points_match,win_rate,opp_win_rate,event_rank,event_points,event_players
 liga-2x2-online-s1-e01,Andressa & Carbeauty,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.5555555555555555,1,3,10
-liga-2x2-online-s1-e01,Bauer & Marcos Sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.4444444444444444,2,2,10
+liga-2x2-online-s1-e01,Bauer & Marcos Sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,10
 liga-2x2-online-s1-e01,Juliano & Mateus,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.4444444444444444,3,2,10
-liga-2x2-online-s1-e01,Samuel & Thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,10
 liga-2x2-online-s1-e01,Fabio & Luiz,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,10
 liga-2x2-online-s1-e01,Felipe Familiar & Langa,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,7,1,10
 liga-2x2-online-s1-e01,Jorel & Martin,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,6,1,10
-liga-2x2-online-s1-e01,Erick & Glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.3333333333333333,8,1,10
-liga-2x2-online-s1-e01,Boone & Reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.4444444444444444,9,1,10
+liga-2x2-online-s1-e01,Erick & Glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.1111111111111111,8,1,10
+liga-2x2-online-s1-e01,Boone & Reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.2222222222222222,9,1,10
 liga-2x2-online-s1-e01,Chueiry & Vicente,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,0,0.0,0.4444444444444444,10,1,10
+liga-2x2-online-s1-e01,Samuel & Thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,6,0.0,0.3333333333333333,4,2,10
 liga-2x2-online-s1-e02,Samuel & Thiago,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,3,0,0,9,1.0,0.5555555555555555,1,3,12
 liga-2x2-online-s1-e02,Carlos & Errejota,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,2,0,1,6,0.6666666666666666,0.6666666666666666,2,2,12
 liga-2x2-online-s1-e02,Boone & Reva,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,2,0,1,6,0.6666666666666666,0.5555555555555555,3,2,12
@@ -85,11 +85,11 @@ liga-2x2-online-s2-e5,Arthur Sartori & Marcos Sartori,Liga 2x2 Online S2-E5,2026
 liga-2x2-online-s2-e5,João Marmentini & Vande,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,1,0,7,0.6666666666666666,0.3333333333333333,2,2,12
 liga-2x2-online-s2-e5,Guilherme & Vicente,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.6666666666666666,3,2,12
 liga-2x2-online-s2-e5,Bells & Greowtty,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,5,1,12
-liga-2x2-online-s2-e5,Crothen & Erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,12
-liga-2x2-online-s2-e5,Carlos & Cássio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.5555555555555555,6,1,12
-liga-2x2-online-s2-e5,Jorel & Martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.2222222222222222,7,1,12
+liga-2x2-online-s2-e5,Crothen & Erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.2222222222222222,4,2,12
+liga-2x2-online-s2-e5,Carlos & Cássio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,6,1,12
+liga-2x2-online-s2-e5,Jorel & Martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.1111111111111111,7,1,12
 liga-2x2-online-s2-e5,Daniel & Rodrigo,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,8,1,12
-liga-2x2-online-s2-e5,Reva & Samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,9,1,12
 liga-2x2-online-s2-e5,Bauer & Gustavo Dias,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,10,1,12
 liga-2x2-online-s2-e5,Felipe & Pinho,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,1,2,1,0.0,0.6666666666666666,11,1,12
 liga-2x2-online-s2-e5,Marcelo F. & Renan,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,0,0.0,0.5555555555555555,12,1,12
+liga-2x2-online-s2-e5,Reva & Samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,3,0.0,0.4444444444444444,9,1,12

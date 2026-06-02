@@ -33,6 +33,10 @@ _LAST_TOPDECK_REQUEST_MONO = 0.0
 _DECK_ALIASES_CACHE = None
 
 
+def discard_count_for_league(league_type: str) -> int:
+    return 2 if league_type in {"online", "online2x2"} else 3
+
+
 def parse_retry_after_seconds(value: str | None) -> float | None:
     if not value:
         return None
@@ -2141,7 +2145,7 @@ def main():
                 discard_worst_results=True,
                 preserve_best_month=False,
                 include_absences_as_zero=True,
-                discard_count=3,
+                discard_count=discard_count_for_league(league_type),
             )
             if not df2.empty:
                 event_counts = df2.groupby("player_name", as_index=False)["tid"].nunique().rename(
@@ -2215,7 +2219,7 @@ def main():
                 discard_worst_results=True,
                 preserve_best_month=False,
                 include_absences_as_zero=True,
-                discard_count=3,
+                discard_count=discard_count_for_league(league_type),
             ).rename(columns={"player_name": "team_key"})
             if not team_df2.empty:
                 team_counts = team_df2.groupby("player_name", as_index=False)["tid"].nunique().rename(
@@ -2487,7 +2491,7 @@ def main():
             discard_worst_results=(league_type in {"online", "presencial"}),
             preserve_best_month=(league_type != "presencial"),
             include_absences_as_zero=(league_type in {"online", "presencial"}),
-            discard_count=(2 if league_type == "online" else 3),
+            discard_count=discard_count_for_league(league_type),
         )
 
         if not df2.empty:

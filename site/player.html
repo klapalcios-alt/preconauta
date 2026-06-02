@@ -794,7 +794,7 @@
 
       function buildLeaguePointsMap(eventScores) {
         const rules =
-          LEAGUE === "online"
+          LEAGUE === "online" || LEAGUE === "online2x2"
             ? { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 2 }
             : { discardWorstResults: true, includeAbsencesAsZero: true, discardCount: 3 };
         const baseRows = toLeagueScoreRows(eventScores);

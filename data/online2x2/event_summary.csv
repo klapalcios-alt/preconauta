@@ -1,24 +1,24 @@
 tid,player_name,team_name,team_key,tournament_name,start_date,month,matches,wins,draws,losses,points_match,win_rate,opp_win_rate,event_rank,event_points,event_players,event_teams
 liga-2x2-online-s1-e01,Carbeauty,Andressa & Carbeauty,andressa & carbeauty,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.5555555555555555,1,3,10,10
 liga-2x2-online-s1-e01,Andressa,Andressa & Carbeauty,andressa & carbeauty,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.5555555555555555,1,3,10,10
-liga-2x2-online-s1-e01,Marcos Sartori,Bauer & Marcos Sartori,bauer & marcos sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.4444444444444444,2,2,10,10
-liga-2x2-online-s1-e01,Bauer,Bauer & Marcos Sartori,bauer & marcos sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.4444444444444444,2,2,10,10
+liga-2x2-online-s1-e01,Marcos Sartori,Bauer & Marcos Sartori,bauer & marcos sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,10,10
+liga-2x2-online-s1-e01,Bauer,Bauer & Marcos Sartori,bauer & marcos sartori,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,10,10
 liga-2x2-online-s1-e01,Juliano,Juliano & Mateus,juliano & mateus,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.4444444444444444,3,2,10,10
 liga-2x2-online-s1-e01,Mateus,Juliano & Mateus,juliano & mateus,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.4444444444444444,3,2,10,10
-liga-2x2-online-s1-e01,Samuel,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,10,10
-liga-2x2-online-s1-e01,Thiago,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,10,10
 liga-2x2-online-s1-e01,Fabio,Fabio & Luiz,fabio & luiz,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,10,10
 liga-2x2-online-s1-e01,Luiz,Fabio & Luiz,fabio & luiz,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,10,10
 liga-2x2-online-s1-e01,Felipe Familiar,Felipe Familiar & Langa,felipe familiar & langa,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,7,1,10,10
 liga-2x2-online-s1-e01,Langa,Felipe Familiar & Langa,felipe familiar & langa,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,7,1,10,10
 liga-2x2-online-s1-e01,Martin,Jorel & Martin,jorel & martin,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,6,1,10,10
 liga-2x2-online-s1-e01,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,1,1,4,0.3333333333333333,0.3333333333333333,6,1,10,10
-liga-2x2-online-s1-e01,Glauber,Erick & Glauber,erick & glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.3333333333333333,8,1,10,10
-liga-2x2-online-s1-e01,Erick,Erick & Glauber,erick & glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.3333333333333333,8,1,10,10
-liga-2x2-online-s1-e01,Reva,Boone & Reva,boone & reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.4444444444444444,9,1,10,10
-liga-2x2-online-s1-e01,Boone,Boone & Reva,boone & reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.4444444444444444,9,1,10,10
+liga-2x2-online-s1-e01,Glauber,Erick & Glauber,erick & glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.1111111111111111,8,1,10,10
+liga-2x2-online-s1-e01,Erick,Erick & Glauber,erick & glauber,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,1,0,2,3,0.3333333333333333,0.1111111111111111,8,1,10,10
+liga-2x2-online-s1-e01,Reva,Boone & Reva,boone & reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.2222222222222222,9,1,10,10
+liga-2x2-online-s1-e01,Boone,Boone & Reva,boone & reva,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,1,2,1,0.0,0.2222222222222222,9,1,10,10
 liga-2x2-online-s1-e01,Chueiry,Chueiry & Vicente,chueiry & vicente,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,0,0.0,0.4444444444444444,10,1,10,10
 liga-2x2-online-s1-e01,Vicente,Chueiry & Vicente,chueiry & vicente,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,0,0.0,0.4444444444444444,10,1,10,10
+liga-2x2-online-s1-e01,Samuel,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,6,0.0,0.3333333333333333,4,2,10,10
+liga-2x2-online-s1-e01,Thiago,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E01,2026-01-29,2026-01,3,0,0,3,6,0.0,0.3333333333333333,4,2,10,10
 liga-2x2-online-s1-e02,Samuel,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,3,0,0,9,1.0,0.5555555555555555,1,3,12,12
 liga-2x2-online-s1-e02,Thiago,Samuel & Thiago,samuel & thiago,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,3,0,0,9,1.0,0.5555555555555555,1,3,12,12
 liga-2x2-online-s1-e02,Carlos,Carlos & Errejota,carlos & errejota,Liga 2x2 Online S1-E02,2026-02-05,2026-02,3,2,0,1,6,0.6666666666666666,0.6666666666666666,2,2,12,12
@@ -171,19 +171,19 @@ liga-2x2-online-s2-e5,Vicente,Guilherme & Vicente,guilherme & vicente,Liga 2x2 O
 liga-2x2-online-s2-e5,Guilherme,Guilherme & Vicente,guilherme & vicente,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.6666666666666666,3,2,12,12
 liga-2x2-online-s2-e5,Greowtty,Bells & Greowtty,bells & greowtty,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,5,1,12,12
 liga-2x2-online-s2-e5,Bells,Bells & Greowtty,bells & greowtty,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,5,1,12,12
-liga-2x2-online-s2-e5,Erick,Crothen & Erick,crothen & erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,12,12
-liga-2x2-online-s2-e5,Crothen,Crothen & Erick,crothen & erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,12,12
-liga-2x2-online-s2-e5,Cássio,Carlos & Cássio,carlos & cassio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.5555555555555555,6,1,12,12
-liga-2x2-online-s2-e5,Carlos,Carlos & Cássio,carlos & cassio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.5555555555555555,6,1,12,12
-liga-2x2-online-s2-e5,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.2222222222222222,7,1,12,12
-liga-2x2-online-s2-e5,Martin,Jorel & Martin,jorel & martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.2222222222222222,7,1,12,12
+liga-2x2-online-s2-e5,Erick,Crothen & Erick,crothen & erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.2222222222222222,4,2,12,12
+liga-2x2-online-s2-e5,Crothen,Crothen & Erick,crothen & erick,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,2,0,1,6,0.6666666666666666,0.2222222222222222,4,2,12,12
+liga-2x2-online-s2-e5,Cássio,Carlos & Cássio,carlos & cassio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,6,1,12,12
+liga-2x2-online-s2-e5,Carlos,Carlos & Cássio,carlos & cassio,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,6,1,12,12
+liga-2x2-online-s2-e5,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.1111111111111111,7,1,12,12
+liga-2x2-online-s2-e5,Martin,Jorel & Martin,jorel & martin,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,1,1,4,0.3333333333333333,0.1111111111111111,7,1,12,12
 liga-2x2-online-s2-e5,Rodrigo,Daniel & Rodrigo,daniel & rodrigo,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,8,1,12,12
 liga-2x2-online-s2-e5,Daniel,Daniel & Rodrigo,daniel & rodrigo,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,8,1,12,12
-liga-2x2-online-s2-e5,Samuel,Reva & Samuel,reva & samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,9,1,12,12
-liga-2x2-online-s2-e5,Reva,Reva & Samuel,reva & samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,9,1,12,12
 liga-2x2-online-s2-e5,Bauer,Bauer & Gustavo Dias,bauer & gustavo dias,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,10,1,12,12
 liga-2x2-online-s2-e5,Gustavo Dias,Bauer & Gustavo Dias,bauer & gustavo dias,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,10,1,12,12
 liga-2x2-online-s2-e5,Pinho,Felipe & Pinho,felipe & pinho,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,1,2,1,0.0,0.6666666666666666,11,1,12,12
 liga-2x2-online-s2-e5,Felipe,Felipe & Pinho,felipe & pinho,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,1,2,1,0.0,0.6666666666666666,11,1,12,12
 liga-2x2-online-s2-e5,Marcelo F.,Marcelo F. & Renan,marcelo f & renan,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,0,0.0,0.5555555555555555,12,1,12,12
 liga-2x2-online-s2-e5,Renan,Marcelo F. & Renan,marcelo f & renan,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,0,0.0,0.5555555555555555,12,1,12,12
+liga-2x2-online-s2-e5,Samuel,Reva & Samuel,reva & samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,3,0.0,0.4444444444444444,9,1,12,12
+liga-2x2-online-s2-e5,Reva,Reva & Samuel,reva & samuel,Liga 2x2 Online S2-E5,2026-05-28,2026-05,3,0,0,3,3,0.0,0.4444444444444444,9,1,12,12

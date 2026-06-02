@@ -1,4 +1,6 @@
 tid,tournament_name,start_date,month,raw_team,team_name,team_key,player_1,player_2,deck_1,deck_2,deck_url_1,deck_url_2,deck_name_pt_1,deck_name_pt_2,deck_name_en_1,deck_name_en_2,colecao_1,colecao_2,map_status,missing_players,missing_decks
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Samuel Maia & Thiago,Samuel & Thiago,samuel & thiago,Samuel,Thiago,,,,,,,,,,,parsed,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Chueiry & Vicente,Chueiry & Vicente,chueiry & vicente,Chueiry,Vicente,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Jorel & Martin,Jorel & Martin,jorel & martin,Jorel,Martin,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Zangalli & Zangalli pai,Zangalli & Zangalli pai,zangalli & zangalli pai,Zangalli,Zangalli pai,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1
+liga-2x2-online-s2-e5,Liga 2x2 Online S2-E5,2026-05-28,2026-05,Samuel Maia & Reva// Prismari Artistry & Hail Caesar,Reva & Samuel,reva & samuel,Samuel,Reva,Prismari Artistry,"Ave, Caesar",https://moxfield.com/decks/Fh99bHrQZ0KLu34C2JXu5w,https://moxfield.com/decks/a6xg5ghnH0C-IB5PPqTZBQ,Prismari Artistry,"Ave, Caesar",Prismari Artistry,"Hail, Caesar",Secrets of Strixhaven,Fallout,parsed,0,0

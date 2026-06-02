@@ -99,8 +99,14 @@ Regras:
 - Se o jogador tiver **menos de 4 eventos no trimestre**, **não descarta** nenhum resultado.
 - Caso contrário:
   - **Preserva o melhor resultado de cada mês** do trimestre.
-  - Entre os demais resultados, **descarta os 3 piores**.
+  - Liga online: **descarta os 2 piores** do trimestre.
+  - Liga presencial: **descarta os 3 piores** do trimestre.
 - A pontuação final do trimestre é a soma dos pontos dos eventos mantidos.
+
+Nas ligas 2x2, a regra segue a quantidade de etapas do formato:
+
+- Online 2x2: 5 etapas por trimestre, descarta os 2 piores resultados.
+- Presencial 2x2: 9 etapas por trimestre, descarta os 3 piores resultados.
 
 ### Critérios de desempate (evento e liga)
 1. Pontos (match points)

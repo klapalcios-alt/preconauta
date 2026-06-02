@@ -161,6 +161,12 @@
         font-size: 0.85rem;
       }
 
+      .pill.active {
+        color: var(--accent-ink);
+        background: linear-gradient(135deg, rgba(248, 187, 99, 0.3), rgba(148, 163, 184, 0.2));
+        border-color: rgba(248, 187, 99, 0.45);
+      }
+
       .pill.accent {
         color: #0f172a;
         background: linear-gradient(120deg, rgba(248, 187, 99, 0.9), rgba(96, 165, 250, 0.75));
@@ -540,6 +546,39 @@
         return best;
       }
 
+      function getQuarter(date) {
+        if (!date) return null;
+        return Math.floor(date.getMonth() / 3) + 1;
+      }
+
+      function filterRowsByQuarter(rows, quarter, year) {
+        return (rows || []).filter((row) => {
+          const d = parseDateYYYYMMDD(row?.start_date);
+          if (!d) return false;
+          if (year && d.getFullYear() !== year) return false;
+          return getQuarter(d) === quarter;
+        });
+      }
+
+      function filterDataByQuarter(data, quarter, year) {
+        if (!data) return null;
+        return {
+          ...data,
+          team_league_table: [],
+          team_matches: filterRowsByQuarter(data.team_matches || [], quarter, year),
+          matches: filterRowsByQuarter(data.matches || [], quarter, year),
+          standings: filterRowsByQuarter(data.standings || [], quarter, year),
+          team_event_scores: filterRowsByQuarter(data.team_event_scores || [], quarter, year),
+          event_scores: filterRowsByQuarter(data.event_scores || [], quarter, year),
+          team_player_map: filterRowsByQuarter(data.team_player_map || [], quarter, year),
+        };
+      }
+
+      function formatQuarterLabel(quarter) {
+        if (!quarter) return "Trimestre";
+        return `${quarter}\u00b0 trimestre`;
+      }
+
       function normalizeTeamKey(row) {
         const candidates = [row?.team_key, row?.player_name, row?.team_name];
         for (const candidate of candidates) {
@@ -548,6 +587,101 @@
           if (clean && looseName(clean)) return clean.toLowerCase();
         }
         return null;
+      }
+
+      function leagueDiscardCount() {
+        return LEAGUE === "online" || LEAGUE === "online2x2" ? 2 : 3;
+      }
+
+      function compareScoreRowsAsc(a, b) {
+        if (a.event_points !== b.event_points) return a.event_points - b.event_points;
+        if (a.points_match !== b.points_match) return a.points_match - b.points_match;
+        if (a.win_rate !== b.win_rate) return a.win_rate - b.win_rate;
+        if (a.opp_win_rate !== b.opp_win_rate) return a.opp_win_rate - b.opp_win_rate;
+        if (a.date_sort !== b.date_sort) return a.date_sort - b.date_sort;
+        return String(a.event_key || "").localeCompare(String(b.event_key || ""), "pt-BR");
+      }
+
+      function resolveTeamScoreKey(row, knownTeamKeys) {
+        return (
+          knownTeamKeys.get(looseName(row?.team_name)) ||
+          knownTeamKeys.get(looseName(row?.player_name)) ||
+          normalizeTeamKey(row)
+        );
+      }
+
+      function buildTeamLeaguePointsMap(scoreRows, knownTeamKeys, selectedSet) {
+        const rows = [];
+        (scoreRows || []).forEach((row) => {
+          const eventKey = getEventKey(row);
+          if (selectedSet.size && !selectedSet.has(eventKey)) return;
+          const teamKey = resolveTeamScoreKey(row, knownTeamKeys);
+          const date = parseDateYYYYMMDD(row?.start_date);
+          if (!teamKey || !date) return;
+          rows.push({
+            player_name: teamKey,
+            quarter: `${date.getFullYear()}-Q${getQuarter(date)}`,
+            event_key: eventKey || `${row?.tournament_name || "event"}::${row?.start_date || ""}`,
+            event_points: Number.isFinite(Number(row?.event_points)) ? Number(row.event_points) : 0,
+            points_match: Number.isFinite(Number(row?.points_match)) ? Number(row.points_match) : 0,
+            win_rate: Number.isFinite(Number(row?.win_rate)) ? Number(row.win_rate) : 0,
+            opp_win_rate: Number.isFinite(Number(row?.opp_win_rate)) ? Number(row.opp_win_rate) : 0,
+            date_sort: date.getTime(),
+          });
+        });
+
+        const eventsByQuarter = new Map();
+        const teamsByQuarter = new Map();
+        const present = new Set();
+        rows.forEach((row) => {
+          if (!eventsByQuarter.has(row.quarter)) eventsByQuarter.set(row.quarter, new Map());
+          eventsByQuarter.get(row.quarter).set(row.event_key, row);
+
+          const teamQuarterKey = `${row.player_name}::${row.quarter}`;
+          if (!teamsByQuarter.has(teamQuarterKey)) {
+            teamsByQuarter.set(teamQuarterKey, { player_name: row.player_name, quarter: row.quarter });
+          }
+          present.add(`${teamQuarterKey}::${row.event_key}`);
+        });
+
+        teamsByQuarter.forEach((teamQuarter) => {
+          const events = eventsByQuarter.get(teamQuarter.quarter);
+          if (!events) return;
+          events.forEach((eventRow, eventKey) => {
+            const presenceKey = `${teamQuarter.player_name}::${teamQuarter.quarter}::${eventKey}`;
+            if (present.has(presenceKey)) return;
+            rows.push({
+              ...eventRow,
+              player_name: teamQuarter.player_name,
+              event_points: 0,
+              points_match: 0,
+              win_rate: 0,
+              opp_win_rate: 0,
+            });
+          });
+        });
+
+        const groups = new Map();
+        rows.forEach((row) => {
+          const key = `${row.player_name}::${row.quarter}`;
+          if (!groups.has(key)) groups.set(key, { player_name: row.player_name, rows: [] });
+          groups.get(key).rows.push(row);
+        });
+
+        const totals = new Map();
+        const dropCount = leagueDiscardCount();
+        groups.forEach((group) => {
+          const rowsByQuarter = group.rows;
+          let keptRows = rowsByQuarter;
+          if (rowsByQuarter.length >= 4) {
+            const sorted = [...rowsByQuarter].sort(compareScoreRowsAsc);
+            const dropped = new Set(sorted.slice(0, dropCount));
+            keptRows = rowsByQuarter.filter((row) => !dropped.has(row));
+          }
+          const subtotal = keptRows.reduce((sum, row) => sum + (Number(row.event_points) || 0), 0);
+          totals.set(group.player_name, (totals.get(group.player_name) || 0) + subtotal);
+        });
+        return totals;
       }
 
       function buildTeamStats(data, selectedEvents) {
@@ -560,7 +694,7 @@
         const map = new Map();
         const knownTeamKeys = new Map();
 
-        [...teamRows, ...matchRows, ...teamMapRows].forEach((row) => {
+        [...teamRows, ...matchRows, ...scoreRows, ...teamMapRows].forEach((row) => {
           const key = normalizeTeamKey(row);
           if (!key) return;
           [row.team_name, row.player_name, row.raw_team].forEach((name) => {
@@ -568,6 +702,8 @@
             if (loose && !knownTeamKeys.has(loose)) knownTeamKeys.set(loose, key);
           });
         });
+
+        const leaguePointsMap = buildTeamLeaguePointsMap(scoreRows, knownTeamKeys, selectedSet);
 
         const ensure = (key, name) => {
           if (!key) return null;
@@ -708,7 +844,9 @@
               drawRate: item.matches ? item.draws / item.matches : 0,
               oppWinRate: item.oppWrWeight ? item.oppWrWeighted / item.oppWrWeight : null,
               lastDateLabel: formatPtBR(item.lastDate),
-              leaguePoints: hasEventFilter ? item.leaguePoints : item.leaguePointsAll || item.leaguePoints,
+              leaguePoints:
+                leaguePointsMap.get(item.key) ??
+                (hasEventFilter ? item.leaguePoints : item.leaguePointsAll || item.leaguePoints),
             };
           })
           .filter((item) => item.matches > 0 || item.eventsCount > 0 || item.leaguePoints > 0);
@@ -801,6 +939,8 @@
         const [data, setData] = useState(null);
         const [eventOptions, setEventOptions] = useState([]);
         const [selectedEvents, setSelectedEvents] = useState([]);
+        const [currentYear, setCurrentYear] = useState(null);
+        const [quarter, setQuarter] = useState(1);
         const [searchTerm, setSearchTerm] = useState("");
         const [sortPrimary, setSortPrimary] = useState("points");
         const [sortPrimaryDir, setSortPrimaryDir] = useState("desc");
@@ -808,6 +948,7 @@
         const [notice, setNotice] = useState("");
         const [page, setPage] = useState(1);
         const pageSize = 20;
+        const quarterOptions = [1, 2, 3, 4];
 
         useEffect(() => {
           async function loadReal() {
@@ -817,19 +958,29 @@
               if (!IS_2X2) {
                 setData(null);
                 setEventOptions([]);
+                setCurrentYear(null);
+                setQuarter(1);
                 setNotice("A pagina de duplas esta disponivel apenas nas ligas 2x2.");
                 return;
               }
               const siteData = await fetchSiteData();
               const teamRows = Array.isArray(siteData.team_matches) ? siteData.team_matches : [];
               if (!teamRows.length) throw new Error(NO_DATA_MESSAGE);
+              const lastDate = mostRecentDate(teamRows);
+              const resolvedYear = lastDate ? lastDate.getFullYear() : null;
+              const resolvedQuarter = lastDate ? getQuarter(lastDate) : 1;
+              const quarterRows = filterRowsByQuarter(teamRows, resolvedQuarter || 1, resolvedYear);
               setData(siteData);
-              setEventOptions(buildEventOptions(teamRows));
+              setCurrentYear(resolvedYear);
+              setQuarter(resolvedQuarter || 1);
+              setEventOptions(buildEventOptions(quarterRows));
               setSelectedEvents([]);
             } catch (err) {
               setData(null);
               setEventOptions([]);
               setSelectedEvents([]);
+              setCurrentYear(null);
+              setQuarter(1);
               setNotice(String(err.message || err));
             } finally {
               setLoading(false);
@@ -840,14 +991,28 @@
         }, []);
 
         useEffect(() => {
+          if (!data) {
+            setEventOptions([]);
+            return;
+          }
+          const quarterRows = filterRowsByQuarter(data.team_matches || [], quarter, currentYear);
+          setEventOptions(buildEventOptions(quarterRows));
+        }, [data, quarter, currentYear]);
+
+        useEffect(() => {
           setSelectedEvents((prev) => prev.filter((key) => eventOptions.some((opt) => opt.key === key)));
         }, [eventOptions]);
 
         useEffect(() => {
           setPage(1);
-        }, [searchTerm, sortPrimary, sortPrimaryDir, selectedEvents]);
+        }, [searchTerm, sortPrimary, sortPrimaryDir, quarter, selectedEvents]);
 
-        const teams = useMemo(() => buildTeamStats(data, selectedEvents), [data, selectedEvents]);
+        const quarterData = useMemo(
+          () => filterDataByQuarter(data, quarter, currentYear),
+          [data, quarter, currentYear]
+        );
+
+        const teams = useMemo(() => buildTeamStats(quarterData, selectedEvents), [quarterData, selectedEvents]);
 
         const filteredTeams = useMemo(() => {
           const term = searchTerm.trim().toLowerCase();
@@ -881,7 +1046,7 @@
           const totalMatches = teams.reduce((sum, team) => sum + team.matches, 0);
           const totalWins = teams.reduce((sum, team) => sum + team.wins, 0);
           const totalEvents = new Set();
-          (data?.team_matches || []).forEach((row) => {
+          (quarterData?.team_matches || []).forEach((row) => {
             const key = getEventKey(row);
             if (key) totalEvents.add(key);
           });
@@ -891,13 +1056,15 @@
             matches: totalMatches,
             averageWinRate: totalMatches ? totalWins / totalMatches : 0,
             events: selectedEventsCount,
-            updatedAt: formatPtBR(mostRecentDate(data?.team_matches || [])),
+            updatedAt: formatPtBR(mostRecentDate(quarterData?.team_matches || [])),
           };
-        }, [teams, data, selectedEvents]);
+        }, [teams, quarterData, selectedEvents]);
 
         const selectedEventsSet = useMemo(() => new Set(selectedEvents), [selectedEvents]);
         const selectedEventsCount = selectedEvents.length;
         const isAllEventsSelected = selectedEventsCount === 0;
+        const quarterLabel = formatQuarterLabel(quarter);
+        const quarterTitle = currentYear ? `${quarterLabel} ${currentYear}` : quarterLabel;
 
         const totalPages = Math.max(1, Math.ceil(sortedTeams.length / pageSize));
         useEffect(() => {
@@ -960,6 +1127,7 @@
                     <p className="text-slate-500 flex flex-wrap items-center gap-2">
                       <Calendar size={16} />
                       Ultima atualizacao: {summary.updatedAt}
+                      <span className="pill accent">{quarterTitle}</span>
                       <span className="pill accent">
                         <Users size={14} />
                         {summary.teams} duplas
@@ -1057,7 +1225,7 @@
                         Ranking das duplas
                       </h2>
                       <p className="text-sm text-slate-500 mt-2">
-                        Pontos da liga, desempenho em partidas, eventos e aparicoes no top 3.
+                        Pontos da liga, desempenho em partidas, eventos e aparicoes no top 3 por trimestre.
                       </p>
                     </div>
 
@@ -1092,9 +1260,23 @@
                     </div>
                   </div>
 
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {quarterOptions.map((q) => (
+                      <button
+                        key={q}
+                        type="button"
+                        className={`pill ${q === quarter ? "active" : ""}`}
+                        onClick={() => setQuarter(q)}
+                        disabled={loading}
+                      >
+                        {formatQuarterLabel(q)}
+                      </button>
+                    ))}
+                  </div>
+
                   <div className="mt-4">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="text-xs uppercase text-slate-500">Eventos</span>
+                      <span className="text-xs uppercase text-slate-500">Eventos do trimestre</span>
                       <span className="pill">
                         {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
                       </span>
@@ -1108,7 +1290,9 @@
                     </div>
                     <details className="w-full">
                       <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
-                        {selectedEventsCount ? `${selectedEventsCount} evento(s) selecionado(s)` : "Todos os eventos"}
+                        {selectedEventsCount
+                          ? `${selectedEventsCount} evento(s) selecionado(s)`
+                          : "Todos os eventos do trimestre"}
                       </summary>
                       <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
                         <label
@@ -1125,7 +1309,7 @@
                             onChange={handleSelectAllEvents}
                             disabled={loading || !eventOptions.length}
                           />
-                          <span className="text-sm leading-tight">Todos os eventos</span>
+                          <span className="text-sm leading-tight">Todos os eventos do trimestre</span>
                         </label>
 
                         {!eventOptions.length && (
