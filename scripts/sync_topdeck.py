@@ -2,6 +2,8 @@ import json
 import os
 import re
 import time
+import unicodedata
+from difflib import get_close_matches
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
 from urllib.parse import unquote, urlparse, urlunparse
@@ -11,13 +13,24 @@ import requests
 
 API_BASE = "https://topdeck.gg/api"
 API_KEY = os.getenv("TOPDECK_API_KEY")  # NAO colocar key no arquivo
-VALID_LEAGUES = {"presencial", "online"}
+LEAGUE_ORDER = ["presencial", "online", "presencial2x2", "online2x2"]
+VALID_LEAGUES = set(LEAGUE_ORDER)
+TWO_BY_TWO_LEAGUES = {"presencial2x2", "online2x2"}
+LEAGUE_ALIASES = {
+    "presencial-2x2": "presencial2x2",
+    "online-2x2": "online2x2",
+    "2x2-presencial": "presencial2x2",
+    "2x2-online": "online2x2",
+}
 DEFAULT_LEAGUE = "presencial"
+TEAM_MAP_2X2_PATH = "Team_map_2x2.csv"
+DECK_ALIASES_PATH = "deck_aliases.json"
 TOPDECK_MAX_RETRIES = 5
 TOPDECK_BASE_BACKOFF_SECONDS = 1.5
 TOPDECK_MAX_BACKOFF_SECONDS = 45.0
 TOPDECK_MIN_INTERVAL_SECONDS = 0.5
 _LAST_TOPDECK_REQUEST_MONO = 0.0
+_DECK_ALIASES_CACHE = None
 
 
 def parse_retry_after_seconds(value: str | None) -> float | None:
@@ -203,6 +216,8 @@ def clean_player_name(name: object) -> str | None:
         pass
 
     text = re.sub(r"\s+", " ", str(name)).strip()
+    if text and not any(ch.isalnum() for ch in text):
+        return None
     return text or None
 
 
@@ -211,6 +226,19 @@ def normalize_player_name(name: object) -> str | None:
     if not text:
         return None
     return text.lower()
+
+
+def normalize_lookup_key(value: object) -> str | None:
+    text = clean_player_name(value)
+    if not text:
+        return None
+
+    text = unicodedata.normalize("NFKD", text)
+    text = "".join(ch for ch in text if not unicodedata.combining(ch))
+    text = text.lower()
+    text = re.sub(r"[^a-z0-9]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text or None
 
 
 def load_player_aliases(path: str = "player_aliases.json") -> dict[str, str]:
@@ -232,6 +260,30 @@ def load_player_aliases(path: str = "player_aliases.json") -> dict[str, str]:
     return aliases
 
 
+def load_deck_aliases(path: str = DECK_ALIASES_PATH) -> dict[str, str]:
+    global _DECK_ALIASES_CACHE
+    if _DECK_ALIASES_CACHE is not None:
+        return _DECK_ALIASES_CACHE
+    if not os.path.exists(path):
+        _DECK_ALIASES_CACHE = {}
+        return _DECK_ALIASES_CACHE
+
+    with open(path, "r", encoding="utf-8-sig") as f:
+        raw_aliases = json.load(f)
+
+    if not isinstance(raw_aliases, dict):
+        raise SystemExit(f"{path}: esperado um objeto JSON com aliases de decks.")
+
+    aliases = {}
+    for raw_name, canonical_name in raw_aliases.items():
+        key = normalize_lookup_key(raw_name)
+        value = clean_player_name(canonical_name)
+        if key and value:
+            aliases[key] = value
+    _DECK_ALIASES_CACHE = aliases
+    return aliases
+
+
 def resolve_player_alias(name: object, aliases: dict[str, str]) -> str | None:
     clean_name = clean_player_name(name)
     if not clean_name:
@@ -246,6 +298,242 @@ def resolve_player_alias(name: object, aliases: dict[str, str]) -> str | None:
             return canonical_name
 
     return clean_name
+
+
+def is_two_by_two_league(league: str | None) -> bool:
+    return normalize_league(league) in TWO_BY_TWO_LEAGUES
+
+
+def normalize_team_key(value: object) -> str | None:
+    return normalize_lookup_key(value)
+
+
+def two_by_two_player_pair_key(player_1: object, player_2: object) -> str | None:
+    parts = sorted(
+        [key for key in [normalize_lookup_key(player_1), normalize_lookup_key(player_2)] if key]
+    )
+    if len(parts) != 2:
+        return None
+    return " & ".join(parts)
+
+
+def canonical_two_by_two_team_name(player_1: object, player_2: object) -> str | None:
+    players = [clean_player_name(player_1), clean_player_name(player_2)]
+    players = [player for player in players if player]
+    if len(players) != 2:
+        return None
+    return " & ".join(sorted(players, key=lambda value: normalize_lookup_key(value) or ""))
+
+
+def split_two_by_two_values(value: object) -> list[str]:
+    text = clean_player_name(value)
+    if not text:
+        return []
+    parts = re.split(r"\s*(?:&|\+|\be\b|\band\b|,|/)\s*", text, flags=re.IGNORECASE)
+    return [p.strip() for p in parts if p and p.strip()]
+
+
+def parse_two_by_two_raw_team(raw_team: object) -> dict:
+    text = clean_player_name(raw_team)
+    if not text:
+        return {"team_name": None, "players": [], "decks": []}
+
+    team_part = text
+    deck_part = None
+    if "//" in text:
+        team_part, deck_part = re.split(r"\s*//\s*", text, maxsplit=1)
+
+    players = split_two_by_two_values(team_part)[:2]
+    decks = split_two_by_two_values(deck_part)[:2] if deck_part else []
+    return {
+        "team_name": clean_player_name(team_part),
+        "players": players,
+        "decks": decks,
+    }
+
+
+TEAM_MAP_2X2_COLUMNS = [
+    "tid",
+    "raw_team",
+    "team_name",
+    "player_1",
+    "player_2",
+    "deck_1",
+    "deck_2",
+    "deck_url_1",
+    "deck_url_2",
+    "notes",
+]
+
+
+def load_team_map_2x2(path: str = TEAM_MAP_2X2_PATH) -> dict[tuple[str, str], dict]:
+    if not os.path.exists(path):
+        return {}
+
+    df = pd.read_csv(path, encoding="utf-8-sig")
+    if df.empty:
+        return {}
+
+    for col in TEAM_MAP_2X2_COLUMNS:
+        if col not in df.columns:
+            df[col] = None
+
+    mapping = {}
+    for _, row in df.iterrows():
+        tid = clean_player_name(row.get("tid"))
+        raw_team = clean_player_name(row.get("raw_team"))
+        raw_key = normalize_team_key(raw_team)
+        if not tid or not raw_key:
+            continue
+
+        item = {}
+        for col in TEAM_MAP_2X2_COLUMNS:
+            item[col] = clean_player_name(row.get(col))
+        keys = [raw_key]
+        parsed = parse_two_by_two_raw_team(raw_team)
+        team_key = normalize_team_key(item.get("team_name")) or normalize_team_key(parsed.get("team_name"))
+        pair_key = two_by_two_player_pair_key(item.get("player_1"), item.get("player_2"))
+        parsed_pair_key = None
+        if len(parsed["players"]) >= 2:
+            parsed_pair_key = two_by_two_player_pair_key(parsed["players"][0], parsed["players"][1])
+
+        for key in [team_key, pair_key, parsed_pair_key]:
+            if key:
+                keys.append(key)
+
+        for key in dict.fromkeys(keys):
+            mapping[(tid, key)] = item
+    return mapping
+
+
+def resolve_manual_deck(deck_label: object, deck_url: object, deck_map: dict) -> dict:
+    url = canonicalize_url(deck_url)
+    info = deck_map.get(url) if url and deck_map else None
+    label = clean_player_name(deck_label)
+
+    if not info and label and deck_map:
+        info = find_deck_by_name(label, deck_map)
+        if info:
+            url = info.get("deck_url") or url
+
+    if info:
+        deck_name_pt = info.get("deck_name_pt") or label
+        deck_name_en = info.get("deck_name_en")
+        colecao = info.get("colecao")
+    else:
+        deck_name_pt = label
+        deck_name_en = None
+        colecao = None
+
+    deck_key = clean_player_name(deck_name_pt) or url
+    return {
+        "deck_key": deck_key,
+        "deck_name_pt": deck_name_pt,
+        "deck_name_en": deck_name_en,
+        "colecao": colecao,
+        "deck_url": url,
+    }
+
+
+def find_deck_by_name(deck_label: object, deck_map: dict) -> dict | None:
+    key = normalize_lookup_key(deck_label)
+    if not key or not deck_map:
+        return None
+
+    by_name = {}
+    for url, info in deck_map.items():
+        for value in [info.get("deck_name_pt"), info.get("deck_name_en")]:
+            value_key = normalize_lookup_key(value)
+            if value_key:
+                by_name[value_key] = {**info, "deck_url": url}
+
+    exact = by_name.get(key)
+    if exact:
+        return exact
+
+    alias_target = load_deck_aliases().get(key)
+    alias_key = normalize_lookup_key(alias_target)
+    if alias_key:
+        alias_exact = by_name.get(alias_key)
+        if alias_exact:
+            return alias_exact
+
+    matches = get_close_matches(key, by_name.keys(), n=1, cutoff=0.92)
+    if matches:
+        return by_name[matches[0]]
+    return None
+
+
+def resolve_two_by_two_team_info(
+    tid: object,
+    raw_team: object,
+    team_map: dict[tuple[str, str], dict],
+    player_aliases: dict[str, str],
+    deck_map: dict,
+) -> dict:
+    tid_text = clean_player_name(tid)
+    raw_team_text = clean_player_name(raw_team)
+    parsed = parse_two_by_two_raw_team(raw_team_text)
+    manual = None
+    raw_key = normalize_team_key(raw_team_text)
+    if tid_text and raw_key:
+        candidate_keys = [raw_key, normalize_team_key(parsed.get("team_name"))]
+        if len(parsed["players"]) >= 2:
+            candidate_keys.append(two_by_two_player_pair_key(parsed["players"][0], parsed["players"][1]))
+        for key in dict.fromkeys([key for key in candidate_keys if key]):
+            manual = team_map.get((tid_text, key))
+            if manual:
+                break
+
+    player_1 = clean_player_name(manual.get("player_1") if manual else None) or (
+        parsed["players"][0] if len(parsed["players"]) >= 1 else None
+    )
+    player_2 = clean_player_name(manual.get("player_2") if manual else None) or (
+        parsed["players"][1] if len(parsed["players"]) >= 2 else None
+    )
+    player_1 = resolve_player_alias(player_1, player_aliases)
+    player_2 = resolve_player_alias(player_2, player_aliases)
+
+    deck_1_label = clean_player_name(manual.get("deck_1") if manual else None) or (
+        parsed["decks"][0] if len(parsed["decks"]) >= 1 else None
+    )
+    deck_2_label = clean_player_name(manual.get("deck_2") if manual else None) or (
+        parsed["decks"][1] if len(parsed["decks"]) >= 2 else None
+    )
+    deck_1 = resolve_manual_deck(deck_1_label, manual.get("deck_url_1") if manual else None, deck_map)
+    deck_2 = resolve_manual_deck(deck_2_label, manual.get("deck_url_2") if manual else None, deck_map)
+
+    pair_key = two_by_two_player_pair_key(player_1, player_2)
+    if pair_key:
+        team_key = pair_key
+    else:
+        team_key = normalize_team_key(clean_player_name(manual.get("team_name") if manual else None) or parsed.get("team_name") or raw_team_text)
+
+    canonical_team_name = canonical_two_by_two_team_name(player_1, player_2)
+    team_name = clean_player_name(manual.get("team_name") if manual else None) or canonical_team_name or parsed.get("team_name") or raw_team_text
+
+    map_status = "manual" if manual else ("parsed" if player_1 and player_2 else "missing")
+    return {
+        "tid": tid_text,
+        "raw_team": raw_team_text,
+        "team_name": team_name,
+        "team_key": team_key,
+        "player_1": player_1,
+        "player_2": player_2,
+        "deck_1": deck_1.get("deck_key"),
+        "deck_2": deck_2.get("deck_key"),
+        "deck_url_1": deck_1.get("deck_url"),
+        "deck_url_2": deck_2.get("deck_url"),
+        "deck_name_pt_1": deck_1.get("deck_name_pt"),
+        "deck_name_pt_2": deck_2.get("deck_name_pt"),
+        "deck_name_en_1": deck_1.get("deck_name_en"),
+        "deck_name_en_2": deck_2.get("deck_name_en"),
+        "colecao_1": deck_1.get("colecao"),
+        "colecao_2": deck_2.get("colecao"),
+        "map_status": map_status,
+        "missing_players": int(not (player_1 and player_2)),
+        "missing_decks": int(not (deck_1.get("deck_url") and deck_2.get("deck_url"))),
+    }
 
 
 def looks_like_url(u: str | None) -> bool:
@@ -1039,6 +1327,274 @@ def build_player_matchups(matches_df: pd.DataFrame) -> pd.DataFrame:
     return player_df
 
 
+def enrich_two_by_two_team_frame(
+    frame: pd.DataFrame,
+    team_map: dict[tuple[str, str], dict],
+    player_aliases: dict[str, str],
+    deck_map: dict,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    info_cols = [
+        "raw_team",
+        "team_name",
+        "team_key",
+        "player_1",
+        "player_2",
+        "deck_1",
+        "deck_2",
+        "deck_url_1",
+        "deck_url_2",
+        "deck_name_pt_1",
+        "deck_name_pt_2",
+        "deck_name_en_1",
+        "deck_name_en_2",
+        "colecao_1",
+        "colecao_2",
+        "map_status",
+        "missing_players",
+        "missing_decks",
+    ]
+    if frame.empty:
+        return frame.copy(), pd.DataFrame(columns=["tid", *info_cols])
+
+    out = frame.copy()
+    infos = []
+    for row in out.itertuples(index=False):
+        tid = getattr(row, "tid", None)
+        raw_team = getattr(row, "player_name", None)
+        infos.append(resolve_two_by_two_team_info(tid, raw_team, team_map, player_aliases, deck_map))
+
+    info_df = pd.DataFrame(infos)
+    for col in info_cols:
+        out[col] = info_df[col].values if col in info_df.columns else None
+
+    out = out[out["raw_team"].map(clean_player_name).notna()].copy()
+    if out.empty:
+        return out, pd.DataFrame(columns=["tid", *info_cols])
+
+    if "player_name" in out.columns:
+        out["player_name"] = out["team_name"]
+
+    team_map_df = (
+        out[
+            [
+                "tid",
+                "tournament_name",
+                "start_date",
+                "month",
+                *info_cols,
+            ]
+        ]
+        .drop_duplicates(subset=["tid", "raw_team"])
+        .sort_values(["tid", "team_name"], kind="mergesort")
+        .reset_index(drop=True)
+    )
+    return out, team_map_df
+
+
+def normalize_two_by_two_winner_names(matches_df: pd.DataFrame, team_map_df: pd.DataFrame) -> pd.DataFrame:
+    if matches_df.empty or team_map_df.empty or "winner_name" not in matches_df.columns:
+        return matches_df
+
+    out = matches_df.copy()
+    lookup = {}
+    for row in team_map_df.itertuples(index=False):
+        tid = getattr(row, "tid", None)
+        for value in [getattr(row, "raw_team", None), getattr(row, "team_name", None)]:
+            key = (clean_player_name(tid), normalize_team_key(value))
+            if key[0] and key[1]:
+                lookup[key] = getattr(row, "team_name", None)
+
+    def resolve(row):
+        winner = row.get("winner_name")
+        if not isinstance(winner, str) or not winner.strip():
+            return winner
+        if is_draw_result(row.get("status"), row.get("winner_id"), winner):
+            return clean_player_name(winner)
+        key = (clean_player_name(row.get("tid")), normalize_team_key(winner))
+        return lookup.get(key, clean_player_name(winner))
+
+    out["winner_name"] = out.apply(resolve, axis=1)
+    return out
+
+
+def expand_two_by_two_matches_to_players(team_matches_df: pd.DataFrame) -> pd.DataFrame:
+    if team_matches_df.empty:
+        return team_matches_df.copy()
+
+    rows = []
+    for row in team_matches_df.to_dict(orient="records"):
+        slots = [
+            {
+                "slot": 1,
+                "player_name": row.get("player_1"),
+                "teammate_name": row.get("player_2"),
+                "deck_key": row.get("deck_1"),
+                "deck_url": row.get("deck_url_1"),
+                "deck_name_pt": row.get("deck_name_pt_1"),
+                "deck_name_en": row.get("deck_name_en_1"),
+                "colecao": row.get("colecao_1"),
+            },
+            {
+                "slot": 2,
+                "player_name": row.get("player_2"),
+                "teammate_name": row.get("player_1"),
+                "deck_key": row.get("deck_2"),
+                "deck_url": row.get("deck_url_2"),
+                "deck_name_pt": row.get("deck_name_pt_2"),
+                "deck_name_en": row.get("deck_name_en_2"),
+                "colecao": row.get("colecao_2"),
+            },
+        ]
+        for slot in slots:
+            player_name = clean_player_name(slot["player_name"])
+            if not player_name:
+                continue
+
+            out = dict(row)
+            out["team_player_slot"] = slot["slot"]
+            out["team_name"] = row.get("team_name")
+            out["team_key"] = row.get("team_key")
+            out["raw_team"] = row.get("raw_team")
+            out["teammate_name"] = clean_player_name(slot["teammate_name"])
+            out["player_name"] = player_name
+            out["player_id"] = f'{row.get("player_id") or row.get("team_key") or row.get("team_name")}#{slot["slot"]}'
+            out["deck_key"] = slot["deck_key"]
+            out["deck_url"] = slot["deck_url"]
+            out["deck_name_pt"] = slot["deck_name_pt"] or slot["deck_key"]
+            out["deck_name_en"] = slot["deck_name_en"]
+            out["colecao"] = slot["colecao"]
+            rows.append(out)
+
+    return pd.DataFrame(rows)
+
+
+def expand_two_by_two_scores_to_players(team_scores_df: pd.DataFrame, team_map_df: pd.DataFrame) -> pd.DataFrame:
+    cols = [
+        "tid",
+        "player_name",
+        "team_name",
+        "team_key",
+        "tournament_name",
+        "start_date",
+        "month",
+        "matches",
+        "wins",
+        "draws",
+        "losses",
+        "points_match",
+        "win_rate",
+        "opp_win_rate",
+        "event_rank",
+        "event_points",
+        "event_players",
+        "event_teams",
+    ]
+    if team_scores_df.empty:
+        return pd.DataFrame(columns=cols)
+
+    meta_cols = ["tid", "team_name", "team_key", "player_1", "player_2"]
+    meta = team_map_df.reindex(columns=meta_cols).drop_duplicates(subset=["tid", "team_name"])
+    merged = team_scores_df.merge(
+        meta,
+        left_on=["tid", "player_name"],
+        right_on=["tid", "team_name"],
+        how="left",
+    )
+
+    rows = []
+    for row in merged.to_dict(orient="records"):
+        for player_col in ["player_1", "player_2"]:
+            player_name = clean_player_name(row.get(player_col))
+            if not player_name:
+                continue
+            out = {k: row.get(k) for k in team_scores_df.columns}
+            out["team_name"] = row.get("team_name") or row.get("player_name")
+            out["team_key"] = row.get("team_key")
+            out["player_name"] = player_name
+            out["event_teams"] = row.get("event_players")
+            rows.append(out)
+
+    if not rows:
+        return pd.DataFrame(columns=cols)
+    return pd.DataFrame(rows).reindex(columns=cols)
+
+
+def compute_deck_stats_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
+    deck_stats_cols = [
+        "deck_key",
+        "partidas_jogadas",
+        "vitorias",
+        "empates",
+        "jogadores_unicos",
+        "eventos",
+        "derrotas",
+        "win_rate",
+        "deck_name_pt",
+        "deck_name_en",
+        "colecao",
+        "deck_url",
+    ]
+    deck_stats_df = pd.DataFrame(columns=deck_stats_cols)
+    if matches_df.empty:
+        return deck_stats_df
+
+    played = matches_df.copy()
+    if "deck_key" not in played.columns:
+        if "deck_name_pt" in played.columns:
+            played["deck_key"] = played["deck_name_pt"]
+        else:
+            played["deck_key"] = None
+        if "deck_url" in played.columns:
+            played["deck_key"] = played["deck_key"].fillna(played["deck_url"])
+
+    played["deck_key"] = played["deck_key"].astype("string").str.strip()
+    played["deck_key"] = played["deck_key"].mask(played["deck_key"].eq(""))
+    played = played.dropna(subset=["deck_key", "player_name"]).copy()
+    if played.empty:
+        return deck_stats_df
+
+    winner_id = played.get("winner_id", pd.Series([""] * len(played))).astype(str).str.lower()
+    winner_name = played.get("winner_name", pd.Series([""] * len(played))).astype(str).str.lower()
+    status_lower = played.get("status", pd.Series([""] * len(played))).astype(str).str.lower()
+    played["is_draw"] = (
+        winner_id.eq("draw")
+        | winner_name.eq("draw")
+        | status_lower.str.contains("draw", na=False)
+        | status_lower.str.contains("empate", na=False)
+        | status_lower.str.contains(r"\bid\b", regex=True, na=False)
+    ).astype(int)
+
+    played["wins"] = played["is_winner"].fillna(0).astype(int)
+    played["draws"] = played["is_draw"].fillna(0).astype(int)
+
+    agg = played.groupby("deck_key").agg(
+        partidas_jogadas=("deck_key", "size"),
+        vitorias=("wins", "sum"),
+        empates=("draws", "sum"),
+        jogadores_unicos=("player_name", "nunique"),
+        eventos=("tid", "nunique"),
+    ).reset_index()
+
+    agg["derrotas"] = agg["partidas_jogadas"] - agg["vitorias"] - agg["empates"]
+    agg["win_rate"] = (agg["vitorias"] / agg["partidas_jogadas"]).fillna(0)
+
+    for c in ["deck_name_pt", "deck_name_en", "colecao", "deck_url"]:
+        if c not in played.columns:
+            played[c] = None
+
+    meta = played.groupby("deck_key").agg(
+        deck_name_pt=("deck_name_pt", lambda x: next((v for v in x if pd.notna(v)), None)),
+        deck_name_en=("deck_name_en", lambda x: next((v for v in x if pd.notna(v)), None)),
+        colecao=("colecao", lambda x: next((v for v in x if pd.notna(v)), None)),
+        deck_url=("deck_url", lambda x: next((v for v in x if isinstance(v, str)), None)),
+    ).reset_index()
+
+    deck_stats_df = agg.merge(meta, on="deck_key", how="left").sort_values(
+        "partidas_jogadas", ascending=False
+    )
+    return deck_stats_df.reindex(columns=deck_stats_cols)
+
+
 def expand_absences_with_zero_rows(df: pd.DataFrame) -> pd.DataFrame:
     required_cols = {"quarter", "player_name", "tid"}
     if df.empty or not required_cols.issubset(df.columns):
@@ -1206,11 +1762,12 @@ def normalize_league(value: str | None) -> str:
         league = value.strip().lower()
     else:
         league = str(value).strip().lower()
+    league = LEAGUE_ALIASES.get(league, league)
     return league if league in VALID_LEAGUES else DEFAULT_LEAGUE
 
 
 def split_events_by_league(events: list[dict]) -> dict[str, list[dict]]:
-    grouped = {league: [] for league in VALID_LEAGUES}
+    grouped = {league: [] for league in LEAGUE_ORDER}
     for e in events:
         league = normalize_league(e.get("league"))
         grouped.setdefault(league, []).append(e)
@@ -1238,7 +1795,14 @@ def main():
     aliases = load_player_aliases("player_aliases.json")
 
     deck_map = load_deck_map_csv("deck_map.csv")
-    print(f"Aliases carregados: {len(aliases)} | Deck map carregado: {len(deck_map)}")
+    team_map_2x2 = load_team_map_2x2(TEAM_MAP_2X2_PATH)
+    team_map_2x2_rows = 0
+    if os.path.exists(TEAM_MAP_2X2_PATH):
+        team_map_2x2_rows = len(pd.read_csv(TEAM_MAP_2X2_PATH, encoding="utf-8-sig"))
+    print(
+        f"Aliases carregados: {len(aliases)} | Deck map carregado: {len(deck_map)} | "
+        f"Team map 2x2 carregado: {team_map_2x2_rows} linha(s), {len(team_map_2x2)} chave(s)"
+    )
     grouped = split_events_by_league(events)
     summaries = []
 
@@ -1252,8 +1816,9 @@ def main():
                 legacy_removed += 1
         if legacy_removed:
             print(f"{legacy_raw_dir} legado limpo: {legacy_removed} arquivo(s) removido(s)")
-    for league_type in ["presencial", "online"]:
+    for league_type in LEAGUE_ORDER:
         events = grouped.get(league_type, [])
+        is_2x2 = league_type in TWO_BY_TWO_LEAGUES
         event_tids = {str(e.get("tid")) for e in events if e.get("tid")}
         raw_dir = os.path.join("data", "raw", league_type)
         out_dir = os.path.join("data", league_type)
@@ -1317,6 +1882,11 @@ def main():
                                 indent=2,
                             )
                         continue
+
+            if isinstance(data, dict) and data.get("fetched") is False and data.get("error"):
+                print(f"Erro: RAW local de erro para {tid}: {data.get('error')}. Pulando evento.")
+                failed_tids.append(tid)
+                continue
 
             tdata = data.get("data", {}) if isinstance(data.get("data", {}), dict) else {}
             tournament_name = data.get("tournamentName") or tdata.get("name") or tid
@@ -1509,6 +2079,256 @@ def main():
             df = df[df["tid"].isin(event_tids)]
             tables_df = tables_df[tables_df["tid"].isin(event_tids)]
             matches_df = matches_df[matches_df["tid"].isin(event_tids)]
+
+        if is_2x2:
+            team_df, team_map_from_standings = enrich_two_by_two_team_frame(
+                df, team_map_2x2, aliases, deck_map
+            )
+            team_matches_df, team_map_from_matches = enrich_two_by_two_team_frame(
+                matches_df, team_map_2x2, aliases, deck_map
+            )
+            team_map_df = (
+                pd.concat([team_map_from_standings, team_map_from_matches], ignore_index=True)
+                if not team_map_from_standings.empty or not team_map_from_matches.empty
+                else pd.DataFrame(columns=team_map_from_standings.columns)
+            )
+            if not team_map_df.empty:
+                team_map_df = (
+                    team_map_df.drop_duplicates(subset=["tid", "raw_team"])
+                    .sort_values(["tid", "team_name"], kind="mergesort")
+                    .reset_index(drop=True)
+                )
+
+            team_matches_df = normalize_two_by_two_winner_names(team_matches_df, team_map_df)
+            player_matches_df = expand_two_by_two_matches_to_players(team_matches_df)
+
+            team_event_scores_df = compute_event_scores_from_matches(team_matches_df)
+            team_event_scores_df = apply_official_event_rank(
+                team_event_scores_df,
+                team_df,
+                matches_df=team_matches_df,
+            )
+            player_event_scores_df = expand_two_by_two_scores_to_players(team_event_scores_df, team_map_df)
+
+            team_df = apply_official_rank_to_standings(team_df, matches_df=team_matches_df)
+
+            df2 = player_event_scores_df.dropna(subset=["month", "player_name"]).copy()
+            df2["event_points"] = pd.to_numeric(df2.get("event_points"), errors="coerce").fillna(0)
+            df2["points_match"] = pd.to_numeric(df2.get("points_match"), errors="coerce").fillna(0)
+            df2["win_rate"] = pd.to_numeric(df2.get("win_rate"), errors="coerce").fillna(0.0)
+            df2["opp_win_rate"] = pd.to_numeric(df2.get("opp_win_rate"), errors="coerce").fillna(0.0)
+            df2["start_date_val"] = pd.to_datetime(df2.get("start_date"), errors="coerce")
+            df2 = df2.sort_values(
+                by=[
+                    "month",
+                    "player_name",
+                    "event_points",
+                    "points_match",
+                    "win_rate",
+                    "opp_win_rate",
+                    "start_date_val",
+                ],
+                ascending=[True, True, False, False, False, False, False],
+            )
+
+            monthly_best = df2.groupby(["month", "player_name"], as_index=False).head(1)
+            if "event_points" not in monthly_best.columns:
+                monthly_best["event_points"] = 0
+            monthly_best = monthly_best.drop(columns=["start_date_val"], errors="ignore")
+
+            league = compute_quarterly_points(
+                df2,
+                discard_worst_results=True,
+                preserve_best_month=False,
+                include_absences_as_zero=True,
+                discard_count=3,
+            )
+            if not df2.empty:
+                event_counts = df2.groupby("player_name", as_index=False)["tid"].nunique().rename(
+                    columns={"tid": "eventos"}
+                )
+                league = league.merge(event_counts, on="player_name", how="left")
+            else:
+                league["eventos"] = 0
+
+            deck_principal = {}
+            if not player_matches_df.empty and "deck_key" in player_matches_df.columns:
+                tmp = player_matches_df.dropna(subset=["player_name", "deck_key"]).copy()
+                tmp["deck_key"] = tmp["deck_key"].astype("string").str.strip()
+                tmp = tmp[tmp["deck_key"].notna() & tmp["deck_key"].ne("")]
+                if not tmp.empty:
+                    counts = (
+                        tmp.groupby(["player_name", "deck_key"])
+                        .size()
+                        .reset_index(name="games")
+                        .sort_values(["player_name", "games", "deck_key"], ascending=[True, False, True])
+                    )
+                    deck_principal = (
+                        counts.groupby("player_name").head(1).set_index("player_name")["deck_key"].to_dict()
+                    )
+
+            league["deck_principal"] = league["player_name"].map(lambda n: deck_principal.get(n))
+            league = league.sort_values(
+                ["league_points", "eventos", "player_name"],
+                ascending=[False, False, True],
+            )
+
+            team_df2 = team_event_scores_df.dropna(subset=["month", "player_name"]).copy()
+            team_identity = pd.DataFrame(columns=["tid", "team_name", "team_key", "display_team_name"])
+            if not team_map_df.empty:
+                team_identity = team_map_df.reindex(
+                    columns=["tid", "team_name", "team_key", "player_1", "player_2"]
+                ).copy()
+                team_identity["display_team_name"] = team_identity.apply(
+                    lambda row: canonical_two_by_two_team_name(row.get("player_1"), row.get("player_2"))
+                    or row.get("team_name"),
+                    axis=1,
+                )
+                team_identity = team_identity.drop_duplicates(subset=["tid", "team_name"])
+            if not team_df2.empty and not team_identity.empty:
+                team_df2 = team_df2.merge(
+                    team_identity[["tid", "team_name", "team_key", "display_team_name"]],
+                    left_on=["tid", "player_name"],
+                    right_on=["tid", "team_name"],
+                    how="left",
+                )
+            if "team_key" not in team_df2.columns:
+                team_df2["team_key"] = None
+            team_df2["team_key"] = team_df2["team_key"].fillna(team_df2["player_name"].map(normalize_team_key))
+            if "display_team_name" not in team_df2.columns:
+                team_df2["display_team_name"] = None
+            team_df2["display_team_name"] = team_df2["display_team_name"].fillna(team_df2["player_name"])
+            team_display = (
+                team_df2.dropna(subset=["team_key", "display_team_name"])
+                .groupby("team_key")["display_team_name"]
+                .agg(lambda values: values.value_counts().index[0])
+                .reset_index()
+                .rename(columns={"display_team_name": "team_name"})
+            )
+            team_df2["player_name"] = team_df2["team_key"]
+            team_df2["event_points"] = pd.to_numeric(team_df2.get("event_points"), errors="coerce").fillna(0)
+            team_df2["points_match"] = pd.to_numeric(team_df2.get("points_match"), errors="coerce").fillna(0)
+            team_df2["win_rate"] = pd.to_numeric(team_df2.get("win_rate"), errors="coerce").fillna(0.0)
+            team_df2["opp_win_rate"] = pd.to_numeric(team_df2.get("opp_win_rate"), errors="coerce").fillna(0.0)
+            team_league = compute_quarterly_points(
+                team_df2,
+                discard_worst_results=True,
+                preserve_best_month=False,
+                include_absences_as_zero=True,
+                discard_count=3,
+            ).rename(columns={"player_name": "team_key"})
+            if not team_df2.empty:
+                team_counts = team_df2.groupby("player_name", as_index=False)["tid"].nunique().rename(
+                    columns={"player_name": "team_key", "tid": "eventos"}
+                )
+                team_league = team_league.merge(team_counts, on="team_key", how="left")
+            else:
+                team_league["eventos"] = 0
+            if not team_display.empty:
+                team_league = team_league.merge(team_display, on="team_key", how="left")
+            else:
+                team_league["team_name"] = team_league["team_key"]
+            team_league["team_name"] = team_league["team_name"].fillna(team_league["team_key"])
+            team_league = team_league.sort_values(
+                ["league_points", "eventos", "team_name"],
+                ascending=[False, False, True],
+            )
+            team_league = team_league.reindex(columns=["team_name", "team_key", "league_points", "eventos"])
+
+            unmapped_teams_df = team_map_df[
+                (team_map_df.get("map_status") != "manual")
+                | (pd.to_numeric(team_map_df.get("missing_players"), errors="coerce").fillna(1) > 0)
+                | (pd.to_numeric(team_map_df.get("missing_decks"), errors="coerce").fillna(1) > 0)
+            ].copy()
+            unmapped_teams_df.to_csv(os.path.join(out_dir, "unmapped_teams.csv"), index=False, encoding="utf-8")
+
+            unmapped_decks_cols = [
+                "tid",
+                "tournament_name",
+                "start_date",
+                "team_name",
+                "raw_team",
+                "player_name",
+                "slot",
+                "deck",
+            ]
+            missing_deck_rows = []
+            for row in team_map_df.to_dict(orient="records"):
+                for slot in [1, 2]:
+                    if clean_player_name(row.get(f"deck_url_{slot}")):
+                        continue
+                    missing_deck_rows.append(
+                        {
+                            "tid": row.get("tid"),
+                            "tournament_name": row.get("tournament_name"),
+                            "start_date": row.get("start_date"),
+                            "team_name": row.get("team_name"),
+                            "raw_team": row.get("raw_team"),
+                            "player_name": row.get(f"player_{slot}"),
+                            "slot": slot,
+                            "deck": row.get(f"deck_{slot}"),
+                        }
+                    )
+            pd.DataFrame(missing_deck_rows, columns=unmapped_decks_cols).to_csv(
+                os.path.join(out_dir, "unmapped_decks.csv"),
+                index=False,
+                encoding="utf-8",
+            )
+
+            player_df = build_player_matchups(player_matches_df)
+            deck_stats_df = compute_deck_stats_from_matches(player_matches_df)
+
+            team_df.to_csv(os.path.join(out_dir, "standings.csv"), index=False, encoding="utf-8")
+            team_df.to_csv(os.path.join(out_dir, "team_standings.csv"), index=False, encoding="utf-8")
+            tables_df.to_csv(os.path.join(out_dir, "tables.csv"), index=False, encoding="utf-8")
+            player_matches_df.to_csv(os.path.join(out_dir, "matches.csv"), index=False, encoding="utf-8")
+            team_matches_df.to_csv(os.path.join(out_dir, "team_matches.csv"), index=False, encoding="utf-8")
+            player_event_scores_df.to_csv(os.path.join(out_dir, "event_summary.csv"), index=False, encoding="utf-8")
+            player_event_scores_df.to_csv(
+                os.path.join(out_dir, "player_event_summary.csv"), index=False, encoding="utf-8"
+            )
+            team_event_scores_df.to_csv(
+                os.path.join(out_dir, "team_event_summary.csv"), index=False, encoding="utf-8"
+            )
+            player_df.to_csv(os.path.join(out_dir, "player.csv"), index=False, encoding="utf-8")
+            monthly_best.to_csv(os.path.join(out_dir, "monthly_best.csv"), index=False, encoding="utf-8")
+            league.to_csv(os.path.join(out_dir, "league_table.csv"), index=False, encoding="utf-8")
+            league.to_csv(os.path.join(out_dir, "player_league_table.csv"), index=False, encoding="utf-8")
+            team_league.to_csv(os.path.join(out_dir, "team_league_table.csv"), index=False, encoding="utf-8")
+            team_map_df.to_csv(os.path.join(out_dir, "team_player_map.csv"), index=False, encoding="utf-8")
+            deck_stats_df.to_csv(os.path.join(out_dir, "deck_stats.csv"), index=False, encoding="utf-8")
+
+            site = {
+                "league_format": "2x2",
+                "rounds_per_event": 3,
+                "standings": team_df.to_dict(orient="records"),
+                "tables": tables_df.to_dict(orient="records"),
+                "matches": player_matches_df.to_dict(orient="records"),
+                "team_matches": team_matches_df.to_dict(orient="records"),
+                "event_scores": player_event_scores_df.to_dict(orient="records"),
+                "team_event_scores": team_event_scores_df.to_dict(orient="records"),
+                "monthly_best": monthly_best.to_dict(orient="records"),
+                "league_table": league.to_dict(orient="records"),
+                "player_league_table": league.to_dict(orient="records"),
+                "team_league_table": team_league.to_dict(orient="records"),
+                "team_player_map": team_map_df.to_dict(orient="records"),
+                "deck_stats": deck_stats_df.to_dict(orient="records"),
+                "player_aliases": aliases,
+            }
+            with open(os.path.join(out_dir, "site.json"), "w", encoding="utf-8") as f:
+                json.dump(clean_nan(site), f, ensure_ascii=False, allow_nan=False)
+
+            print(
+                f"\nOK ({league_type})! Gerado 2x2: standings.csv, team_matches.csv, matches.csv, "
+                f"player_event_summary.csv, team_event_summary.csv, league_table.csv, "
+                f"team_league_table.csv, deck_stats.csv, site.json em {out_dir}"
+            )
+            if not unmapped_teams_df.empty:
+                print(f"Aviso 2x2: {len(unmapped_teams_df)} dupla(s) precisam revisao em {out_dir}/unmapped_teams.csv")
+            if failed_tids:
+                print(f"Aviso: {len(failed_tids)} evento(s) falharam nesta liga: {', '.join(failed_tids)}")
+            summaries.append({"league": league_type, "events": len(event_tids), "out_dir": out_dir})
+            continue
 
         if not matches_df.empty:
             def fill_deck_url(row):

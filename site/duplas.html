@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liga Preconauta - Duplas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;700&family=Manrope:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+      :root {
+        --font-body: "Manrope", "Segoe UI", sans-serif;
+        --font-display: "Fraunces", "Georgia", serif;
+        --text: #e2e8f0;
+        --muted: #94a3b8;
+        --bg-1: #05060b;
+        --bg-2: #0f172a;
+        --glass: rgba(8, 12, 20, 0.65);
+        --glass-border: rgba(148, 163, 184, 0.18);
+        --glass-highlight: rgba(255, 255, 255, 0.08);
+        --glass-strong: rgba(15, 23, 42, 0.85);
+        --shadow: 0 30px 80px rgba(2, 6, 23, 0.6);
+        --shadow-soft: 0 20px 40px rgba(2, 6, 23, 0.45);
+        --chip-bg: rgba(15, 23, 42, 0.7);
+        --chip-border: rgba(148, 163, 184, 0.2);
+        color-scheme: dark;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: var(--font-body);
+        color: var(--text);
+        background: radial-gradient(
+            1200px circle at 10% 10%,
+            rgba(248, 187, 99, 0.18),
+            transparent 55%
+          ),
+          radial-gradient(
+            900px circle at 90% 20%,
+            rgba(96, 165, 250, 0.22),
+            transparent 60%
+          ),
+          linear-gradient(160deg, var(--bg-1), var(--bg-2));
+        overflow-x: hidden;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .font-display {
+        font-family: var(--font-display);
+      }
+
+      .ambient {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        overflow: hidden;
+      }
+
+      .blob {
+        position: absolute;
+        width: 420px;
+        height: 420px;
+        border-radius: 50%;
+        filter: blur(60px);
+        opacity: 0.8;
+        mix-blend-mode: screen;
+        animation: float 16s ease-in-out infinite;
+      }
+
+      .blob-1 {
+        background: radial-gradient(circle at 30% 30%, rgba(251, 191, 36, 0.18), transparent 65%);
+        top: -120px;
+        left: -80px;
+      }
+
+      .blob-2 {
+        background: radial-gradient(circle at 40% 40%, rgba(96, 165, 250, 0.22), transparent 65%);
+        top: 10%;
+        right: -120px;
+        animation-delay: -4s;
+      }
+
+      .blob-3 {
+        background: radial-gradient(circle at 30% 40%, rgba(236, 72, 153, 0.2), transparent 65%);
+        bottom: -140px;
+        left: 20%;
+        animation-delay: -8s;
+      }
+
+      .glass-card,
+      .glass-panel,
+      .glass-table {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+        position: relative;
+      }
+
+      .glass-card::after,
+      .glass-panel::after,
+      .glass-table::after {
+        content: "";
+        position: absolute;
+        inset: 1px;
+        border-radius: inherit;
+        border: 1px solid var(--glass-highlight);
+        opacity: 0.45;
+        pointer-events: none;
+      }
+
+      .glass-card {
+        padding: 1.5rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      }
+
+      .glass-card:hover {
+        transform: translateY(-4px);
+        box-shadow: var(--shadow-soft);
+        border-color: var(--glass-highlight);
+      }
+
+      .glass-panel {
+        padding: 2rem;
+      }
+
+      .glass-table {
+        overflow: hidden;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 999px;
+        background: var(--chip-bg);
+        border: 1px solid var(--chip-border);
+        color: var(--muted);
+        font-size: 0.85rem;
+      }
+
+      .pill.accent {
+        color: #0f172a;
+        background: linear-gradient(120deg, rgba(248, 187, 99, 0.9), rgba(96, 165, 250, 0.75));
+        border-color: rgba(248, 187, 99, 0.6);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.2rem;
+        border-radius: 999px;
+        border: 1px solid var(--chip-border);
+        background: var(--glass-strong);
+        color: var(--text);
+        font-weight: 600;
+        transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--glass-highlight);
+        box-shadow: var(--shadow-soft);
+      }
+
+      .btn-ghost {
+        background: transparent;
+      }
+
+      .input-glass,
+      select {
+        background: var(--glass-strong);
+        border: 1px solid var(--glass-border);
+        border-radius: 999px;
+        padding: 0.6rem 1rem;
+        color: var(--text);
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .input-glass:focus,
+      select:focus {
+        outline: none;
+        border-color: rgba(248, 187, 99, 0.6);
+        box-shadow: 0 0 0 2px rgba(248, 187, 99, 0.15);
+      }
+
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      select:focus-visible {
+        outline: 2px solid rgba(248, 187, 99, 0.8);
+        outline-offset: 2px;
+      }
+
+      .title-gradient {
+        background: linear-gradient(110deg, #f8e1a3, #f6b37a 40%, #60a5fa 70%, #f472b6);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+
+      .rank-gold {
+        border-color: rgba(248, 187, 99, 0.6);
+        box-shadow: 0 0 0 1px rgba(248, 187, 99, 0.4), 0 16px 30px rgba(248, 187, 99, 0.2);
+      }
+
+      .rank-silver {
+        border-color: rgba(203, 213, 225, 0.6);
+        box-shadow: 0 0 0 1px rgba(203, 213, 225, 0.4), 0 16px 30px rgba(148, 163, 184, 0.2);
+      }
+
+      .rank-bronze {
+        border-color: rgba(194, 139, 98, 0.6);
+        box-shadow: 0 0 0 1px rgba(194, 139, 98, 0.4), 0 16px 30px rgba(194, 139, 98, 0.2);
+      }
+
+      .reveal {
+        animation: fadeUp 0.8s ease both;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) translateX(0px);
+        }
+        50% {
+          transform: translateY(30px) translateX(-20px);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(18px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .blob,
+        .reveal,
+        .glass-card {
+          animation: none;
+          transition: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useEffect, useMemo, useState } = React;
+      const VALID_LEAGUES = new Set(["presencial", "online", "presencial2x2", "online2x2"]);
+
+      function getLeagueFromQuery() {
+        const params = new URLSearchParams(window.location.search);
+        const league = params.get("league");
+        return VALID_LEAGUES.has(league) ? league : "presencial2x2";
+      }
+
+      function withLeague(url, league = LEAGUE) {
+        const [path, hash] = url.split("#");
+        const [base, query] = path.split("?");
+        const params = new URLSearchParams(query || "");
+        params.set("league", league);
+        const qs = params.toString();
+        return `${base}${qs ? `?${qs}` : ""}${hash ? `#${hash}` : ""}`;
+      }
+
+      const LEAGUE = getLeagueFromQuery();
+      const IS_2X2 = LEAGUE.endsWith("2x2");
+      const NO_DATA_MESSAGE = "Sem dados por enquanto, desculpe =(";
+
+      const IconBase = ({ children, size = 24, className = "", ...props }) => (
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width={size}
+          height={size}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={className}
+          {...props}
+        >
+          {children}
+        </svg>
+      );
+
+      const Calendar = (p) => (
+        <IconBase {...p}>
+          <rect width="18" height="18" x="3" y="4" rx="2" ry="2" />
+          <line x1="16" x2="16" y1="2" y2="6" />
+          <line x1="8" x2="8" y1="2" y2="6" />
+          <line x1="3" x2="21" y1="10" y2="10" />
+        </IconBase>
+      );
+      const Crown = (p) => (
+        <IconBase {...p}>
+          <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+        </IconBase>
+      );
+      const Search = (p) => (
+        <IconBase {...p}>
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.3-4.3" />
+        </IconBase>
+      );
+      const Shield = (p) => (
+        <IconBase {...p}>
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+        </IconBase>
+      );
+      const Swords = (p) => (
+        <IconBase {...p}>
+          <polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5" />
+          <line x1="13" x2="19" y1="19" y2="13" />
+          <line x1="16" x2="20" y1="16" y2="20" />
+          <line x1="19" x2="21" y1="21" y2="19" />
+          <polyline points="14.5 6.5 18 3 21 3 21 6 17.5 9.5" />
+          <line x1="5" x2="9" y1="14" y2="18" />
+          <line x1="7" x2="4" y1="17" y2="20" />
+          <line x1="3" x2="5" y1="19" y2="21" />
+        </IconBase>
+      );
+      const Trophy = (p) => (
+        <IconBase {...p}>
+          <path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6" />
+          <path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18" />
+          <path d="M4 22h16" />
+          <path d="M18 2H6v7a6 6 0 0 0 12 0V2Z" />
+        </IconBase>
+      );
+      const Users = (p) => (
+        <IconBase {...p}>
+          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </IconBase>
+      );
+
+      const Card = ({ children, className = "", ...props }) => (
+        <div className={`glass-card ${className}`} {...props}>
+          {children}
+        </div>
+      );
+
+      const Badge = ({ rank }) => {
+        if (rank === 1)
+          return (
+            <span className="text-amber-300 inline-flex">
+              <Crown size={20} fill="currentColor" stroke="none" />
+            </span>
+          );
+        if (rank === 2)
+          return (
+            <span className="text-slate-200 inline-flex">
+              <Trophy size={18} />
+            </span>
+          );
+        if (rank === 3)
+          return (
+            <span className="text-amber-700 inline-flex">
+              <Trophy size={18} />
+            </span>
+          );
+        return <span className="text-slate-400 font-mono">#{rank}</span>;
+      };
+
+      function parseDateYYYYMMDD(s) {
+        if (!s) return null;
+        const d = new Date(s + "T00:00:00");
+        return Number.isNaN(d.getTime()) ? null : d;
+      }
+
+      function formatPtBR(d) {
+        return d ? d.toLocaleDateString("pt-BR") : "N/D";
+      }
+
+      function formatPercent(value) {
+        if (!Number.isFinite(value)) return "-";
+        return `${(value * 100).toFixed(1)}%`;
+      }
+
+      function safeNumber(value, fallback = 0) {
+        const n = Number(value);
+        return Number.isFinite(n) ? n : fallback;
+      }
+
+      function looseName(value) {
+        return String(value || "")
+          .normalize("NFD")
+          .replace(/[\u0300-\u036f]/g, "")
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, " ")
+          .trim()
+          .replace(/\s+/g, " ");
+      }
+
+      function isHttpUrl(s) {
+        return typeof s === "string" && /^https?:\/\//i.test(s);
+      }
+
+      function DeckLink({ deck }) {
+        if (!deck) return <span>N/D</span>;
+        if (!deck.url) return <span>{deck.name}</span>;
+        return (
+          <a
+            href={deck.url}
+            target="_blank"
+            rel="noreferrer"
+            className="text-amber-200 underline underline-offset-4"
+          >
+            {deck.name || "Moxfield"}
+          </a>
+        );
+      }
+
+      function getEventKey(row) {
+        const tid = typeof row?.tid === "string" && row.tid.trim() ? row.tid.trim() : null;
+        if (tid) return tid;
+        const name =
+          typeof row?.tournament_name === "string" && row.tournament_name.trim()
+            ? row.tournament_name.trim()
+            : null;
+        const date =
+          typeof row?.start_date === "string" && row.start_date.trim() ? row.start_date.trim() : null;
+        if (name && date) return `${name}::${date}`;
+        return name || date || null;
+      }
+
+      function getTableKey(row) {
+        const tid = typeof row?.tid === "string" && row.tid.trim() ? row.tid.trim() : null;
+        const round = row?.round;
+        const table = row?.table;
+        if (!tid || round == null || table == null) return null;
+        return `${tid}::${round}::${table}`;
+      }
+
+      function isDrawMatch(row) {
+        const status = String(row?.status || "").toLowerCase();
+        const winnerId = String(row?.winner_id || "").toLowerCase();
+        const winnerName = String(row?.winner_name || "").toLowerCase();
+        return (
+          winnerId === "draw" ||
+          winnerName === "draw" ||
+          status.includes("draw") ||
+          status.includes("empate") ||
+          /\bid\b/.test(status)
+        );
+      }
+
+      function getDeckFromRow(row, slot) {
+        const name =
+          row?.[`deck_name_pt_${slot}`] ||
+          row?.[`deck_name_en_${slot}`] ||
+          row?.[`deck_${slot}`] ||
+          null;
+        const cleanName = typeof name === "string" && name.trim() ? name.trim() : null;
+        if (!cleanName) return null;
+        const rawUrl = row?.[`deck_url_${slot}`];
+        return {
+          name: isHttpUrl(cleanName) ? "Moxfield" : cleanName,
+          url: typeof rawUrl === "string" && rawUrl.trim() ? rawUrl.trim() : null,
+          collection: row?.[`colecao_${slot}`] || null,
+        };
+      }
+
+      function buildEventOptions(rows) {
+        const map = new Map();
+        (rows || []).forEach((row) => {
+          const key = getEventKey(row);
+          if (!key) return;
+          const dateRaw =
+            typeof row?.start_date === "string" && row.start_date.trim() ? row.start_date.trim() : "";
+          const date = parseDateYYYYMMDD(dateRaw);
+          const name =
+            typeof row?.tournament_name === "string" && row.tournament_name.trim()
+              ? row.tournament_name.trim()
+              : key;
+          const current = map.get(key);
+          if (!current || (date && (!current.dateObj || date > current.dateObj))) {
+            map.set(key, { key, name, dateRaw, dateObj: date });
+          }
+        });
+
+        return Array.from(map.values())
+          .sort((a, b) => {
+            if (a.dateObj && b.dateObj && a.dateObj.getTime() !== b.dateObj.getTime()) {
+              return b.dateObj - a.dateObj;
+            }
+            if (a.dateObj && !b.dateObj) return -1;
+            if (!a.dateObj && b.dateObj) return 1;
+            return a.name.localeCompare(b.name, "pt-BR");
+          })
+          .map((event) => {
+            const dateLabel = event.dateObj ? formatPtBR(event.dateObj) : event.dateRaw || "";
+            const label = dateLabel ? `${dateLabel} - ${event.name}` : event.name;
+            return { key: event.key, label };
+          });
+      }
+
+      function mostRecentDate(rows) {
+        let best = null;
+        (rows || []).forEach((row) => {
+          const d = parseDateYYYYMMDD(row.start_date);
+          if (d && (!best || d > best)) best = d;
+        });
+        return best;
+      }
+
+      function normalizeTeamKey(row) {
+        const candidates = [row?.team_key, row?.player_name, row?.team_name];
+        for (const candidate of candidates) {
+          if (typeof candidate !== "string") continue;
+          const clean = candidate.trim();
+          if (clean && looseName(clean)) return clean.toLowerCase();
+        }
+        return null;
+      }
+
+      function buildTeamStats(data, selectedEvents) {
+        const selectedSet = new Set(selectedEvents || []);
+        const hasEventFilter = selectedSet.size > 0;
+        const teamRows = Array.isArray(data?.team_league_table) ? data.team_league_table : [];
+        const matchRows = Array.isArray(data?.team_matches) ? data.team_matches : [];
+        const scoreRows = Array.isArray(data?.team_event_scores) ? data.team_event_scores : [];
+        const teamMapRows = Array.isArray(data?.team_player_map) ? data.team_player_map : [];
+        const map = new Map();
+        const knownTeamKeys = new Map();
+
+        [...teamRows, ...matchRows, ...teamMapRows].forEach((row) => {
+          const key = normalizeTeamKey(row);
+          if (!key) return;
+          [row.team_name, row.player_name, row.raw_team].forEach((name) => {
+            const loose = looseName(name);
+            if (loose && !knownTeamKeys.has(loose)) knownTeamKeys.set(loose, key);
+          });
+        });
+
+        const ensure = (key, name) => {
+          if (!key) return null;
+          let item = map.get(key);
+          if (!item) {
+            item = {
+              key,
+              name: name || key,
+              leaguePointsAll: 0,
+              leaguePoints: 0,
+              matchPoints: 0,
+              matches: 0,
+              wins: 0,
+              draws: 0,
+              losses: 0,
+              events: new Set(),
+              players: new Set(),
+              decksByName: new Map(),
+              titles: 0,
+              top3: 0,
+              oppWrWeighted: 0,
+              oppWrWeight: 0,
+              lastDate: null,
+              lastEvent: null,
+            };
+            map.set(key, item);
+          } else if (name && name.length > item.name.length) {
+            item.name = name;
+          }
+          return item;
+        };
+
+        teamRows.forEach((row) => {
+          const key = normalizeTeamKey(row);
+          const item = ensure(key, row.team_name);
+          if (!item) return;
+          item.leaguePointsAll = safeNumber(row.league_points);
+          if (!hasEventFilter) item.leaguePoints = item.leaguePointsAll;
+        });
+
+        const addMeta = (row) => {
+          const key = normalizeTeamKey(row);
+          const item = ensure(key, row.team_name || row.player_name);
+          if (!item) return null;
+
+          [row.player_1, row.player_2].forEach((player) => {
+            if (typeof player === "string" && player.trim()) item.players.add(player.trim());
+          });
+
+          [getDeckFromRow(row, 1), getDeckFromRow(row, 2)].forEach((deck) => {
+            if (!deck) return;
+            const existing = item.decksByName.get(deck.name) || deck;
+            if (!existing.url && deck.url) existing.url = deck.url;
+            if (!existing.collection && deck.collection) existing.collection = deck.collection;
+            item.decksByName.set(deck.name, existing);
+          });
+
+          const eventKey = getEventKey(row);
+          if (eventKey) item.events.add(eventKey);
+
+          const date = parseDateYYYYMMDD(row.start_date);
+          if (date && (!item.lastDate || date > item.lastDate)) {
+            item.lastDate = date;
+            item.lastEvent = row.tournament_name || eventKey;
+          }
+
+          return item;
+        };
+
+        teamMapRows.forEach((row) => {
+          const eventKey = getEventKey(row);
+          if (hasEventFilter && !selectedSet.has(eventKey)) return;
+          addMeta(row);
+        });
+
+        const seenMatches = new Set();
+        matchRows.forEach((row) => {
+          const eventKey = getEventKey(row);
+          if (hasEventFilter && !selectedSet.has(eventKey)) return;
+          const item = addMeta(row);
+          if (!item) return;
+          const tableKey = getTableKey(row) || `${eventKey || "event"}::${item.key}::${item.matches}`;
+          const uniqueKey = `${tableKey}::${item.key}`;
+          if (seenMatches.has(uniqueKey)) return;
+          seenMatches.add(uniqueKey);
+
+          item.matches += 1;
+          item.wins += safeNumber(row.is_winner);
+          if (isDrawMatch(row)) item.draws += 1;
+        });
+
+        scoreRows.forEach((row) => {
+          const eventKey = getEventKey(row);
+          if (hasEventFilter && !selectedSet.has(eventKey)) return;
+          const key =
+            knownTeamKeys.get(looseName(row.team_name)) ||
+            knownTeamKeys.get(looseName(row.player_name)) ||
+            normalizeTeamKey(row);
+          const item = ensure(key, row.team_name || row.player_name);
+          if (!item) return;
+
+          item.events.add(eventKey || `${row.tournament_name || "event"}::${row.start_date || ""}`);
+          item.leaguePoints += safeNumber(row.event_points);
+          item.matchPoints += safeNumber(row.points_match);
+
+          const rank = safeNumber(row.event_rank, null);
+          if (rank === 1) item.titles += 1;
+          if (rank && rank <= 3) item.top3 += 1;
+
+          const scoreMatches = safeNumber(row.matches);
+          const opp = Number(row.opp_win_rate);
+          if (Number.isFinite(opp) && scoreMatches > 0) {
+            item.oppWrWeighted += opp * scoreMatches;
+            item.oppWrWeight += scoreMatches;
+          }
+
+          const date = parseDateYYYYMMDD(row.start_date);
+          if (date && (!item.lastDate || date > item.lastDate)) {
+            item.lastDate = date;
+            item.lastEvent = row.tournament_name || eventKey;
+          }
+        });
+
+        return Array.from(map.values())
+          .map((item) => {
+            const losses = Math.max(0, item.matches - item.wins - item.draws);
+            const decks = Array.from(item.decksByName.values()).sort((a, b) =>
+              a.name.localeCompare(b.name, "pt-BR")
+            );
+            const players = Array.from(item.players).sort((a, b) => a.localeCompare(b, "pt-BR"));
+            return {
+              ...item,
+              players,
+              decks,
+              losses,
+              eventsCount: item.events.size,
+              winRate: item.matches ? item.wins / item.matches : 0,
+              drawRate: item.matches ? item.draws / item.matches : 0,
+              oppWinRate: item.oppWrWeight ? item.oppWrWeighted / item.oppWrWeight : null,
+              lastDateLabel: formatPtBR(item.lastDate),
+              leaguePoints: hasEventFilter ? item.leaguePoints : item.leaguePointsAll || item.leaguePoints,
+            };
+          })
+          .filter((item) => item.matches > 0 || item.eventsCount > 0 || item.leaguePoints > 0);
+      }
+
+      function compareTeams(a, b, field, dir) {
+        const dirFactor = dir === "asc" ? 1 : -1;
+        const pick = (team) => {
+          switch (field) {
+            case "winRate":
+              return [team.winRate, "number"];
+            case "matches":
+              return [team.matches, "number"];
+            case "events":
+              return [team.eventsCount, "number"];
+            case "top3":
+              return [team.top3, "number"];
+            case "titles":
+              return [team.titles, "number"];
+            case "name":
+              return [team.name, "string"];
+            case "points":
+            default:
+              return [team.leaguePoints, "number"];
+          }
+        };
+        const [av, type] = pick(a);
+        const [bv] = pick(b);
+        if (type === "string") return dirFactor * String(av).localeCompare(String(bv), "pt-BR");
+        const diff = safeNumber(av) - safeNumber(bv);
+        if (diff !== 0) return dirFactor * (diff > 0 ? 1 : -1);
+
+        const tieBreakers = [
+          safeNumber(a.winRate) - safeNumber(b.winRate),
+          safeNumber(a.leaguePoints) - safeNumber(b.leaguePoints),
+          safeNumber(a.matches) - safeNumber(b.matches),
+          safeNumber(a.eventsCount) - safeNumber(b.eventsCount),
+        ];
+        for (const tie of tieBreakers) {
+          if (tie !== 0) return tie > 0 ? -1 : 1;
+        }
+        return a.name.localeCompare(b.name, "pt-BR");
+      }
+
+      async function fetchSiteData() {
+        const urlCandidates = [
+          `./data/${LEAGUE}/site.json`,
+          `../data/${LEAGUE}/site.json`,
+          `/data/${LEAGUE}/site.json`,
+        ];
+        let lastError = null;
+
+        for (const url of urlCandidates) {
+          try {
+            const res = await fetch(url, { cache: "no-store" });
+            if (!res.ok) {
+              lastError = new Error(`HTTP ${res.status} em ${url}`);
+              continue;
+            }
+            return await res.json();
+          } catch (err) {
+            lastError = err;
+          }
+        }
+
+        const tried = urlCandidates.join(", ");
+        throw new Error(
+          `Dados reais indisponiveis (${tried}).` +
+            (lastError ? ` Ultimo erro: ${lastError.message || lastError}` : "")
+        );
+      }
+
+      function TeamDecks({ decks, limit = 4 }) {
+        if (!decks || !decks.length) return <span className="text-slate-500">N/D</span>;
+        const visible = decks.slice(0, limit);
+        const extra = decks.length - visible.length;
+        return (
+          <div className="flex flex-wrap gap-2">
+            {visible.map((deck) => (
+              <span key={deck.name} className="pill">
+                <DeckLink deck={deck} />
+              </span>
+            ))}
+            {extra > 0 && <span className="pill">+{extra}</span>}
+          </div>
+        );
+      }
+
+      function LeagueTeams() {
+        const [data, setData] = useState(null);
+        const [eventOptions, setEventOptions] = useState([]);
+        const [selectedEvents, setSelectedEvents] = useState([]);
+        const [searchTerm, setSearchTerm] = useState("");
+        const [sortPrimary, setSortPrimary] = useState("points");
+        const [sortPrimaryDir, setSortPrimaryDir] = useState("desc");
+        const [loading, setLoading] = useState(true);
+        const [notice, setNotice] = useState("");
+        const [page, setPage] = useState(1);
+        const pageSize = 20;
+
+        useEffect(() => {
+          async function loadReal() {
+            try {
+              setLoading(true);
+              setNotice("");
+              if (!IS_2X2) {
+                setData(null);
+                setEventOptions([]);
+                setNotice("A pagina de duplas esta disponivel apenas nas ligas 2x2.");
+                return;
+              }
+              const siteData = await fetchSiteData();
+              const teamRows = Array.isArray(siteData.team_matches) ? siteData.team_matches : [];
+              if (!teamRows.length) throw new Error(NO_DATA_MESSAGE);
+              setData(siteData);
+              setEventOptions(buildEventOptions(teamRows));
+              setSelectedEvents([]);
+            } catch (err) {
+              setData(null);
+              setEventOptions([]);
+              setSelectedEvents([]);
+              setNotice(String(err.message || err));
+            } finally {
+              setLoading(false);
+            }
+          }
+
+          loadReal();
+        }, []);
+
+        useEffect(() => {
+          setSelectedEvents((prev) => prev.filter((key) => eventOptions.some((opt) => opt.key === key)));
+        }, [eventOptions]);
+
+        useEffect(() => {
+          setPage(1);
+        }, [searchTerm, sortPrimary, sortPrimaryDir, selectedEvents]);
+
+        const teams = useMemo(() => buildTeamStats(data, selectedEvents), [data, selectedEvents]);
+
+        const filteredTeams = useMemo(() => {
+          const term = searchTerm.trim().toLowerCase();
+          if (!term) return teams;
+          return teams.filter((team) => {
+            const haystack = [
+              team.name,
+              ...team.players,
+              ...team.decks.map((deck) => deck.name),
+              team.lastEvent || "",
+            ]
+              .join(" ")
+              .toLowerCase();
+            return haystack.includes(term);
+          });
+        }, [teams, searchTerm]);
+
+        const sortedTeams = useMemo(() => {
+          const list = [...filteredTeams];
+          list.sort((a, b) => compareTeams(a, b, sortPrimary, sortPrimaryDir));
+          return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
+        }, [filteredTeams, sortPrimary, sortPrimaryDir]);
+
+        const topTeams = useMemo(() => {
+          const list = [...teams];
+          list.sort((a, b) => compareTeams(a, b, "points", "desc"));
+          return list.slice(0, 3).map((row, idx) => ({ ...row, rank: idx + 1 }));
+        }, [teams]);
+
+        const summary = useMemo(() => {
+          const totalMatches = teams.reduce((sum, team) => sum + team.matches, 0);
+          const totalWins = teams.reduce((sum, team) => sum + team.wins, 0);
+          const totalEvents = new Set();
+          (data?.team_matches || []).forEach((row) => {
+            const key = getEventKey(row);
+            if (key) totalEvents.add(key);
+          });
+          const selectedEventsCount = selectedEvents.length || totalEvents.size;
+          return {
+            teams: teams.length,
+            matches: totalMatches,
+            averageWinRate: totalMatches ? totalWins / totalMatches : 0,
+            events: selectedEventsCount,
+            updatedAt: formatPtBR(mostRecentDate(data?.team_matches || [])),
+          };
+        }, [teams, data, selectedEvents]);
+
+        const selectedEventsSet = useMemo(() => new Set(selectedEvents), [selectedEvents]);
+        const selectedEventsCount = selectedEvents.length;
+        const isAllEventsSelected = selectedEventsCount === 0;
+
+        const totalPages = Math.max(1, Math.ceil(sortedTeams.length / pageSize));
+        useEffect(() => {
+          if (page > totalPages) setPage(totalPages);
+        }, [page, totalPages]);
+
+        const pagedTeams = useMemo(
+          () => sortedTeams.slice((page - 1) * pageSize, page * pageSize),
+          [sortedTeams, page]
+        );
+        const pageStart = sortedTeams.length ? (page - 1) * pageSize + 1 : 0;
+        const pageEnd = Math.min(page * pageSize, sortedTeams.length);
+
+        const sortOptions = [
+          { value: "points", label: "Pontos" },
+          { value: "winRate", label: "Win rate" },
+          { value: "matches", label: "Partidas" },
+          { value: "events", label: "Eventos" },
+          { value: "top3", label: "Top 3" },
+          { value: "titles", label: "Titulos" },
+          { value: "name", label: "Nome" },
+        ];
+
+        const leagueLabel =
+          LEAGUE === "online2x2"
+            ? "2x2 Online"
+            : LEAGUE === "presencial2x2"
+            ? "2x2 Presencial"
+            : "Mesao";
+
+        const toggleEventSelection = (eventKey) => {
+          setSelectedEvents((prev) => {
+            const set = new Set(prev);
+            if (set.has(eventKey)) set.delete(eventKey);
+            else set.add(eventKey);
+            return Array.from(set);
+          });
+        };
+
+        const handleSelectAllEvents = () => setSelectedEvents([]);
+
+        return (
+          <div className="min-h-screen relative">
+            <div className="ambient" aria-hidden="true">
+              <span className="blob blob-1"></span>
+              <span className="blob blob-2"></span>
+              <span className="blob blob-3"></span>
+            </div>
+
+            <div className="relative z-10 px-4 md:px-8 pb-16">
+              <header className="max-w-6xl mx-auto pt-10 pb-8">
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.35em] text-slate-500 mb-4">
+                      Liga Preconauta - {leagueLabel}
+                    </p>
+                    <h1 className="text-4xl md:text-6xl font-display tracking-tight title-gradient mb-3">
+                      Duplas
+                    </h1>
+                    <p className="text-slate-500 flex flex-wrap items-center gap-2">
+                      <Calendar size={16} />
+                      Ultima atualizacao: {summary.updatedAt}
+                      <span className="pill accent">
+                        <Users size={14} />
+                        {summary.teams} duplas
+                      </span>
+                      <span className="pill accent">
+                        <Swords size={14} />
+                        {summary.matches} partidas
+                      </span>
+                    </p>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <nav className="flex flex-wrap gap-2">
+                      <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
+                        Players
+                      </a>
+                      {IS_2X2 && (
+                        <a className="btn" href={withLeague("duplas.html", LEAGUE)}>
+                          Duplas
+                        </a>
+                      )}
+                      <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
+                        Decks
+                      </a>
+                      <a className="btn btn-ghost" href={withLeague("liga.html", LEAGUE)}>
+                        Liga
+                      </a>
+                    </nav>
+                    <a className="btn" href="./">Home</a>
+                  </div>
+                </div>
+
+                {notice && <p className="mt-4 text-xs text-amber-300/90">{notice}</p>}
+                {loading && <p className="mt-4 text-sm text-slate-500">Carregando dados...</p>}
+              </header>
+
+              <section className="max-w-6xl mx-auto mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Card>
+                    <p className="text-xs uppercase text-slate-500 mb-2">Win rate medio</p>
+                    <p className="text-3xl font-semibold text-amber-200">{formatPercent(summary.averageWinRate)}</p>
+                  </Card>
+                  <Card>
+                    <p className="text-xs uppercase text-slate-500 mb-2">Eventos</p>
+                    <p className="text-3xl font-semibold text-amber-200">{summary.events}</p>
+                  </Card>
+                  <Card>
+                    <p className="text-xs uppercase text-slate-500 mb-2">Duplas ativas</p>
+                    <p className="text-3xl font-semibold text-amber-200">{summary.teams}</p>
+                  </Card>
+                  <Card>
+                    <p className="text-xs uppercase text-slate-500 mb-2">Partidas registradas</p>
+                    <p className="text-3xl font-semibold text-amber-200">{summary.matches}</p>
+                  </Card>
+                </div>
+              </section>
+
+              <section className="max-w-6xl mx-auto mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  {!loading &&
+                    topTeams.map((team, index) => {
+                      const rankClass =
+                        index === 0 ? "rank-gold" : index === 1 ? "rank-silver" : "rank-bronze";
+                      return (
+                        <Card
+                          key={`${team.key}-top`}
+                          className={`${rankClass} reveal`}
+                          style={{ animationDelay: `${index * 0.08}s` }}
+                        >
+                          <div className="flex items-center justify-between gap-3">
+                            <p className="text-sm text-slate-500">Top {index + 1}</p>
+                            <Badge rank={index + 1} />
+                          </div>
+                          <h3 className="text-xl font-display mt-2">{team.name}</h3>
+                          <p className="text-sm text-slate-500 mt-1">
+                            {team.players.length ? team.players.join(" + ") : "Jogadores N/D"}
+                          </p>
+                          <div className="mt-4 flex flex-wrap gap-2 text-xs text-slate-500">
+                            <span className="pill">Pts {team.leaguePoints}</span>
+                            <span className="pill">WR {formatPercent(team.winRate)}</span>
+                            <span className="pill">Partidas {team.matches}</span>
+                          </div>
+                        </Card>
+                      );
+                    })}
+                </div>
+              </section>
+
+              <section className="max-w-6xl mx-auto">
+                <div className="glass-panel mb-6">
+                  <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                    <div>
+                      <h2 className="text-2xl font-display flex items-center gap-2">
+                        <Shield className="text-amber-300" />
+                        Ranking das duplas
+                      </h2>
+                      <p className="text-sm text-slate-500 mt-2">
+                        Pontos da liga, desempenho em partidas, eventos e aparicoes no top 3.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+                      <div className="relative">
+                        <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+                        <input
+                          type="text"
+                          placeholder="Buscar dupla, jogador ou deck..."
+                          className="input-glass pl-11 pr-4 w-full sm:w-80"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          disabled={loading}
+                        />
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <span className="text-xs uppercase text-slate-500">Ordenar por</span>
+                        <select value={sortPrimary} onChange={(e) => setSortPrimary(e.target.value)}>
+                          {sortOptions.map((opt) => (
+                            <option key={opt.value} value={opt.value}>
+                              {opt.label}
+                            </option>
+                          ))}
+                        </select>
+                        <button
+                          className="btn btn-ghost text-xs"
+                          onClick={() => setSortPrimaryDir(sortPrimaryDir === "asc" ? "desc" : "asc")}
+                        >
+                          {sortPrimaryDir === "asc" ? "Asc" : "Desc"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                      <span className="text-xs uppercase text-slate-500">Eventos</span>
+                      <span className="pill">
+                        {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
+                      </span>
+                      <button
+                        className="btn btn-ghost text-xs"
+                        onClick={handleSelectAllEvents}
+                        disabled={loading || !selectedEventsCount}
+                      >
+                        Limpar
+                      </button>
+                    </div>
+                    <details className="w-full">
+                      <summary className="input-glass w-full rounded-2xl cursor-pointer select-none">
+                        {selectedEventsCount ? `${selectedEventsCount} evento(s) selecionado(s)` : "Todos os eventos"}
+                      </summary>
+                      <div className="input-glass w-full rounded-2xl p-2 max-h-56 overflow-y-auto space-y-1 mt-2">
+                        <label
+                          className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                            isAllEventsSelected
+                              ? "bg-amber-300/15 text-amber-100"
+                              : "text-slate-300 hover:bg-white/10"
+                          }`}
+                        >
+                          <input
+                            type="checkbox"
+                            className="h-4 w-4 accent-amber-400"
+                            checked={isAllEventsSelected}
+                            onChange={handleSelectAllEvents}
+                            disabled={loading || !eventOptions.length}
+                          />
+                          <span className="text-sm leading-tight">Todos os eventos</span>
+                        </label>
+
+                        {!eventOptions.length && (
+                          <p className="text-sm text-slate-500 px-2 py-2">Sem eventos disponiveis.</p>
+                        )}
+                        {eventOptions.map((event) => {
+                          const isChecked = !isAllEventsSelected && selectedEventsSet.has(event.key);
+                          return (
+                            <label
+                              key={event.key}
+                              className={`flex items-center gap-2 px-2 py-1.5 rounded-lg cursor-pointer transition-colors ${
+                                isChecked
+                                  ? "bg-amber-300/15 text-amber-100"
+                                  : "text-slate-300 hover:bg-white/10"
+                              }`}
+                            >
+                              <input
+                                type="checkbox"
+                                className="h-4 w-4 accent-amber-400"
+                                checked={isChecked}
+                                onChange={() => toggleEventSelection(event.key)}
+                                disabled={loading}
+                              />
+                              <span className="text-sm leading-tight">{event.label}</span>
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </details>
+                  </div>
+                </div>
+
+                <div className="md:hidden grid gap-4">
+                  {!loading &&
+                    pagedTeams.map((team, index) => (
+                      <Card key={`${team.key}-${index}`} className="reveal" style={{ animationDelay: `${index * 0.03}s` }}>
+                        <div className="flex items-center justify-between gap-3">
+                          <div>
+                            <p className="text-sm text-slate-500">Rank {team.rank}</p>
+                            <h3 className="text-lg font-display">{team.name}</h3>
+                          </div>
+                          <Badge rank={team.rank} />
+                        </div>
+                        <p className="text-sm text-slate-500 mt-2">
+                          {team.players.length ? team.players.join(" + ") : "Jogadores N/D"}
+                        </p>
+                        <div className="mt-3">
+                          <TeamDecks decks={team.decks} limit={3} />
+                        </div>
+                        <div className="mt-3 flex flex-wrap gap-2 text-xs text-slate-500">
+                          <span className="pill">Pts {team.leaguePoints}</span>
+                          <span className="pill">WR {formatPercent(team.winRate)}</span>
+                          <span className="pill">Vit {team.wins}</span>
+                          <span className="pill">Emp {team.draws}</span>
+                          <span className="pill">Der {team.losses}</span>
+                          <span className="pill">Eventos {team.eventsCount}</span>
+                        </div>
+                      </Card>
+                    ))}
+                </div>
+
+                <div className="glass-table hidden md:block">
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-left border-collapse">
+                      <thead>
+                        <tr className="text-xs uppercase tracking-wider text-slate-500 border-b border-white/5">
+                          <th className="p-4 w-16 text-center">#</th>
+                          <th className="p-4">Dupla</th>
+                          <th className="p-4 hidden lg:table-cell">Jogadores</th>
+                          <th className="p-4 hidden xl:table-cell">Decks</th>
+                          <th className="p-4 text-right">Pontos</th>
+                          <th className="p-4 text-center">Partidas</th>
+                          <th className="p-4 text-center hidden lg:table-cell">V/E/D</th>
+                          <th className="p-4 text-center">WR</th>
+                          <th className="p-4 text-center hidden xl:table-cell">Opp WR</th>
+                          <th className="p-4 text-center">Eventos</th>
+                          <th className="p-4 text-center hidden lg:table-cell">Top 3</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-white/5">
+                        {!loading &&
+                          pagedTeams.map((team) => (
+                            <tr key={team.key} className="transition-colors hover:bg-white/5">
+                              <td className="p-4 text-center font-bold text-slate-300">
+                                <Badge rank={team.rank} />
+                              </td>
+                              <td className="p-4 font-medium text-slate-100">{team.name}</td>
+                              <td className="p-4 text-slate-400 text-sm hidden lg:table-cell">
+                                {team.players.length ? team.players.join(" + ") : "N/D"}
+                              </td>
+                              <td className="p-4 text-slate-400 text-sm hidden xl:table-cell">
+                                <TeamDecks decks={team.decks} />
+                              </td>
+                              <td className="p-4 text-right font-semibold text-amber-200">
+                                {team.leaguePoints}
+                              </td>
+                              <td className="p-4 text-center text-slate-400">{team.matches}</td>
+                              <td className="p-4 text-center text-slate-400 hidden lg:table-cell">
+                                {team.wins}/{team.draws}/{team.losses}
+                              </td>
+                              <td className="p-4 text-center text-slate-400">{formatPercent(team.winRate)}</td>
+                              <td className="p-4 text-center text-slate-400 hidden xl:table-cell">
+                                {formatPercent(team.oppWinRate)}
+                              </td>
+                              <td className="p-4 text-center text-slate-400">{team.eventsCount}</td>
+                              <td className="p-4 text-center text-slate-400 hidden lg:table-cell">
+                                {team.top3}
+                              </td>
+                            </tr>
+                          ))}
+
+                        {!loading && sortedTeams.length === 0 && (
+                          <tr>
+                            <td className="p-4 text-slate-500" colSpan="11">
+                              Nenhuma dupla encontrada.
+                            </td>
+                          </tr>
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div className="mt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-sm text-slate-500">
+                  <span>
+                    Mostrando {pageStart}-{pageEnd} de {sortedTeams.length}
+                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      className="btn btn-ghost"
+                      onClick={() => setPage((p) => Math.max(1, p - 1))}
+                      disabled={page === 1}
+                    >
+                      Anterior
+                    </button>
+                    <span className="pill">
+                      Pagina {page} de {totalPages}
+                    </span>
+                    <button
+                      className="btn btn-ghost"
+                      onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={page === totalPages}
+                    >
+                      Proxima
+                    </button>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<LeagueTeams />);
+    </script>
+  </body>
+</html>

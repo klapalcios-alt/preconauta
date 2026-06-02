@@ -1,0 +1,4 @@
+tid,tournament_name,start_date,month,raw_team,team_name,team_key,player_1,player_2,deck_1,deck_2,deck_url_1,deck_url_2,deck_name_pt_1,deck_name_pt_2,deck_name_en_1,deck_name_en_2,colecao_1,colecao_2,map_status,missing_players,missing_decks
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Chueiry & Vicente,Chueiry & Vicente,chueiry & vicente,Chueiry,Vicente,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Jorel & Martin,Jorel & Martin,jorel & martin,Jorel,Martin,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Zangalli & Zangalli pai,Zangalli & Zangalli pai,zangalli & zangalli pai,Zangalli,Zangalli pai,sem deck,sem deck,,,sem deck,sem deck,,,,,manual,0,1

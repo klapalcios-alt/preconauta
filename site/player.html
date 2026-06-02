@@ -334,7 +334,7 @@
 
     <script type="text/babel">
       const { useEffect, useMemo, useState } = React;
-      const VALID_LEAGUES = new Set(["presencial", "online"]);
+      const VALID_LEAGUES = new Set(["presencial", "online", "presencial2x2", "online2x2"]);
 
       function getLeagueFromQuery() {
         const params = new URLSearchParams(window.location.search);
@@ -352,6 +352,7 @@
       }
 
       const LEAGUE = getLeagueFromQuery();
+      const IS_2X2 = LEAGUE.endsWith("2x2");
 
       const IconBase = ({ children, size = 24, className = "", ...props }) => (
         <svg
@@ -1506,10 +1507,15 @@
                       </h1>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <nav className="flex gap-2">
+                      <nav className="flex flex-wrap gap-2">
                         <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                           Players
                         </a>
+                        {IS_2X2 && (
+                          <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                            Duplas
+                          </a>
+                        )}
                         <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
                           Decks
                         </a>
@@ -1550,10 +1556,15 @@
                       </h1>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <nav className="flex gap-2">
+                      <nav className="flex flex-wrap gap-2">
                         <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                           Players
                         </a>
+                        {IS_2X2 && (
+                          <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                            Duplas
+                          </a>
+                        )}
                         <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
                           Decks
                         </a>
@@ -1593,10 +1604,15 @@
                       </h1>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <nav className="flex gap-2">
+                      <nav className="flex flex-wrap gap-2">
                         <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                           Players
                         </a>
+                        {IS_2X2 && (
+                          <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                            Duplas
+                          </a>
+                        )}
                         <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
                           Decks
                         </a>
@@ -1639,10 +1655,15 @@
                       </h1>
                     </div>
                     <div className="flex flex-wrap items-center gap-3">
-                      <nav className="flex gap-2">
+                      <nav className="flex flex-wrap gap-2">
                         <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                           Players
                         </a>
+                        {IS_2X2 && (
+                          <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                            Duplas
+                          </a>
+                        )}
                         <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
                           Decks
                         </a>
@@ -1694,10 +1715,15 @@
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    <nav className="flex gap-2">
+                    <nav className="flex flex-wrap gap-2">
                       <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                         Players
                       </a>
+                      {IS_2X2 && (
+                        <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                          Duplas
+                        </a>
+                      )}
                       <a className="btn btn-ghost" href={withLeague("decks.html", LEAGUE)}>
                         Decks
                       </a>

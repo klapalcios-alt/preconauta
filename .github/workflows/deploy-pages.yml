@@ -24,10 +24,12 @@ jobs:
 
       - name: Montar publicacao
         run: |
-          mkdir -p dist/data/presencial dist/data/online
+          mkdir -p dist/data/presencial dist/data/online dist/data/presencial2x2 dist/data/online2x2
           cp -r site/. dist/
           if [ -f data/presencial/site.json ]; then cp data/presencial/site.json dist/data/presencial/site.json; fi
           if [ -f data/online/site.json ]; then cp data/online/site.json dist/data/online/site.json; fi
+          if [ -f data/presencial2x2/site.json ]; then cp data/presencial2x2/site.json dist/data/presencial2x2/site.json; fi
+          if [ -f data/online2x2/site.json ]; then cp data/online2x2/site.json dist/data/online2x2/site.json; fi
           find dist/data -name site.json | grep -q .
 
       - name: Upload Pages artifact

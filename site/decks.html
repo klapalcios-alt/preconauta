@@ -312,7 +312,7 @@
 
     <script type="text/babel">
       const { useEffect, useMemo, useState } = React;
-      const VALID_LEAGUES = new Set(["presencial", "online"]);
+      const VALID_LEAGUES = new Set(["presencial", "online", "presencial2x2", "online2x2"]);
 
       function getLeagueFromQuery() {
         const params = new URLSearchParams(window.location.search);
@@ -331,8 +331,10 @@
 
       const LEAGUE = getLeagueFromQuery();
       const NO_DATA_MESSAGE = "Sem dados por enquanto, desculpe =(";
-      const BAN_MIN_WIN_RATE = 1 / 3;
-      const BAN_MIN_MATCHES = LEAGUE === "online" ? 12 : 24;
+      const IS_2X2 = LEAGUE.endsWith("2x2");
+      const BAN_MIN_WIN_RATE = IS_2X2 ? 2 / 3 : 1 / 3;
+      const BAN_MIN_MATCHES = LEAGUE === "online" || IS_2X2 ? 12 : 24;
+      const BAN_WIN_RATE_LABEL = IS_2X2 ? "66,6%" : "33,33%";
 
       const IconBase = ({ children, size = 24, className = "", ...props }) => (
         <svg
@@ -991,10 +993,15 @@
                   </div>
 
                   <div className="flex flex-wrap items-center gap-3">
-                    <nav className="flex gap-2">
+                    <nav className="flex flex-wrap gap-2">
                       <a className="btn btn-ghost" href={withLeague("players.html", LEAGUE)}>
                         Players
                       </a>
+                      {IS_2X2 && (
+                        <a className="btn btn-ghost" href={withLeague("duplas.html", LEAGUE)}>
+                          Duplas
+                        </a>
+                      )}
                       <a className="btn" href={withLeague("decks.html", LEAGUE)}>
                         Decks
                       </a>
@@ -1236,7 +1243,7 @@
                 <div className="glass-panel mt-8">
                   <div className="flex items-center justify-between gap-3 mb-4">
                     <h3 className="text-xl font-display">Decks banidos (Liga 2026)</h3>
-                    <span className="pill">Criterios: {BAN_MIN_MATCHES}+ jogos e 33,33%+ WR</span>
+                    <span className="pill">Criterios: {BAN_MIN_MATCHES}+ jogos e {BAN_WIN_RATE_LABEL}+ WR</span>
                   </div>
                   <p className="text-xs text-slate-500 mb-4">
                     Banimento so entra na virada do mes. Status congelado em{" "}
@@ -1431,5 +1438,4 @@
     </script>
   </body>
 </html>
-
 

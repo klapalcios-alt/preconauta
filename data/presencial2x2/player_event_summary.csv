@@ -1,0 +1,223 @@
+tid,player_name,team_name,team_key,tournament_name,start_date,month,matches,wins,draws,losses,points_match,win_rate,opp_win_rate,event_rank,event_points,event_players,event_teams
+liga-2x2-presencial-s1-e01-1,Nobru,Metusa & Nobru,metusa & nobru,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,3,0,0,9,1.0,0.2222222222222222,1,3,6,6
+liga-2x2-presencial-s1-e01-1,Metusa,Metusa & Nobru,metusa & nobru,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,3,0,0,9,1.0,0.2222222222222222,1,3,6,6
+liga-2x2-presencial-s1-e01-1,Langa,Guga & Langa,guga & langa,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,2,0,1,6,0.6666666666666666,0.3333333333333333,2,2,6,6
+liga-2x2-presencial-s1-e01-1,Guga,Guga & Langa,guga & langa,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,2,0,1,6,0.6666666666666666,0.3333333333333333,2,2,6,6
+liga-2x2-presencial-s1-e01-1,Teixeira,Pedro & Teixeira,pedro & teixeira,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,1,1,4,0.3333333333333333,0.5555555555555555,3,2,6,6
+liga-2x2-presencial-s1-e01-1,Pedro,Pedro & Teixeira,pedro & teixeira,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,1,1,4,0.3333333333333333,0.5555555555555555,3,2,6,6
+liga-2x2-presencial-s1-e01-1,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,0,2,3,0.3333333333333333,0.6666666666666666,4,2,6,6
+liga-2x2-presencial-s1-e01-1,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,0,2,3,0.3333333333333333,0.6666666666666666,4,2,6,6
+liga-2x2-presencial-s1-e01-1,Baron,Baron & Dare,baron & dare,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,0,2,3,0.3333333333333333,0.3333333333333333,5,1,6,6
+liga-2x2-presencial-s1-e01-1,Dare,Baron & Dare,baron & dare,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,1,0,2,3,0.3333333333333333,0.3333333333333333,5,1,6,6
+liga-2x2-presencial-s1-e01-1,Zubk,Nath & Zubk,nath & zubk,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,0,1,2,1,0.0,0.5555555555555555,6,1,6,6
+liga-2x2-presencial-s1-e01-1,Nath,Nath & Zubk,nath & zubk,Liga 2x2 presencial S1-E01,2026-01-31,2026-01,3,0,1,2,1,0.0,0.5555555555555555,6,1,6,6
+liga-2x2-presencial-s1-e02,Nobru,Metusa & Nobru,metusa & nobru,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,2,0,1,6,0.6666666666666666,0.3333333333333333,1,3,4,4
+liga-2x2-presencial-s1-e02,Metusa,Metusa & Nobru,metusa & nobru,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,2,0,1,6,0.6666666666666666,0.3333333333333333,1,3,4,4
+liga-2x2-presencial-s1-e02,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,1,1,4,0.3333333333333333,0.4444444444444444,3,2,4,4
+liga-2x2-presencial-s1-e02,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,1,1,4,0.3333333333333333,0.4444444444444444,3,2,4,4
+liga-2x2-presencial-s1-e02,Tony,Oscar & Tony,oscar & tony,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,1,1,4,0.3333333333333333,0.4444444444444444,2,2,4,4
+liga-2x2-presencial-s1-e02,Oscar,Oscar & Tony,oscar & tony,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,1,1,4,0.3333333333333333,0.4444444444444444,2,2,4,4
+liga-2x2-presencial-s1-e02,Fiel,Fiel & marcus vinicius werneck esteves,fiel & marcus vinicius werneck esteves,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,0,2,3,0.3333333333333333,0.4444444444444444,4,2,4,4
+liga-2x2-presencial-s1-e02,marcus vinicius werneck esteves,Fiel & marcus vinicius werneck esteves,fiel & marcus vinicius werneck esteves,Liga 2x2 presencial S1-E02,2026-02-07,2026-02,3,1,0,2,3,0.3333333333333333,0.4444444444444444,4,2,4,4
+liga-2x2-presencial-s1-e04,Bauer,Bauer & Langa,bauer & langa,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,2,1,0,7,0.6666666666666666,0.4444444444444444,1,3,6,6
+liga-2x2-presencial-s1-e04,Langa,Bauer & Langa,bauer & langa,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,2,1,0,7,0.6666666666666666,0.4444444444444444,1,3,6,6
+liga-2x2-presencial-s1-e04,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,2,0,1,6,0.6666666666666666,0.3333333333333333,2,2,6,6
+liga-2x2-presencial-s1-e04,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,2,0,1,6,0.6666666666666666,0.3333333333333333,2,2,6,6
+liga-2x2-presencial-s1-e04,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,2,0,5,0.3333333333333333,0.3333333333333333,3,2,6,6
+liga-2x2-presencial-s1-e04,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,2,0,5,0.3333333333333333,0.3333333333333333,3,2,6,6
+liga-2x2-presencial-s1-e04,Zangalli,Zangalli & Zangalli pai,zangalli & zangalli pai,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,1,1,4,0.3333333333333333,0.2222222222222222,4,2,6,6
+liga-2x2-presencial-s1-e04,Zangalli pai,Zangalli & Zangalli pai,zangalli & zangalli pai,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,1,1,4,0.3333333333333333,0.2222222222222222,4,2,6,6
+liga-2x2-presencial-s1-e04,Freire,Freire & Pudeulko,freire & pudeulko,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,6,6
+liga-2x2-presencial-s1-e04,Pudeulko,Freire & Pudeulko,freire & pudeulko,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,6,6
+liga-2x2-presencial-s1-e04,Nobru,Nobru & Tarik,nobru & tarik,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,0,0,3,0,0.0,0.4444444444444444,6,1,6,6
+liga-2x2-presencial-s1-e04,Tarik,Nobru & Tarik,nobru & tarik,Liga 2x2 presencial S1-E04,2026-02-21,2026-02,3,0,0,3,0,0.0,0.4444444444444444,6,1,6,6
+liga-2x2-presencial-s1-e06,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,5,5
+liga-2x2-presencial-s1-e06,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,5,5
+liga-2x2-presencial-s1-e06,Carlos,Carlos & Mel,carlos & mel,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,2,0,1,6,0.6666666666666666,0.2222222222222222,2,2,5,5
+liga-2x2-presencial-s1-e06,Mel,Carlos & Mel,carlos & mel,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,2,0,1,6,0.6666666666666666,0.2222222222222222,2,2,5,5
+liga-2x2-presencial-s1-e06,Matheus,Luciano & Matheus,luciano & matheus,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,1,0,2,3,0.3333333333333333,0.3333333333333333,3,2,5,5
+liga-2x2-presencial-s1-e06,Luciano,Luciano & Matheus,luciano & matheus,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,1,0,2,3,0.3333333333333333,0.3333333333333333,3,2,5,5
+liga-2x2-presencial-s1-e06,Nobru,Nobru & Tarik,nobru & tarik,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,0,1,2,1,0.0,0.5555555555555555,5,1,5,5
+liga-2x2-presencial-s1-e06,Tarik,Nobru & Tarik,nobru & tarik,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,3,0,1,2,1,0.0,0.5555555555555555,5,1,5,5
+liga-2x2-presencial-s1-e06,Aleksander,Aleksander & Luisa,aleksander & luisa,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,1,0,0,1,0,0.0,0.6666666666666666,6,1,5,5
+liga-2x2-presencial-s1-e06,Luisa,Aleksander & Luisa,aleksander & luisa,Liga 2x2 presencial S1-E06,2026-03-07,2026-03,1,0,0,1,0,0.0,0.6666666666666666,6,1,5,5
+liga-2x2-presencial-s1-e07,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s1-e07,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s1-e07,Langa,Langa & Murilo Ferreira,langa & murilo ferreira,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,2,0,1,6,0.6666666666666666,0.4444444444444444,2,2,8,8
+liga-2x2-presencial-s1-e07,Murilo Ferreira,Langa & Murilo Ferreira,langa & murilo ferreira,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,2,0,1,6,0.6666666666666666,0.4444444444444444,2,2,8,8
+liga-2x2-presencial-s1-e07,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,2,0,5,0.3333333333333333,0.2222222222222222,3,2,8,8
+liga-2x2-presencial-s1-e07,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,2,0,5,0.3333333333333333,0.2222222222222222,3,2,8,8
+liga-2x2-presencial-s1-e07,Melk,Gustavo Dias & Melk,gustavo dias & melk,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,2,0,5,0.3333333333333333,0.1111111111111111,4,2,8,8
+liga-2x2-presencial-s1-e07,Gustavo Dias,Gustavo Dias & Melk,gustavo dias & melk,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,2,0,5,0.3333333333333333,0.1111111111111111,4,2,8,8
+liga-2x2-presencial-s1-e07,Bauer,Bauer & Kennao,bauer & kennao,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s1-e07,Kennao,Bauer & Kennao,bauer & kennao,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s1-e07,Theo,Leonardo & Theo,leonardo & theo,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,0,2,3,0.3333333333333333,0.5555555555555555,6,1,8,8
+liga-2x2-presencial-s1-e07,Leonardo,Leonardo & Theo,leonardo & theo,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,1,0,2,3,0.3333333333333333,0.5555555555555555,6,1,8,8
+liga-2x2-presencial-s1-e07,Matheus,Luciano & Matheus,luciano & matheus,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,0,1,2,1,0.0,0.4444444444444444,7,1,8,8
+liga-2x2-presencial-s1-e07,Luciano,Luciano & Matheus,luciano & matheus,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,0,1,2,1,0.0,0.4444444444444444,7,1,8,8
+liga-2x2-presencial-s1-e07,Nobru,Nicolas & Nobru,nicolas & nobru,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,0,0,3,0,0.0,0.3333333333333333,8,1,8,8
+liga-2x2-presencial-s1-e07,Nicolas,Nicolas & Nobru,nicolas & nobru,Liga 2x2 presencial S1-E07,2026-03-14,2026-03,3,0,0,3,0,0.0,0.3333333333333333,8,1,8,8
+liga-2x2-presencial-s1-e08,Zangalli,Vina & Zangalli,vina & zangalli,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s1-e08,Vina,Vina & Zangalli,vina & zangalli,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s1-e08,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,2,0,1,6,0.6666666666666666,0.4444444444444444,2,2,8,8
+liga-2x2-presencial-s1-e08,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,2,0,1,6,0.6666666666666666,0.4444444444444444,2,2,8,8
+liga-2x2-presencial-s1-e08,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,2,0,1,6,0.6666666666666666,0.2222222222222222,3,2,8,8
+liga-2x2-presencial-s1-e08,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,2,0,1,6,0.6666666666666666,0.2222222222222222,3,2,8,8
+liga-2x2-presencial-s1-e08,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,1,1,4,0.3333333333333333,0.5555555555555555,4,2,8,8
+liga-2x2-presencial-s1-e08,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,1,1,4,0.3333333333333333,0.5555555555555555,4,2,8,8
+liga-2x2-presencial-s1-e08,Banshee,Banshee & Gabi,banshee & gabi,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s1-e08,Gabi,Banshee & Gabi,banshee & gabi,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s1-e08,Matheus,Matheus & Murilo,matheus & murilo,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,0,2,3,0.3333333333333333,0.5555555555555555,6,1,8,8
+liga-2x2-presencial-s1-e08,Murilo,Matheus & Murilo,matheus & murilo,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,0,2,3,0.3333333333333333,0.5555555555555555,6,1,8,8
+liga-2x2-presencial-s1-e08,Nobru,Guga & Nobru,guga & nobru,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,0,2,3,0.3333333333333333,0.4444444444444444,7,1,8,8
+liga-2x2-presencial-s1-e08,Guga,Guga & Nobru,guga & nobru,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,1,0,2,3,0.3333333333333333,0.4444444444444444,7,1,8,8
+liga-2x2-presencial-s1-e08,Manfrinato,Manfrinato & Melissa,manfrinato & melissa,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,0,0,3,0,0.0,0.5555555555555555,8,1,8,8
+liga-2x2-presencial-s1-e08,Melissa,Manfrinato & Melissa,manfrinato & melissa,Liga 2x2 presencial S1-E08,2026-03-21,2026-03,3,0,0,3,0,0.0,0.5555555555555555,8,1,8,8
+liga-2x2-presencial-s1-e09,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,3,3,0,0,9,1.0,0.16666666666666666,1,3,5,5
+liga-2x2-presencial-s1-e09,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,3,3,0,0,9,1.0,0.16666666666666666,1,3,5,5
+liga-2x2-presencial-s1-e09,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,1,0,1,6,0.5,0.5,2,2,5,5
+liga-2x2-presencial-s1-e09,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,1,0,1,6,0.5,0.5,2,2,5,5
+liga-2x2-presencial-s1-e09,Matheus,Matheus & Romano,matheus & romano,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,3,0,2,1,2,0.0,0.16666666666666666,5,1,5,5
+liga-2x2-presencial-s1-e09,Romano,Matheus & Romano,matheus & romano,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,3,0,2,1,2,0.0,0.16666666666666666,5,1,5,5
+liga-2x2-presencial-s1-e09,Oscar,Anthony & Oscar,anthony & oscar,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,0,1,1,4,0.0,0.5,3,2,5,5
+liga-2x2-presencial-s1-e09,Anthony,Anthony & Oscar,anthony & oscar,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,0,1,1,4,0.0,0.5,3,2,5,5
+liga-2x2-presencial-s1-e09,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,0,1,1,4,0.0,0.5,4,2,5,5
+liga-2x2-presencial-s1-e09,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S1-E09,2026-03-28,2026-03,2,0,1,1,4,0.0,0.5,4,2,5,5
+liga-2x2-presencial-s2-e1,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s2-e1,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s2-e1,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,2,0,1,6,0.6666666666666666,0.5555555555555555,2,2,8,8
+liga-2x2-presencial-s2-e1,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,2,0,1,6,0.6666666666666666,0.5555555555555555,2,2,8,8
+liga-2x2-presencial-s2-e1,Zangalli,Cheury & Zangalli,cheury & zangalli,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,2,0,1,6,0.6666666666666666,0.4444444444444444,3,2,8,8
+liga-2x2-presencial-s2-e1,Cheury,Cheury & Zangalli,cheury & zangalli,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,2,0,1,6,0.6666666666666666,0.4444444444444444,3,2,8,8
+liga-2x2-presencial-s2-e1,Matheus,Johann & Matheus,johann & matheus,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,1,1,4,0.3333333333333333,0.2222222222222222,4,2,8,8
+liga-2x2-presencial-s2-e1,Johann,Johann & Matheus,johann & matheus,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,1,1,4,0.3333333333333333,0.2222222222222222,4,2,8,8
+liga-2x2-presencial-s2-e1,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,8,8
+liga-2x2-presencial-s2-e1,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,8,8
+liga-2x2-presencial-s2-e1,Oscar,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,0,2,3,0.3333333333333333,0.3333333333333333,6,1,8,8
+liga-2x2-presencial-s2-e1,Vini,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,1,0,2,3,0.3333333333333333,0.3333333333333333,6,1,8,8
+liga-2x2-presencial-s2-e1,Berka,Berka & Nobru,berka & nobru,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,0,2,1,2,0.0,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e1,Nobru,Berka & Nobru,berka & nobru,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,0,2,1,2,0.0,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e1,Theo,André & Theo,andre & theo,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,0,1,2,1,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e1,André,André & Theo,andre & theo,Liga 2x2 presencial S2-E1,2026-04-04,2026-04,3,0,1,2,1,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e2,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,1,0,7,0.6666666666666666,0.611111111111111,1,3,9,9
+liga-2x2-presencial-s2-e2,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,1,0,7,0.6666666666666666,0.611111111111111,1,3,9,9
+liga-2x2-presencial-s2-e2,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,1,0,7,0.6666666666666666,0.4444444444444444,2,2,9,9
+liga-2x2-presencial-s2-e2,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,1,0,7,0.6666666666666666,0.4444444444444444,2,2,9,9
+liga-2x2-presencial-s2-e2,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,9,9
+liga-2x2-presencial-s2-e2,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,9,9
+liga-2x2-presencial-s2-e2,Nobru,Melk & Nobru,melk & nobru,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,0,1,6,0.6666666666666666,0.2222222222222222,5,1,9,9
+liga-2x2-presencial-s2-e2,Melk,Melk & Nobru,melk & nobru,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,2,0,1,6,0.6666666666666666,0.2222222222222222,5,1,9,9
+liga-2x2-presencial-s2-e2,Eduardo,Eduardo & Luís Zangalli,eduardo & luis zangalli,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,1,1,1,4,0.3333333333333333,0.2222222222222222,6,1,9,9
+liga-2x2-presencial-s2-e2,Luís Zangalli,Eduardo & Luís Zangalli,eduardo & luis zangalli,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,1,1,1,4,0.3333333333333333,0.2222222222222222,6,1,9,9
+liga-2x2-presencial-s2-e2,Carlos Kit,Carlos Kit & Gustavo Dias,carlos kit & gustavo dias,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,1,0,1,6,0.5,0.3333333333333333,3,2,9,9
+liga-2x2-presencial-s2-e2,Gustavo Dias,Carlos Kit & Gustavo Dias,carlos kit & gustavo dias,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,1,0,1,6,0.5,0.3333333333333333,3,2,9,9
+liga-2x2-presencial-s2-e2,Oscar,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,0,1,2,1,0.0,0.5,9,1,9,9
+liga-2x2-presencial-s2-e2,Vini,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,3,0,1,2,1,0.0,0.5,9,1,9,9
+liga-2x2-presencial-s2-e2,Ewerson,Ewerson & Gabriel,ewerson & gabriel,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,0,0,2,3,0.0,0.6666666666666666,7,1,9,9
+liga-2x2-presencial-s2-e2,Gabriel,Ewerson & Gabriel,ewerson & gabriel,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,0,0,2,3,0.0,0.6666666666666666,7,1,9,9
+liga-2x2-presencial-s2-e2,André,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,0,0,2,3,0.0,0.5,8,1,9,9
+liga-2x2-presencial-s2-e2,Matheus,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E2,2026-04-11,2026-04,2,0,0,2,3,0.0,0.5,8,1,9,9
+liga-2x2-presencial-s2-e3,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,3,0,0,9,1.0,0.3333333333333333,1,3,8,8
+liga-2x2-presencial-s2-e3,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,3,0,0,9,1.0,0.3333333333333333,1,3,8,8
+liga-2x2-presencial-s2-e3,Gustavo Dias,Gustavo Dias & Gustavo taverna,gustavo dias & gustavo taverna,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,2,0,1,6,0.6666666666666666,0.2222222222222222,2,2,8,8
+liga-2x2-presencial-s2-e3,Gustavo taverna,Gustavo Dias & Gustavo taverna,gustavo dias & gustavo taverna,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,2,0,1,6,0.6666666666666666,0.2222222222222222,2,2,8,8
+liga-2x2-presencial-s2-e3,Martin,Banshee & Martin,banshee & martin,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.6666666666666666,3,2,8,8
+liga-2x2-presencial-s2-e3,Banshee,Banshee & Martin,banshee & martin,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.6666666666666666,3,2,8,8
+liga-2x2-presencial-s2-e3,Furiatti,Furiatti & Nakamura,furiatti & nakamura,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.5555555555555555,4,2,8,8
+liga-2x2-presencial-s2-e3,Nakamura,Furiatti & Nakamura,furiatti & nakamura,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.5555555555555555,4,2,8,8
+liga-2x2-presencial-s2-e3,Fabi,Fabi & João Marmentini,fabi & joao marmentini,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s2-e3,João Marmentini,Fabi & João Marmentini,fabi & joao marmentini,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.4444444444444444,5,1,8,8
+liga-2x2-presencial-s2-e3,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.4444444444444444,6,1,8,8
+liga-2x2-presencial-s2-e3,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,1,1,4,0.3333333333333333,0.4444444444444444,6,1,8,8
+liga-2x2-presencial-s2-e3,Oscar,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,0,2,3,0.3333333333333333,0.2222222222222222,7,1,8,8
+liga-2x2-presencial-s2-e3,Vini,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,1,0,2,3,0.3333333333333333,0.2222222222222222,7,1,8,8
+liga-2x2-presencial-s2-e3,Romano,Matheus & Romano,matheus & romano,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,0,0,3,0,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e3,Matheus,Matheus & Romano,matheus & romano,Liga 2x2 presencial S2-E3,2026-04-25,2026-04,3,0,0,3,0,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e4,Jorel,Banshee & Jorel,banshee & jorel,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,6,6
+liga-2x2-presencial-s2-e4,Banshee,Banshee & Jorel,banshee & jorel,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,6,6
+liga-2x2-presencial-s2-e4,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,2,2,6,6
+liga-2x2-presencial-s2-e4,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,2,2,6,6
+liga-2x2-presencial-s2-e4,Matheus,Beck & Matheus,beck & matheus,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,4,2,6,6
+liga-2x2-presencial-s2-e4,Beck,Beck & Matheus,beck & matheus,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,4,2,6,6
+liga-2x2-presencial-s2-e4,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,3,2,6,6
+liga-2x2-presencial-s2-e4,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,3,2,6,6
+liga-2x2-presencial-s2-e4,Oscar,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.2222222222222222,5,1,6,6
+liga-2x2-presencial-s2-e4,Vini,Oscar & Vini,oscar & vini,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,1,1,1,4,0.3333333333333333,0.2222222222222222,5,1,6,6
+liga-2x2-presencial-s2-e4,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,0,1,2,1,0.0,0.3333333333333333,6,1,6,6
+liga-2x2-presencial-s2-e4,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E4,2026-05-02,2026-05,3,0,1,2,1,0.0,0.3333333333333333,6,1,6,6
+liga-2x2-presencial-s2-e5,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,3,0,0,9,1.0,0.4444444444444444,1,3,9,9
+liga-2x2-presencial-s2-e5,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,3,0,0,9,1.0,0.4444444444444444,1,3,9,9
+liga-2x2-presencial-s2-e5,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,9,9
+liga-2x2-presencial-s2-e5,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,9,9
+liga-2x2-presencial-s2-e5,Banshee,Banshee & Ruanito,banshee & ruanito,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,2,0,1,6,0.6666666666666666,0.5,3,2,9,9
+liga-2x2-presencial-s2-e5,Ruanito,Banshee & Ruanito,banshee & ruanito,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,2,0,1,6,0.6666666666666666,0.5,3,2,9,9
+liga-2x2-presencial-s2-e5,Beck,Beck & Gus,beck & gus,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,9,9
+liga-2x2-presencial-s2-e5,Gus,Beck & Gus,beck & gus,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,9,9
+liga-2x2-presencial-s2-e5,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,1,0,1,6,0.5,0.5,4,2,9,9
+liga-2x2-presencial-s2-e5,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,1,0,1,6,0.5,0.5,4,2,9,9
+liga-2x2-presencial-s2-e5,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,0,2,3,0.3333333333333333,0.6666666666666666,6,1,9,9
+liga-2x2-presencial-s2-e5,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,0,2,3,0.3333333333333333,0.6666666666666666,6,1,9,9
+liga-2x2-presencial-s2-e5,Rogério,Nathan & Rogério,nathan & rogerio,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,0,2,3,0.3333333333333333,0.5,7,1,9,9
+liga-2x2-presencial-s2-e5,Nathan,Nathan & Rogério,nathan & rogerio,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,3,1,0,2,3,0.3333333333333333,0.5,7,1,9,9
+liga-2x2-presencial-s2-e5,André,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,0,0,2,3,0.0,0.5,9,1,9,9
+liga-2x2-presencial-s2-e5,Matheus,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,0,0,2,3,0.0,0.5,9,1,9,9
+liga-2x2-presencial-s2-e5,Zangalli,Clausius & Zangalli,clausius & zangalli,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,0,0,2,3,0.0,0.5,8,1,9,9
+liga-2x2-presencial-s2-e5,Clausius,Clausius & Zangalli,clausius & zangalli,Liga 2x2 presencial S2-E5,2026-05-09,2026-05,2,0,0,2,3,0.0,0.5,8,1,9,9
+liga-2x2-presencial-s2-e6,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,8,8
+liga-2x2-presencial-s2-e6,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,2,1,0,7,0.6666666666666666,0.3333333333333333,1,3,8,8
+liga-2x2-presencial-s2-e6,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,8,8
+liga-2x2-presencial-s2-e6,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,2,1,0,7,0.6666666666666666,0.2222222222222222,2,2,8,8
+liga-2x2-presencial-s2-e6,Martin,Banshee & Martin,banshee & martin,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.5555555555555555,3,2,8,8
+liga-2x2-presencial-s2-e6,Banshee,Banshee & Martin,banshee & martin,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.5555555555555555,3,2,8,8
+liga-2x2-presencial-s2-e6,André,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,4,2,8,8
+liga-2x2-presencial-s2-e6,Matheus,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,4,2,8,8
+liga-2x2-presencial-s2-e6,Gustavo Dias,Gustavo Dias & Luciano,gustavo dias & luciano,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,6,1,8,8
+liga-2x2-presencial-s2-e6,Luciano,Gustavo Dias & Luciano,gustavo dias & luciano,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,6,1,8,8
+liga-2x2-presencial-s2-e6,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,8,8
+liga-2x2-presencial-s2-e6,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,1,1,4,0.3333333333333333,0.3333333333333333,5,1,8,8
+liga-2x2-presencial-s2-e6,Berka,Berka & Du,berka & du,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e6,Du,Berka & Du,berka & du,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e6,Nathan,Coelho & Nathan,coelho & nathan,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,0,0,3,0,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e6,Coelho,Coelho & Nathan,coelho & nathan,Liga 2x2 presencial S2-E6,2026-05-16,2026-05,3,0,0,3,0,0.0,0.4444444444444444,8,1,8,8
+liga-2x2-presencial-s2-e7,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,3,0,0,9,1.0,0.38888888888888884,1,3,13,13
+liga-2x2-presencial-s2-e7,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,3,0,0,9,1.0,0.38888888888888884,1,3,13,13
+liga-2x2-presencial-s2-e7,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,3,0,0,9,1.0,0.3333333333333333,2,2,13,13
+liga-2x2-presencial-s2-e7,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,3,0,0,9,1.0,0.3333333333333333,2,2,13,13
+liga-2x2-presencial-s2-e7,Nathalia,Lily & Nathalia,lily & nathalia,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,2,0,1,6,0.6666666666666666,0.5555555555555555,4,2,13,13
+liga-2x2-presencial-s2-e7,Lily,Lily & Nathalia,lily & nathalia,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,2,0,1,6,0.6666666666666666,0.5555555555555555,4,2,13,13
+liga-2x2-presencial-s2-e7,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,2,0,5,0.3333333333333333,0.2222222222222222,6,2,13,13
+liga-2x2-presencial-s2-e7,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,2,0,5,0.3333333333333333,0.2222222222222222,6,2,13,13
+liga-2x2-presencial-s2-e7,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,7,2,13,13
+liga-2x2-presencial-s2-e7,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,1,1,4,0.3333333333333333,0.4444444444444444,7,2,13,13
+liga-2x2-presencial-s2-e7,Lucas,Lucas & Luiz Rodrigues,lucas & luiz rodrigues,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,1,0,1,6,0.5,0.6666666666666666,3,2,13,13
+liga-2x2-presencial-s2-e7,Luiz Rodrigues,Lucas & Luiz Rodrigues,lucas & luiz rodrigues,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,1,0,1,6,0.5,0.6666666666666666,3,2,13,13
+liga-2x2-presencial-s2-e7,Zangalli,Banshee & Zangalli,banshee & zangalli,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,1,0,1,6,0.5,0.3333333333333333,5,2,13,13
+liga-2x2-presencial-s2-e7,Banshee,Banshee & Zangalli,banshee & zangalli,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,1,0,1,6,0.5,0.3333333333333333,5,2,13,13
+liga-2x2-presencial-s2-e7,Beck,Beck & Ricardo,beck & ricardo,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.7222222222222222,8,2,13,13
+liga-2x2-presencial-s2-e7,Ricardo,Beck & Ricardo,beck & ricardo,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.7222222222222222,8,2,13,13
+liga-2x2-presencial-s2-e7,João,Hermann & João,hermann & joao,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,10,1,13,13
+liga-2x2-presencial-s2-e7,Hermann,Hermann & João,hermann & joao,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,10,1,13,13
+liga-2x2-presencial-s2-e7,Pietro,Luiz Henrique & Pietro,luiz henrique & pietro,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,11,1,13,13
+liga-2x2-presencial-s2-e7,Luiz Henrique,Luiz Henrique & Pietro,luiz henrique & pietro,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,11,1,13,13
+liga-2x2-presencial-s2-e7,Theo,Leonardo & Theo,leonardo & theo,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.2222222222222222,12,1,13,13
+liga-2x2-presencial-s2-e7,Leonardo,Leonardo & Theo,leonardo & theo,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,1,0,2,3,0.3333333333333333,0.2222222222222222,12,1,13,13
+liga-2x2-presencial-s2-e7,Nathan,Nathan & Rogério,nathan & rogerio,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,0,1,2,1,0.0,0.3333333333333333,13,1,13,13
+liga-2x2-presencial-s2-e7,Rogério,Nathan & Rogério,nathan & rogerio,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,3,0,1,2,1,0.0,0.3333333333333333,13,1,13,13
+liga-2x2-presencial-s2-e7,Matheus,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,0,0,2,3,0.0,0.6666666666666666,9,1,13,13
+liga-2x2-presencial-s2-e7,André,André & Matheus,andre & matheus,Liga 2x2 presencial S2-E7,2026-05-23,2026-05,2,0,0,2,3,0.0,0.6666666666666666,9,1,13,13
+liga-2x2-presencial-s2-e8,Melk,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s2-e8,Sônia,Melk & Sônia,melk & sonia,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,3,0,0,9,1.0,0.4444444444444444,1,3,8,8
+liga-2x2-presencial-s2-e8,Metusa,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.6666666666666666,2,2,8,8
+liga-2x2-presencial-s2-e8,Rudzzt,Metusa & Rudzzt,metusa & rudzzt,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.6666666666666666,2,2,8,8
+liga-2x2-presencial-s2-e8,Arthur Castanhari,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.5555555555555555,3,2,8,8
+liga-2x2-presencial-s2-e8,Murilo Oyafuso,Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.5555555555555555,3,2,8,8
+liga-2x2-presencial-s2-e8,Carlos Kit,Carlos Kit & Gustavo Dias,carlos kit & gustavo dias,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,8,8
+liga-2x2-presencial-s2-e8,Gustavo Dias,Carlos Kit & Gustavo Dias,carlos kit & gustavo dias,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,2,0,1,6,0.6666666666666666,0.3333333333333333,4,2,8,8
+liga-2x2-presencial-s2-e8,Jorel,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,8,8
+liga-2x2-presencial-s2-e8,Martin,Jorel & Martin,jorel & martin,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.5555555555555555,5,1,8,8
+liga-2x2-presencial-s2-e8,Johann,Johann & Matheus,johann & matheus,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,6,1,8,8
+liga-2x2-presencial-s2-e8,Matheus,Johann & Matheus,johann & matheus,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.4444444444444444,6,1,8,8
+liga-2x2-presencial-s2-e8,André,André & Zangalli,andre & zangalli,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e8,Zangalli,André & Zangalli,andre & zangalli,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,1,0,2,3,0.3333333333333333,0.3333333333333333,7,1,8,8
+liga-2x2-presencial-s2-e8,Rogério,Beck & Rogério,beck & rogerio,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,0,0,3,0,0.0,0.6666666666666666,8,1,8,8
+liga-2x2-presencial-s2-e8,Beck,Beck & Rogério,beck & rogerio,Liga 2x2 presencial S2-E8,2026-05-30,2026-05,3,0,0,3,0,0.0,0.6666666666666666,8,1,8,8
