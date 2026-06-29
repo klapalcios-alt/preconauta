@@ -15,7 +15,7 @@
       :root {
         --font-body: "Manrope", "Segoe UI", sans-serif;
         --font-display: "Fraunces", "Georgia", serif;
-        --home-hero-image: url("./assets/home-hero.webp");
+        --home-hero-image: url("./assets/mtg-marvel.jpg");
         --text: #0f172a;
         --muted: #475569;
         --bg-1: #f8fafc;
@@ -305,7 +305,7 @@
         const isGitHubPages = /\.github\.io$/i.test(window.location.hostname);
         const pathParts = window.location.pathname.split("/").filter(Boolean);
         const repoBase = isGitHubPages && pathParts.length ? `/${pathParts[0]}` : "";
-        const assetPath = isGitHubPages ? `${repoBase}/assets/home-hero.webp` : "./assets/home-hero.webp";
+        const assetPath = isGitHubPages ? `${repoBase}/assets/mtg-marvel.jpg` : "./assets/mtg-marvel.jpg";
         document.documentElement.style.setProperty("--home-hero-image", `url("${assetPath}")`);
       })();
     </script>
