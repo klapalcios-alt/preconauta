@@ -1,29 +1,33 @@
 player_name,league_points,eventos,deck_principal
-Marcos Sartori,14,9,Festa dos Planeswalker
-Arthur Sartori,13,8,Scions & Spellcraft
-Bauer,11,9,Temur Roar
-João Marmentini,11,9,Endless Punishment
-Carlos,11,8,Saída do Exílio
-Vande,11,8,Scions & Spellcraft
+Marcos Sartori,18,11,Festa dos Planeswalker
+Arthur Sartori,17,10,Scions & Spellcraft
+Carlos,16,10,Saída do Exílio
+Martin,14,11,Lorehold Spirit
+João Marmentini,14,10,Endless Punishment
+Vande,14,10,Scions & Spellcraft
+Bauer,12,9,Temur Roar
+Jorel,12,9,Turtle Power!
+Reva,11,12,"Ave, Caesar"
+Vicente,11,12,Enxame Fractius
+Bells,11,6,Quandrix Unlimited
+Greowtty,11,6,Ciência!
+Boone,10,9,Festa dos Planeswalker
 Juliano,10,8,Içar Velas
 Mateus,10,8,Içar Velas
 Langa,10,7,Içar Velas
-Reva,9,10,"Ave, Caesar"
-Martin,9,9,Counter Blitz
-Boone,9,8,Festa dos Planeswalker
-Jorel,9,8,Domínio das Fadinas
-Vicente,8,10,Enxame Fractius
-Cássio,7,5,Animated Army
-Bells,7,4,Masters of Evil
-Greowtty,7,4,Ciência!
+Cássio,8,5,Animated Army
 Samuel,7,3,Endless Punishment
+Thiago,7,3,Blight Curse
+Andressa,6,4,Counter Blitz
 Erick,6,4,Counter Blitz
 Chueiry,5,4,Dance of the Elements
-Andressa,5,3,Counter Blitz
 Errejota,5,3,Animated Army
-Thiago,5,2,Blight Curse
+Guilherme,5,3,Dance of the Elements
 Borini,4,4,Abzan Armor
 Gustavo Dias,4,4,Ferocidade Felina
+Dellani,4,2,Festa dos Planeswalker
+Felipe,3,3,Tricky Terrain
+Pinho,3,3,Counter Blitz
 Rogério Nascimento,3,2,World Shaper
 Carbeauty,3,1,Blight Curse
 Fabio,2,2,Counter Blitz
@@ -31,20 +35,17 @@ Glauber,2,2,Ameaça sem Rosto
 Crothen,2,1,Blight Curse
 Elder Mancini,2,1,Counter Blitz
 Glaicon,2,1,Enxame Tiranídeo
-Guilherme,2,1,Dance of the Elements
+Pedro Boaro,2,1,Silverquill Influence
 Vina,2,1,Counter Blitz
-Zangalli,2,1,sem deck
-Zangalli pai,2,1,sem deck
+Zangalli,2,1,
+Zangalli pai,2,1,
 Zangas,2,1,Turtle Power!
 Carlindo,1,1,Festa dos Planeswalker
 Daniel,1,1,Creative Energy
-Dellani,1,1,Turtle Power!
-Felipe,1,1,Counter Blitz
 Felipe Familiar,1,1,Blight Curse
 Luiz,1,1,Exploradores das Profundezas
 Marcelo,1,1,Dance of the Elements
 Marcelo F.,1,1,Lorehold Spirit
-Pinho,1,1,Tricky Terrain
 Rafael Mendes,1,1,Turtle Power!
 Renan,1,1,Içar Velas
 Rodrigo,1,1,Cavaleiros de Rohan

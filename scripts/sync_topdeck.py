@@ -245,6 +245,19 @@ def normalize_lookup_key(value: object) -> str | None:
     return text or None
 
 
+def is_placeholder_deck(value: object) -> bool:
+    key = normalize_lookup_key(value)
+    return key in {
+        "sem deck",
+        "sem decks",
+        "s deck",
+        "no deck",
+        "no decks",
+        "deck missing",
+        "missing deck",
+    }
+
+
 def load_player_aliases(path: str = "player_aliases.json") -> dict[str, str]:
     if not os.path.exists(path):
         return {}
@@ -412,6 +425,15 @@ def load_team_map_2x2(path: str = TEAM_MAP_2X2_PATH) -> dict[tuple[str, str], di
 
 def resolve_manual_deck(deck_label: object, deck_url: object, deck_map: dict) -> dict:
     url = canonicalize_url(deck_url)
+    if is_placeholder_deck(deck_label) and not url:
+        return {
+            "deck_key": None,
+            "deck_name_pt": None,
+            "deck_name_en": None,
+            "colecao": None,
+            "deck_url": None,
+        }
+
     info = deck_map.get(url) if url and deck_map else None
     label = clean_player_name(deck_label)
 
@@ -1553,6 +1575,7 @@ def compute_deck_stats_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
 
     played["deck_key"] = played["deck_key"].astype("string").str.strip()
     played["deck_key"] = played["deck_key"].mask(played["deck_key"].eq(""))
+    played["deck_key"] = played["deck_key"].mask(played["deck_key"].map(is_placeholder_deck))
     played = played.dropna(subset=["deck_key", "player_name"]).copy()
     if played.empty:
         return deck_stats_df
@@ -2160,6 +2183,7 @@ def main():
                 tmp = player_matches_df.dropna(subset=["player_name", "deck_key"]).copy()
                 tmp["deck_key"] = tmp["deck_key"].astype("string").str.strip()
                 tmp = tmp[tmp["deck_key"].notna() & tmp["deck_key"].ne("")]
+                tmp = tmp[~tmp["deck_key"].map(is_placeholder_deck)]
                 if not tmp.empty:
                     counts = (
                         tmp.groupby(["player_name", "deck_key"])
@@ -2240,8 +2264,7 @@ def main():
             team_league = team_league.reindex(columns=["team_name", "team_key", "league_points", "eventos"])
 
             unmapped_teams_df = team_map_df[
-                (team_map_df.get("map_status") != "manual")
-                | (pd.to_numeric(team_map_df.get("missing_players"), errors="coerce").fillna(1) > 0)
+                (pd.to_numeric(team_map_df.get("missing_players"), errors="coerce").fillna(1) > 0)
                 | (pd.to_numeric(team_map_df.get("missing_decks"), errors="coerce").fillna(1) > 0)
             ].copy()
             unmapped_teams_df.to_csv(os.path.join(out_dir, "unmapped_teams.csv"), index=False, encoding="utf-8")
@@ -2519,6 +2542,7 @@ def main():
             matches_df["deck_key"] = matches_df["deck_key"].fillna(matches_df["deck_url"])
 
             tmp = matches_df.dropna(subset=["player_name", "deck_key"]).copy()
+            tmp = tmp[~tmp["deck_key"].map(is_placeholder_deck)]
             if not tmp.empty:
                 counts = (
                     tmp.groupby(["player_name", "deck_key"])
@@ -2555,6 +2579,7 @@ def main():
                 )
 
             played = matches_df.dropna(subset=["deck_key", "player_name"]).copy()
+            played = played[~played["deck_key"].map(is_placeholder_deck)].copy()
 
             status_lower = played.get("status", pd.Series([""] * len(played))).astype(str).str.lower()
             played["is_draw"] = (

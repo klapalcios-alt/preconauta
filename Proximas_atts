@@ -1,5 +1,8 @@
-cd "C:\Users\Edd\Desktop\Codes\Liga preconauta\preconauta-league"
+cd "C:\Users\Eduardo Bueno\Desktop\Eduardo\Diversos\GitHub Klapalcios\preconauta"
 .\run_sync.ps1
-git add .
-git commit -m "Atualiza dados do site"
-git push
+
+$git = Get-ChildItem "$env:LOCALAPPDATA\GitHubDesktop\app-*\resources\app\git\cmd\git.exe" | Sort-Object FullName -Descending | Select-Object -First 1 -ExpandProperty FullName
+& $git status -sb
+& $git add .
+& $git commit -m "Atualiza dados do site"
+& $git push origin main

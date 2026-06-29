@@ -11,6 +11,7 @@ from sync_topdeck import (
     find_deck_by_name,
     load_deck_map_csv,
     load_player_aliases,
+    is_placeholder_deck,
     normalize_lookup_key,
     resolve_player_alias,
     canonical_two_by_two_team_name,
@@ -142,6 +143,15 @@ def canonical_team_name(player_1: str | None, player_2: str | None) -> str | Non
 
 
 def deck_fields(deck_label: str | None, deck_map: dict, slot: int) -> dict:
+    if is_placeholder_deck(deck_label):
+        return {
+            f"deck_{slot}": None,
+            f"deck_url_{slot}": None,
+            f"deck_name_pt_{slot}": None,
+            f"deck_name_en_{slot}": None,
+            f"colecao_{slot}": None,
+        }
+
     info = find_deck_by_name(deck_label, deck_map) if deck_label else None
     deck_name_pt = info.get("deck_name_pt") if info else clean_player_name(deck_label)
     deck_name_en = info.get("deck_name_en") if info else None

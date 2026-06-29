@@ -1,20 +1,20 @@
 player_name,league_points,eventos,deck_principal
-Jorel,23,12,Turtle Power!
-Metusa,22,15,Jump Scare!
-Martin,22,13,Lorehold Spirit
-Rudzzt,20,13,Jump Scare!
-Melk,16,10,Counter Inteligence
-Sônia,14,8,Veloci-E-Rápido
-Arthur Castanhari,14,7,Turtle Power!
-Murilo Oyafuso,14,7,Silverquill Influence
-Matheus,13,12,Domínio das Fadinas
-Banshee,12,6,Prismari Artistry
-Zangalli,11,6,Dance of the Elements
-Nobru,10,8,Içar Velas
+Metusa,24,16,Jump Scare!
+Jorel,24,13,Turtle Power!
+Martin,24,13,Lorehold Spirit
+Rudzzt,22,14,Jump Scare!
+Melk,19,11,Counter Inteligence
+Sônia,17,9,Veloci-E-Rápido
+Arthur Castanhari,16,8,Turtle Power!
+Murilo Oyafuso,16,8,Silverquill Influence
+Matheus,14,12,Domínio das Fadinas
+Banshee,13,7,Prismari Artistry
+Zangalli,13,7,Endless Punishment
+Nobru,11,9,Içar Velas
 Gustavo Dias,9,5,Temur Roar
+André,8,7,Quandrix Unlimited
 Oscar,8,6,Temur Roar
 Langa,7,3,Içar Velas
-André,6,6,Quandrix Unlimited
 Beck,6,4,Içar Velas
 Vini,4,4,Veloci-E-Rápido
 Luciano,4,3,Limit Break
@@ -25,6 +25,7 @@ Rogério,3,3,Counter Blitz
 Theo,3,3,Creative Energy
 Guga,3,2,Mardu Surge
 Johann,3,2,Dinastias Necron
+Lucas,3,2,Exploradores das Profundezas
 Vina,3,1,Scions & Spellcraft
 Berka,2,2,Death Toll
 Leonardo,2,2,Lorehold Spirit
@@ -35,9 +36,8 @@ Carlos,2,1,Virtude e Valor
 Cheury,2,1,Endless Punishment
 Fiel,2,1,Death Toll
 Furiatti,2,1,Domínio das Fadinas
-Gustavo taverna,2,1,Sem deck
+Gustavo taverna,2,1,
 Lily,2,1,Sultai Arisen
-Lucas,2,1,World Shaper
 Luiz Rodrigues,2,1,Creative Energy
 Mel,2,1,Cavaleiros de Rohan
 Murilo Ferreira,2,1,Içar Velas
@@ -50,31 +50,37 @@ Teixeira,2,1,Veloci-E-Rápido
 Tony,2,1,Domínio das Fadinas
 Zangalli pai,2,1,Veloci-E-Rápido
 marcus vinicius werneck esteves,2,1,Endless Punishment
-Aleksander,1,1,Sem deck
+Aleksander,1,1,
 Baron,1,1,Virtude e Valor
 Clausius,1,1,Prismari Artistry
 Coelho,1,1,Scions & Spellcraft
 Dare,1,1,Animated Army
 Du,1,1,Silverquill Influence
-Eduardo,1,1,Sem deck
-Ewerson,1,1,Sem deck
+Eduardo,1,1,
+Everton Grochoski,1,1,Avengers Assemble
+Ewerson,1,1,
 Fabi,1,1,Virtude e Valor
-Freire,1,1,Sem deck
+Freire,1,1,
 Gabi,1,1,Squirreled Away
-Gabriel,1,1,Sem deck
+Gabriel,1,1,
+Gabriel Arents,1,1,Animated Army
 Gus,1,1,Içar Velas
-Hermann,1,1,Sem deck
-João,1,1,Sem deck
+Hermann,1,1,
+João,1,1,
 João Marmentini,1,1,Squirreled Away
 Kennao,1,1,Temur Roar
-Luisa,1,1,Sem deck
+Kit,1,1,Raining Cats and Dogs
+Luisa,1,1,
+Luiz,1,1,Silverquill Influence
 Luiz Henrique,1,1,Temur Roar
-Luís Zangalli,1,1,Sem deck
+Luís Zangalli,1,1,
 Manfrinato,1,1,Comida e Sociedade
 Melissa,1,1,Cavaleiros de Rohan
 Murilo,1,1,Scions & Spellcraft
 Nath,1,1,Perigo Mortal
 Nicolas,1,1,Sultai Arisen
 Pietro,1,1,Cavaleiros de Rohan
-Pudeulko,1,1,Sem deck
+Pudeulko,1,1,
+Susan,1,1,Avengers Assemble
+Vinicius,1,1,Wakanda Forever
 Zubk,1,1,Devorarrrdores de Mentes
