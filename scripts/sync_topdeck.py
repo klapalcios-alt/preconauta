@@ -1810,6 +1810,11 @@ def env_flag(name: str, default: bool = False) -> bool:
 
 
 def main():
+    run_started_at = datetime.now().astimezone()
+    site_meta = {
+        "last_updated": run_started_at.strftime("%Y-%m-%d"),
+        "last_updated_at": run_started_at.isoformat(timespec="seconds"),
+    }
     offline_mode = env_flag("TOPDECK_OFFLINE", default=False)
     if not API_KEY and not offline_mode:
         raise SystemExit("Defina TOPDECK_API_KEY no terminal (nao coloque a key no arquivo).")
@@ -2326,6 +2331,7 @@ def main():
             deck_stats_df.to_csv(os.path.join(out_dir, "deck_stats.csv"), index=False, encoding="utf-8")
 
             site = {
+                **site_meta,
                 "league_format": "2x2",
                 "rounds_per_event": 3,
                 "standings": team_df.to_dict(orient="records"),
@@ -2622,6 +2628,7 @@ def main():
         deck_stats_df.to_csv(os.path.join(out_dir, "deck_stats.csv"), index=False, encoding="utf-8")
 
         site = {
+            **site_meta,
             "standings": df.to_dict(orient="records"),
             "tables": tables_df.to_dict(orient="records"),
             "matches": matches_df.to_dict(orient="records"),

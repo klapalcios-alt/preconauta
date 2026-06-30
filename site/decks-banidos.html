@@ -427,6 +427,13 @@
         return d ? d.toLocaleDateString("pt-BR") : "N/D";
       }
 
+      function siteUpdatedDate(data) {
+        const d = parseDateYYYYMMDD(data?.last_updated);
+        if (d) return d;
+        const dt = data?.last_updated_at ? new Date(data.last_updated_at) : null;
+        return dt && !Number.isNaN(dt.getTime()) ? dt : null;
+      }
+
       function getLastEventDate(standings, matches) {
         let best = null;
         const scan = (arr) => {
@@ -745,14 +752,13 @@
               const matches = Array.isArray(data.matches) ? data.matches : [];
               setMatchesData(matches);
               const list = buildDeckStats(data);
-              const lastDate = getLastEventDate(data.standings, matches);
 
               if (!list.length) {
                 throw new Error(NO_DATA_MESSAGE);
               }
 
               setDecks(list);
-              setUpdatedAt(lastDate);
+              setUpdatedAt(siteUpdatedDate(data));
             } catch (e) {
               setNotice(String(e.message || e));
               setDecks([]);
@@ -802,11 +808,12 @@
         }, [filteredDecks, sortPrimary, sortPrimaryDir]);
 
         const top3Decks = useMemo(() => rankedDecks.slice(0, 3), [rankedDecks]);
+        const latestLeagueDate = useMemo(() => getLastEventDate([], matchesData), [matchesData]);
         const banCutoffDate = useMemo(() => {
-          if (!updatedAt) return null;
-          const cutoff = new Date(updatedAt.getFullYear(), updatedAt.getMonth(), 1);
+          if (!latestLeagueDate) return null;
+          const cutoff = new Date(latestLeagueDate.getFullYear(), latestLeagueDate.getMonth(), 1);
           return Number.isNaN(cutoff.getTime()) ? null : cutoff;
-        }, [updatedAt]);
+        }, [latestLeagueDate]);
         const bannedDecks = useMemo(() => {
           if (!banCutoffDate || !matchesData.length) return [];
           const historicalMatches = matchesData.filter((m) => {

@@ -525,6 +525,13 @@
         return d ? d.toLocaleDateString("pt-BR") : "N/D";
       }
 
+      function siteUpdatedLabel(data) {
+        const d = parseDateYYYYMMDD(data?.last_updated);
+        if (d) return formatPtBR(d);
+        const dt = data?.last_updated_at ? new Date(data.last_updated_at) : null;
+        return dt && !Number.isNaN(dt.getTime()) ? formatPtBR(dt) : "N/D";
+      }
+
       function formatPercent(value) {
         if (!Number.isFinite(value)) return "-";
         return `${(value * 100).toFixed(1)}%`;
@@ -1473,7 +1480,7 @@
           ? leaguePoints
           : 0;
 
-        const updatedAt = useMemo(() => formatPtBR(mostRecentDateFrom(data)), [data]);
+        const updatedAt = useMemo(() => siteUpdatedLabel(data), [data]);
 
         const playerFound = Boolean(normalizedName && (playerRow || playerMatches.length));
         const useMock = false;

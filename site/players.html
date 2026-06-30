@@ -512,6 +512,13 @@
         return d ? d.toLocaleDateString("pt-BR") : "N/D";
       }
 
+      function siteUpdatedLabel(data) {
+        const d = parseDateYYYYMMDD(data?.last_updated);
+        if (d) return formatPtBR(d);
+        const dt = data?.last_updated_at ? new Date(data.last_updated_at) : null;
+        return dt && !Number.isNaN(dt.getTime()) ? formatPtBR(dt) : "N/D";
+      }
+
       function formatPercent(value) {
         if (!Number.isFinite(value)) return "-";
         return `${(value * 100).toFixed(1)}%`;
@@ -979,11 +986,13 @@
           const d = parseDateYYYYMMDD(row?.start_date);
           if (!d) return false;
           if (year && d.getFullYear() !== year) return false;
+          if (quarter === "all") return true;
           return getQuarter(d) === quarter;
         });
       }
 
       function formatQuarterLabel(quarter) {
+        if (quarter === "all") return "GERAL";
         if (!quarter) return "Trimestre";
         return `${quarter}\u00b0 trimestre`;
       }
@@ -1237,7 +1246,7 @@
         const [notice, setNotice] = useState("");
         const [page, setPage] = useState(1);
         const pageSize = 20;
-        const quarterOptions = [1, 2, 3, 4];
+        const quarterOptions = ["all", 1, 2, 3, 4];
 
         useEffect(() => {
           async function loadReal() {
@@ -1265,7 +1274,7 @@
               setEventOptions(buildEventOptions(quarterMatches));
               setSelectedEvents([]);
               setMatchesData(quarterMatches);
-              setUpdatedAt(formatPtBR(mostRecentDateFromMatches(quarterMatches)));
+              setUpdatedAt(siteUpdatedLabel(data));
             } catch (e) {
               setNotice(String(e.message || e));
               setAllMatches([]);
@@ -1318,7 +1327,6 @@
 
           setMatchesData(filteredMatches);
           setPlayers(buildLeagueFromMatches(filteredMatches, filteredScores));
-          setUpdatedAt(formatPtBR(mostRecentDateFromMatches(filteredMatches)));
         }, [allMatches, allScores, quarter, currentYear, selectedEvents]);
 
         useEffect(() => {
@@ -1539,7 +1547,7 @@
                         </div>
                         <div>
                           <div className="flex items-center justify-between gap-3 mb-2">
-                            <span className="text-xs uppercase text-slate-500">Eventos do trimestre</span>
+                        <span className="text-xs uppercase text-slate-500">Eventos do periodo</span>
                             <span className="text-xs text-slate-500">
                               {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
                             </span>

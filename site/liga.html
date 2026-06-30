@@ -512,6 +512,13 @@
         return d ? d.toLocaleDateString("pt-BR") : "N/D";
       }
 
+      function siteUpdatedLabel(data) {
+        const d = parseDateYYYYMMDD(data?.last_updated);
+        if (d) return formatPtBR(d);
+        const dt = data?.last_updated_at ? new Date(data.last_updated_at) : null;
+        return dt && !Number.isNaN(dt.getTime()) ? formatPtBR(dt) : "N/D";
+      }
+
       function formatPercent(value) {
         if (!Number.isFinite(value)) return "-";
         return `${(value * 100).toFixed(1)}%`;
@@ -980,6 +987,7 @@
           const d = parseDateYYYYMMDD(m?.start_date);
           if (!d) return false;
           if (year && d.getFullYear() !== year) return false;
+          if (quarter === "all") return true;
           return getQuarter(d) === quarter;
         });
       }
@@ -989,11 +997,13 @@
           const d = parseDateYYYYMMDD(row?.start_date);
           if (!d) return false;
           if (year && d.getFullYear() !== year) return false;
+          if (quarter === "all") return true;
           return getQuarter(d) === quarter;
         });
       }
 
       function formatQuarterLabel(quarter) {
+        if (quarter === "all") return "GERAL";
         if (!quarter) return "Trimestre";
         return `${quarter}\u00b0 trimestre`;
       }
@@ -1248,7 +1258,7 @@
         const [sortPrimaryDir, setSortPrimaryDir] = useState("desc");
         const [page, setPage] = useState(1);
         const pageSize = 20;
-        const quarterOptions = [1, 2, 3, 4];
+        const quarterOptions = ["all", 1, 2, 3, 4];
 
         useEffect(() => {
           async function loadReal() {
@@ -1275,6 +1285,7 @@
               setAllScores(scores);
               setCurrentYear(resolvedYear);
               setQuarter(resolvedQuarter || 1);
+              setUpdatedAt(siteUpdatedLabel(data));
               setSelectedEvents([]);
             } catch (e) {
               setNotice(String(e.message || e));
@@ -1319,9 +1330,7 @@
             ? quarterScores.filter((row) => selectedSet.has(getEventKey(row)))
             : quarterScores;
           const league = buildLeagueFromMatches(filteredMatches, filteredScores);
-          const lastDate = mostRecentDateFromMatches(filteredMatches);
           setPlayers(league);
-          setUpdatedAt(formatPtBR(lastDate));
         }, [allMatches, allScores, quarter, currentYear, selectedEvents]);
 
         useEffect(() => {
@@ -1497,7 +1506,7 @@
                   </div>
                   <div className="mt-4">
                     <div className="flex flex-wrap items-center gap-2 mb-2">
-                      <span className="text-xs uppercase text-slate-500">Eventos do trimestre</span>
+                      <span className="text-xs uppercase text-slate-500">Eventos do periodo</span>
                       <span className="pill">
                         {selectedEventsCount ? `${selectedEventsCount} selecionado(s)` : "Todos"}
                       </span>

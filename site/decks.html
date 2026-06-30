@@ -445,6 +445,13 @@
         return d ? d.toLocaleDateString("pt-BR") : "N/D";
       }
 
+      function siteUpdatedDate(data) {
+        const d = parseDateYYYYMMDD(data?.last_updated);
+        if (d) return d;
+        const dt = data?.last_updated_at ? new Date(data.last_updated_at) : null;
+        return dt && !Number.isNaN(dt.getTime()) ? dt : null;
+      }
+
       function getLastEventDate(standings, matches) {
         let best = null;
         const scan = (arr) => {
@@ -813,7 +820,6 @@
               const data = await fetchSiteData();
               const matches = Array.isArray(data.matches) ? data.matches : [];
               const list = buildDeckStats(data);
-              const lastDate = getLastEventDate(data.standings, matches);
 
               if (!list.length) {
                 throw new Error(NO_DATA_MESSAGE);
@@ -823,7 +829,7 @@
               setAllMatches(matches);
               setEventOptions(buildEventOptions(matches));
               setSelectedEvents([]);
-              setUpdatedAt(lastDate);
+              setUpdatedAt(siteUpdatedDate(data));
             } catch (e) {
               setNotice(String(e.message || e));
               setBaseDecks([]);
@@ -857,7 +863,6 @@
             : allMatches;
           setMatchesData(filteredMatches);
           setDecks(buildDeckStatsFromMatches(filteredMatches));
-          setUpdatedAt(getLastEventDate([], filteredMatches));
         }, [allMatches, baseDecks, selectedEvents]);
 
         useEffect(() => {
