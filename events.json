@@ -48,6 +48,10 @@
   { "tid": "liga-2x2-online-s2-e3", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s2-e4", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s2-e5", "league": "online2x2", "format": "2x2" },
+  { "tid": "liga-2x2-online-s2-e6", "league": "online2x2", "format": "2x2" },
+  { "tid": "liga-2x2-online-s2-e7", "league": "online2x2", "format": "2x2" },
+  { "tid": "liga-2x2-online-s3-e01", "league": "online2x2", "format": "2x2" },
+  { "tid": "liga-2x2-online-s3-e02", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e01-1", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e02", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e04", "league": "presencial2x2", "format": "2x2" },
@@ -62,5 +66,11 @@
   { "tid": "liga-2x2-presencial-s2-e5", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s2-e6", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s2-e7", "league": "presencial2x2", "format": "2x2" },
-  { "tid": "liga-2x2-presencial-s2-e8", "league": "presencial2x2", "format": "2x2" }
+  { "tid": "liga-2x2-presencial-s2-e8", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s2-e9", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e01", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e02", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e03", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e4", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e5", "league": "presencial2x2", "format": "2x2" }
 ]

@@ -245,13 +245,42 @@ def write_rows(path: Path, rows: list[dict]) -> None:
         writer.writerows(rows)
 
 
+def resolve_source_path(source: str | Path) -> Path:
+    path = Path(source)
+    if path.exists():
+        return path
+
+    root = Path(__file__).resolve().parent.parent
+    candidates = [
+        path,
+        root / path.name,
+        root / path.stem,
+        root / f"{path.stem}.xlsx",
+        root / f"{path.stem}.csv",
+        root / f"{path.stem}.xlsm",
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            return candidate
+
+    for ext in [".xlsx", ".xlsm", ".csv", ".xls"]:
+        guessed = root / f"{path.name}{ext}"
+        if guessed.exists():
+            return guessed
+        guessed = root / f"{path.stem}{ext}"
+        if guessed.exists():
+            return guessed
+
+    return path
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="Importa planilha manual de duplas 2x2 para Team_map_2x2.csv.")
     parser.add_argument("source", help="Caminho da planilha .xlsx/.csv com evento, dupla, players e decks.")
     parser.add_argument("--output", default=TEAM_MAP_2X2_PATH, help="Arquivo Team_map_2x2.csv de destino.")
     args = parser.parse_args()
 
-    source = Path(args.source)
+    source = resolve_source_path(args.source)
     output = Path(args.output)
     deck_map = load_deck_map_csv()
     player_aliases = load_player_aliases()
