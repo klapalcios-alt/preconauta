@@ -10,6 +10,9 @@
   { "tid": "liga-mesao-online-s2-e4", "league": "online" },
   { "tid": "liga-mesao-online-s2-e5", "league": "online" },
   { "tid": "liga-mesao-online-s2-e6", "league": "online" },
+  { "tid": "liga-mesao-online-s3-e01", "league": "online" },
+  { "tid": "liga-mesao-online-s3-e02", "league": "online" },
+  { "tid": "liga-mesao-online-s3-e03", "league": "online" },
   { "tid": "liga-mesao-presencial-s1-e01", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s1-e02", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s1-e03", "league": "presencial" },
@@ -30,6 +33,11 @@
   { "tid": "liga-mesao-presencial-s2-e9", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s2-e10", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s2-e11", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e01", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e02", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e03", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e04", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e05", "league": "presencial" },
   { "tid": "liga-2x2-online-s1-e01", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s1-e02", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s1-e03", "league": "online2x2", "format": "2x2" },
@@ -40,8 +48,6 @@
   { "tid": "liga-2x2-online-s2-e3", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s2-e4", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s2-e5", "league": "online2x2", "format": "2x2" },
-  { "tid": "liga-2x2-online-s2-e6", "league": "online2x2", "format": "2x2" },
-  { "tid": "liga-2x2-online-s2-e7", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e01-1", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e02", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e04", "league": "presencial2x2", "format": "2x2" },
@@ -56,6 +62,5 @@
   { "tid": "liga-2x2-presencial-s2-e5", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s2-e6", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s2-e7", "league": "presencial2x2", "format": "2x2" },
-  { "tid": "liga-2x2-presencial-s2-e8", "league": "presencial2x2", "format": "2x2" },
-  { "tid": "liga-2x2-presencial-s2-e9", "league": "presencial2x2", "format": "2x2" }
+  { "tid": "liga-2x2-presencial-s2-e8", "league": "presencial2x2", "format": "2x2" }
 ]
