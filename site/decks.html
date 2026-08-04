@@ -908,7 +908,7 @@
         const latestLeagueDate = useMemo(() => getLastEventDate([], allMatches), [allMatches]);
         const banCutoffDate = useMemo(() => {
           if (!latestLeagueDate) return null;
-          const cutoff = new Date(latestLeagueDate.getFullYear(), latestLeagueDate.getMonth(), 1);
+          const cutoff = new Date(latestLeagueDate.getFullYear(), latestLeagueDate.getMonth() + 1, 1);
           return Number.isNaN(cutoff.getTime()) ? null : cutoff;
         }, [latestLeagueDate]);
         const bannedDecks = useMemo(() => {
