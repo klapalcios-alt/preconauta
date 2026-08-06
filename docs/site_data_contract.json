@@ -246,7 +246,12 @@
       ],
       "sum": "sum event_points of kept events"
     },
-    "deck_ban_frontend": "partidas_jogadas >= 24 AND win_rate >= 0.3333333333"
+    "deck_ban_frontend": {
+      "online": "partidas_jogadas >= 12 AND win_rate >= 0.3333333333",
+      "presencial": "partidas_jogadas >= 24 AND win_rate >= 0.3333333333",
+      "online2x2": "partidas_jogadas >= 12 AND win_rate >= 0.4875",
+      "presencial2x2": "partidas_jogadas >= 24 AND win_rate >= 0.4875"
+    }
   },
   "frontend_pages": {
     "site/index.html": "League selector",

@@ -247,9 +247,9 @@ def normalize_lookup_key(value: object) -> str | None:
 
 def ban_rule_for_league(league_type: str | None) -> dict[str, float | int | str]:
     if league_type == "online2x2":
-        return {"min_matches": 12, "min_win_rate": 0.5, "label": "50%"}
+        return {"min_matches": 12, "min_win_rate": 0.4875, "label": "48,75%"}
     if league_type == "presencial2x2":
-        return {"min_matches": 12, "min_win_rate": 2 / 3, "label": "66,6%"}
+        return {"min_matches": 24, "min_win_rate": 0.4875, "label": "48,75%"}
     if league_type == "online":
         return {"min_matches": 12, "min_win_rate": 1 / 3, "label": "33,33%"}
     return {"min_matches": 24, "min_win_rate": 1 / 3, "label": "33,33%"}

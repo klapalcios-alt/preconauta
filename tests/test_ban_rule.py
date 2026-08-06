@@ -6,11 +6,11 @@ from scripts.sync_topdeck import annotate_deck_stats_with_ban_rule, ban_rule_for
 
 
 class BanRuleTests(unittest.TestCase):
-    def test_online2x2_uses_fifty_percent_threshold(self) -> None:
+    def test_online2x2_uses_4875_percent_threshold(self) -> None:
         deck_stats = pd.DataFrame(
             [
-                {"deck_key": "Deck A", "partidas_jogadas": 12, "win_rate": 0.5},
-                {"deck_key": "Deck B", "partidas_jogadas": 12, "win_rate": 0.49},
+                {"deck_key": "Deck A", "partidas_jogadas": 12, "win_rate": 0.4875},
+                {"deck_key": "Deck B", "partidas_jogadas": 12, "win_rate": 0.4874},
                 {"deck_key": "Deck C", "partidas_jogadas": 11, "win_rate": 0.8},
             ]
         )
@@ -21,19 +21,19 @@ class BanRuleTests(unittest.TestCase):
         self.assertFalse(result.loc[result["deck_key"] == "Deck B", "is_banned"].iloc[0])
         self.assertFalse(result.loc[result["deck_key"] == "Deck C", "is_banned"].iloc[0])
 
-    def test_presencial2x2_uses_two_thirds_threshold(self) -> None:
+    def test_presencial2x2_uses_24_games_and_4875_percent_threshold(self) -> None:
         deck_stats = pd.DataFrame(
             [
-                {"deck_key": "Deck A", "partidas_jogadas": 12, "win_rate": 2 / 3},
-                {"deck_key": "Deck B", "partidas_jogadas": 12, "win_rate": 0.66},
-                {"deck_key": "Deck C", "partidas_jogadas": 12, "win_rate": 0.65},
+                {"deck_key": "Deck A", "partidas_jogadas": 24, "win_rate": 0.4875},
+                {"deck_key": "Deck B", "partidas_jogadas": 23, "win_rate": 0.9},
+                {"deck_key": "Deck C", "partidas_jogadas": 24, "win_rate": 0.4874},
             ]
         )
 
         result = annotate_deck_stats_with_ban_rule(deck_stats, "presencial2x2")
 
         self.assertTrue(result.loc[result["deck_key"] == "Deck A", "is_banned"].iloc[0])
-        self.assertTrue(result.loc[result["deck_key"] == "Deck B", "is_banned"].iloc[0])
+        self.assertFalse(result.loc[result["deck_key"] == "Deck B", "is_banned"].iloc[0])
         self.assertFalse(result.loc[result["deck_key"] == "Deck C", "is_banned"].iloc[0])
 
     def test_regular_online_keeps_old_threshold(self) -> None:

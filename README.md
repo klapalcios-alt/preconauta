@@ -116,6 +116,14 @@ Nas ligas 2x2, a regra segue a quantidade de etapas do formato:
 > Observação: Opponent Game Win Rate não existe em Standard Tournament no TopDeck,
 > por isso não é usado.
 
+## Banimento de decks
+Regras de banimento por performance:
+
+- Online: 12+ jogos e 33,33%+ WR.
+- Presencial: 24+ jogos e 33,33%+ WR.
+- Online 2x2: 12+ jogos e 48,75%+ WR.
+- Presencial 2x2: 24+ jogos e 48,75%+ WR.
+
 ## Site
 O site usa os dados por liga:
 

@@ -349,8 +349,10 @@ Por `deck_key`:
 ### 6.10 Deck banido (frontend)
 
 Em `decks.html` e `decks-banidos.html`:
-- `partidas_jogadas >= 24`
-- `win_rate >= 1/3`
+- `online`: `partidas_jogadas >= 12` e `win_rate >= 1/3`
+- `presencial`: `partidas_jogadas >= 24` e `win_rate >= 1/3`
+- `online2x2`: `partidas_jogadas >= 12` e `win_rate >= 0.4875`
+- `presencial2x2`: `partidas_jogadas >= 24` e `win_rate >= 0.4875`
 
 ## 7) Divisao de responsabilidades por pagina
 
@@ -454,7 +456,7 @@ Checklist:
 2. `matches.csv` bate com numero de jogadores por mesa x mesas.
 3. `league_table.csv` nao vazio para ligas com eventos.
 4. Top 3 de players/decks no novo site bate com o site atual.
-5. Lista de banidos bate com regra `24+` e `wr>=33.33%`.
+5. Lista de banidos bate com a regra da liga em `ban_rule_for_league`.
 
 ## 10) Arquivos de apoio
 
