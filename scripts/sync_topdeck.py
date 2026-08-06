@@ -245,6 +245,37 @@ def normalize_lookup_key(value: object) -> str | None:
     return text or None
 
 
+def ban_rule_for_league(league_type: str | None) -> dict[str, float | int | str]:
+    if league_type == "online2x2":
+        return {"min_matches": 12, "min_win_rate": 0.5, "label": "50%"}
+    if league_type == "presencial2x2":
+        return {"min_matches": 12, "min_win_rate": 2 / 3, "label": "66,6%"}
+    if league_type == "online":
+        return {"min_matches": 12, "min_win_rate": 1 / 3, "label": "33,33%"}
+    return {"min_matches": 24, "min_win_rate": 1 / 3, "label": "33,33%"}
+
+
+def annotate_deck_stats_with_ban_rule(
+    deck_stats_df: pd.DataFrame,
+    league_type: str | None = None,
+) -> pd.DataFrame:
+    if deck_stats_df.empty:
+        return deck_stats_df
+
+    out = deck_stats_df.copy()
+    if "is_banned" not in out.columns:
+        out["is_banned"] = False
+    if "ban_rule" not in out.columns:
+        out["ban_rule"] = None
+
+    rule = ban_rule_for_league(league_type)
+    partidas = pd.to_numeric(out.get("partidas_jogadas"), errors="coerce").fillna(0)
+    win_rate = pd.to_numeric(out.get("win_rate"), errors="coerce").fillna(0)
+    out["is_banned"] = (partidas >= int(rule["min_matches"])) & (win_rate >= float(rule["min_win_rate"]))
+    out["ban_rule"] = f"{int(rule['min_matches'])}+ jogos e {rule['label']}+ WR"
+    return out
+
+
 def is_placeholder_deck(value: object) -> bool:
     key = normalize_lookup_key(value)
     return key in {
@@ -1545,7 +1576,7 @@ def expand_two_by_two_scores_to_players(team_scores_df: pd.DataFrame, team_map_d
     return pd.DataFrame(rows).reindex(columns=cols)
 
 
-def compute_deck_stats_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
+def compute_deck_stats_from_matches(matches_df: pd.DataFrame, league_type: str | None = None) -> pd.DataFrame:
     deck_stats_cols = [
         "deck_key",
         "partidas_jogadas",
@@ -1555,6 +1586,8 @@ def compute_deck_stats_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
         "eventos",
         "derrotas",
         "win_rate",
+        "is_banned",
+        "ban_rule",
         "deck_name_pt",
         "deck_name_en",
         "colecao",
@@ -1619,7 +1652,8 @@ def compute_deck_stats_from_matches(matches_df: pd.DataFrame) -> pd.DataFrame:
     deck_stats_df = agg.merge(meta, on="deck_key", how="left").sort_values(
         "partidas_jogadas", ascending=False
     )
-    return deck_stats_df.reindex(columns=deck_stats_cols)
+    deck_stats_df = deck_stats_df.reindex(columns=deck_stats_cols)
+    return annotate_deck_stats_with_ban_rule(deck_stats_df, league_type=league_type)
 
 
 def expand_absences_with_zero_rows(df: pd.DataFrame) -> pd.DataFrame:
@@ -2308,7 +2342,7 @@ def main():
             )
 
             player_df = build_player_matchups(player_matches_df)
-            deck_stats_df = compute_deck_stats_from_matches(player_matches_df)
+            deck_stats_df = compute_deck_stats_from_matches(player_matches_df, league_type=league_type)
 
             team_df.to_csv(os.path.join(out_dir, "standings.csv"), index=False, encoding="utf-8")
             team_df.to_csv(os.path.join(out_dir, "team_standings.csv"), index=False, encoding="utf-8")
@@ -2572,6 +2606,8 @@ def main():
             "eventos",
             "derrotas",
             "win_rate",
+            "is_banned",
+            "ban_rule",
             "deck_name_pt",
             "deck_name_en",
             "colecao",
@@ -2624,6 +2660,7 @@ def main():
                 "partidas_jogadas", ascending=False
             )
             deck_stats_df = deck_stats_df.reindex(columns=deck_stats_cols)
+            deck_stats_df = annotate_deck_stats_with_ban_rule(deck_stats_df, league_type=league_type)
 
         deck_stats_df.to_csv(os.path.join(out_dir, "deck_stats.csv"), index=False, encoding="utf-8")
 
