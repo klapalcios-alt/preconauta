@@ -1,7 +1,7 @@
 deck_key,partidas_jogadas,vitorias,empates,jogadores_unicos,eventos,derrotas,win_rate,is_banned,ban_rule,deck_name_pt,deck_name_en,colecao,deck_url
-Turtle Power!,60,29,6,12,12,25,0.4833333333333333,False,"24+ jogos e 48,75%+ WR",Turtle Power!,Turtle Power!,Teenage Mutant Ninja Turtles,https://moxfield.com/decks/igKb7qATmkmYaX3M7hB4Sg
-Içar Velas,52,19,4,10,12,29,0.3653846153846153,False,"24+ jogos e 48,75%+ WR",Içar Velas,Ahoy Mateys,The Lost Caverns of Ixalan,https://moxfield.com/decks/2wB6WsbRwU-ZdNlWHu6VKg
-Veloci-E-Rápido,46,21,8,7,12,17,0.4565217391304347,False,"24+ jogos e 48,75%+ WR",Veloci-E-Rápido,Veloci-Ramp-Tor,The Lost Caverns of Ixalan,https://moxfield.com/decks/KcPWaLquLkmIOy3XsFHTqQ
+Turtle Power!,60,29,6,12,12,25,0.48333333333333334,False,"24+ jogos e 48,75%+ WR",Turtle Power!,Turtle Power!,Teenage Mutant Ninja Turtles,https://moxfield.com/decks/igKb7qATmkmYaX3M7hB4Sg
+Içar Velas,52,19,4,10,12,29,0.36538461538461536,False,"24+ jogos e 48,75%+ WR",Içar Velas,Ahoy Mateys,The Lost Caverns of Ixalan,https://moxfield.com/decks/2wB6WsbRwU-ZdNlWHu6VKg
+Veloci-E-Rápido,46,21,8,7,12,17,0.45652173913043476,False,"24+ jogos e 48,75%+ WR",Veloci-E-Rápido,Veloci-Ramp-Tor,The Lost Caverns of Ixalan,https://moxfield.com/decks/KcPWaLquLkmIOy3XsFHTqQ
 Counter Blitz,46,24,8,10,12,14,0.5217391304347826,True,"24+ jogos e 48,75%+ WR",Counter Blitz,Counter Blitz,Final Fantasy,https://moxfield.com/decks/sDazpxFOb0S9IAdQSA_7lg
 Silverquill Influence,32,13,5,8,9,14,0.40625,False,"24+ jogos e 48,75%+ WR",Silverquill Influence,Silverquill Influence,Secrets of Strixhaven,https://moxfield.com/decks/g9rcUGSiR02aO2Ozof0rNA
 Scions & Spellcraft,30,15,5,8,8,10,0.5,True,"24+ jogos e 48,75%+ WR",Scions & Spellcraft,Scions & Spellcraft,Final Fantasy,https://moxfield.com/decks/r_IFt9Gc3UqaULfoAEjVvg
@@ -13,29 +13,29 @@ Jump Scare!,24,16,4,2,8,4,0.6666666666666666,True,"24+ jogos e 48,75%+ WR",Jump 
 Prismari Artistry,23,12,2,7,6,9,0.5217391304347826,False,"24+ jogos e 48,75%+ WR",Prismari Artistry,Prismari Artistry,Secrets of Strixhaven,https://moxfield.com/decks/Fh99bHrQZ0KLu34C2JXu5w
 Endless Punishment,23,13,0,5,8,10,0.5652173913043478,False,"24+ jogos e 48,75%+ WR",Endless Punishment,Endless Punishment,Duskmourn: House of Horror,https://moxfield.com/decks/eg5J71BzAU-yctY6lRn12Q
 Quandrix Unlimited,22,7,3,6,6,12,0.3181818181818182,False,"24+ jogos e 48,75%+ WR",Quandrix Unlimited,Quandrix Unlimited,Secrets of Strixhaven,https://moxfield.com/decks/ht3IDMDxnU2VOMi7MAhtFg
-Wakanda Forever,17,5,5,6,4,7,0.2941176470588235,False,"24+ jogos e 48,75%+ WR",Wakanda Forever,Wakanda Forever,Marvel Super Heroes,https://moxfield.com/decks/sWfwgd1bQUetBcj5gFVaYQ
+Wakanda Forever,17,5,5,6,4,7,0.29411764705882354,False,"24+ jogos e 48,75%+ WR",Wakanda Forever,Wakanda Forever,Marvel Super Heroes,https://moxfield.com/decks/sWfwgd1bQUetBcj5gFVaYQ
 World Shaper,16,8,3,5,5,5,0.5,False,"24+ jogos e 48,75%+ WR",World Shaper,World Shaper,Edge of Eternities,https://moxfield.com/decks/n04yWsMGvUCmMQ8ImxJ_0A
 Maelstrom Arcano,15,8,3,3,5,4,0.5333333333333333,False,"24+ jogos e 48,75%+ WR",Maelstrom Arcano,Arcane Maelstrom,Commander 2020 - Ikoria,https://moxfield.com/decks/9dBPnvVgpE6CUYp-3EHlAw
 Jeskai Striker,15,9,1,4,5,5,0.6,False,"24+ jogos e 48,75%+ WR",Jeskai Striker,Jeskai Striker,Tarkir Dragonstorm,https://moxfield.com/decks/GqSQ24NIJkq-144dkab-HQ
 Squirreled Away,15,7,4,5,4,4,0.4666666666666667,False,"24+ jogos e 48,75%+ WR",Squirreled Away,Squirreled Away,Bloomburrow,https://moxfield.com/decks/4xEJiagwvEGelJy9ojLtZA
-Ameaça Mutante,14,6,0,3,4,8,0.4285714285714285,False,"24+ jogos e 48,75%+ WR",Ameaça Mutante,Mutant Menace,Fallout,https://moxfield.com/decks/948Bdak9Pki93eeh-lUUVA
+Ameaça Mutante,14,6,0,3,4,8,0.42857142857142855,False,"24+ jogos e 48,75%+ WR",Ameaça Mutante,Mutant Menace,Fallout,https://moxfield.com/decks/948Bdak9Pki93eeh-lUUVA
 Counter Inteligence,14,10,0,3,5,4,0.7142857142857143,False,"24+ jogos e 48,75%+ WR",Counter Inteligence,Counter Inteligence,Edge of Eternities,https://moxfield.com/decks/3_8jtm_lzESK6BdFtnM3iA
 Creative Energy,14,4,1,5,6,9,0.2857142857142857,False,"24+ jogos e 48,75%+ WR",Creative Energy,Creative Energy,Modern Horizons 3,https://moxfield.com/decks/V896XG46-kuKTCBXImt5Cg
-Cavaleiros de Rohan,13,3,0,5,5,10,0.2307692307692307,False,"24+ jogos e 48,75%+ WR",Cavaleiros de Rohan,Riders of Rohan,The Lord Of The Rings: Tales Of Middle-Earth,https://moxfield.com/decks/hi-cA6GBykKPYJ9xW0g_KQ
+Cavaleiros de Rohan,13,3,0,5,5,10,0.23076923076923078,False,"24+ jogos e 48,75%+ WR",Cavaleiros de Rohan,Riders of Rohan,The Lord Of The Rings: Tales Of Middle-Earth,https://moxfield.com/decks/hi-cA6GBykKPYJ9xW0g_KQ
 Sultai Arisen,12,5,0,3,4,7,0.4166666666666667,False,"24+ jogos e 48,75%+ WR",Sultai Arisen,Sultai Arisen,Tarkir Dragonstorm,https://moxfield.com/decks/puUUlzKNckGa-UnaRQSbxw
-Sabedoria Eterna,11,4,4,1,4,3,0.3636363636363636,False,"24+ jogos e 48,75%+ WR",Sabedoria Eterna,Timeless Wisdom,Commander 2020 - Ikoria,https://moxfield.com/decks/mlElAIMD4EazCpFh8osZaw
-Quandrix Quântica,11,5,3,2,4,3,0.4545454545454545,False,"24+ jogos e 48,75%+ WR",Quandrix Quântica,Quantum Quandrix,Commander 2021 - Strixhaven,https://moxfield.com/decks/PZE0uF5pckKFccZKFvp1mg
-Avengers Assemble,11,5,3,4,2,3,0.4545454545454545,False,"24+ jogos e 48,75%+ WR",Avengers Assemble,Avengers Assemble,Marvel Super Heroes,https://moxfield.com/decks/dXgR2kmN2Uyovl7B9qHcPg
+Sabedoria Eterna,11,4,4,1,4,3,0.36363636363636365,False,"24+ jogos e 48,75%+ WR",Sabedoria Eterna,Timeless Wisdom,Commander 2020 - Ikoria,https://moxfield.com/decks/mlElAIMD4EazCpFh8osZaw
+Quandrix Quântica,11,5,3,2,4,3,0.45454545454545453,False,"24+ jogos e 48,75%+ WR",Quandrix Quântica,Quantum Quandrix,Commander 2021 - Strixhaven,https://moxfield.com/decks/PZE0uF5pckKFccZKFvp1mg
+Avengers Assemble,11,5,3,4,2,3,0.45454545454545453,False,"24+ jogos e 48,75%+ WR",Avengers Assemble,Avengers Assemble,Marvel Super Heroes,https://moxfield.com/decks/dXgR2kmN2Uyovl7B9qHcPg
 Exploradores das Profundezas,9,0,3,4,3,6,0.0,False,"24+ jogos e 48,75%+ WR",Exploradores das Profundezas,Explorers of the Deep,The Lost Caverns of Ixalan,https://moxfield.com/decks/SvrXYfEIn0q5EprNPf0mqQ
 Devorarrrdores de Mentes,9,3,1,3,3,5,0.3333333333333333,False,"24+ jogos e 48,75%+ WR",Devorarrrdores de Mentes,Mind Flayarrrs,Commander Legends: Battle for Baldur's Gate,https://moxfield.com/decks/fmt6yaMreU2LXsLELVt7xw
 Blight Curse,8,2,3,2,3,3,0.25,False,"24+ jogos e 48,75%+ WR",Blight Curse,Blight Curse,Lorwyn Eclipsed,https://moxfield.com/decks/dDoe4mrTwEWH0sP2H7WH4A
 Angels: They're Just Like Us but Cooler and With Wings,8,3,0,2,3,5,0.375,False,"24+ jogos e 48,75%+ WR",Angels: They're Just Like Us but Cooler and With Wings,Angels: They're Just Like Us but Cooler and With Wings,Secret Lair Commander Deck,https://moxfield.com/decks/Q3Wn5qhG0UWFaGIYEpmRjQ
 Abzan Armor,6,3,1,2,2,2,0.5,False,"24+ jogos e 48,75%+ WR",Abzan Armor,Abzan Armor,Tarkir Dragonstorm,https://moxfield.com/decks/hdTiRiY5IEyCJFL2BR8cyg
 Family Matters,6,4,0,2,2,2,0.6666666666666666,False,"24+ jogos e 48,75%+ WR",Family Matters,Family Matters,Bloomburrow,https://moxfield.com/decks/c6jPOurIekil4dXtwVWq8w
-Death Toll,6,1,2,2,2,3,0.1666666666666666,False,"24+ jogos e 48,75%+ WR",Death Toll,Death Toll,Duskmourn: House of Horror,https://moxfield.com/decks/IYNgcuHZQk2WJeZMJw0t7Q
+Death Toll,6,1,2,2,2,3,0.16666666666666666,False,"24+ jogos e 48,75%+ WR",Death Toll,Death Toll,Duskmourn: House of Horror,https://moxfield.com/decks/IYNgcuHZQk2WJeZMJw0t7Q
 Witherbloom Pestilence,6,3,2,2,1,1,0.5,False,"24+ jogos e 48,75%+ WR",Witherbloom Pestilence,Witherbloom Pestilence,Secrets of Strixhaven,https://moxfield.com/decks/AfG94iTx-UeG0L1wvTfSug
 Revival Trance,6,5,0,2,1,1,0.8333333333333334,False,"24+ jogos e 48,75%+ WR",Revival Trance,Revival Trance,Final Fantasy,https://moxfield.com/decks/pAPGhXsBz0OcmaT0sMK1_g
-Limit Break,6,1,2,1,2,3,0.1666666666666666,False,"24+ jogos e 48,75%+ WR",Limit Break,Limit Break,Final Fantasy,https://moxfield.com/decks/pTUR6p0yNkOoxDNqo8TMEw
+Limit Break,6,1,2,1,2,3,0.16666666666666666,False,"24+ jogos e 48,75%+ WR",Limit Break,Limit Break,Final Fantasy,https://moxfield.com/decks/pTUR6p0yNkOoxDNqo8TMEw
 Forças do Império,6,3,1,1,2,2,0.5,False,"24+ jogos e 48,75%+ WR",Forças do Império,Forces of the Imperium,Warhammer 40.000,https://moxfield.com/decks/vBgNOCq5CUWU3B4c5m8gXA
 Animated Army,5,2,0,2,2,3,0.4,False,"24+ jogos e 48,75%+ WR",Animated Army,Animated Army,Bloomburrow,https://moxfield.com/decks/IZBQnOST_kWlQtqytb75rg
 Dance of the Elements,5,2,0,2,2,3,0.4,False,"24+ jogos e 48,75%+ WR",Dance of the Elements,Dance of the Elements,Lorwyn Eclipsed,https://moxfield.com/decks/Z9GXwZyiKkOfR3O5m1rEkw

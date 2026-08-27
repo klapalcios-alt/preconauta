@@ -1,14 +1,14 @@
 deck_key,partidas_jogadas,vitorias,empates,jogadores_unicos,eventos,derrotas,win_rate,is_banned,ban_rule,deck_name_pt,deck_name_en,colecao,deck_url
-Counter Blitz,53,18,16,11,11,19,0.3396226415094339,False,"12+ jogos e 48,75%+ WR",Counter Blitz,Counter Blitz,Final Fantasy,https://moxfield.com/decks/sDazpxFOb0S9IAdQSA_7lg
+Counter Blitz,53,18,16,11,11,19,0.33962264150943394,False,"12+ jogos e 48,75%+ WR",Counter Blitz,Counter Blitz,Final Fantasy,https://moxfield.com/decks/sDazpxFOb0S9IAdQSA_7lg
 Içar Velas,52,17,12,6,10,23,0.3269230769230769,False,"12+ jogos e 48,75%+ WR",Içar Velas,Ahoy Mateys,The Lost Caverns of Ixalan,https://moxfield.com/decks/2wB6WsbRwU-ZdNlWHu6VKg
 Festa dos Planeswalker,44,23,11,7,9,10,0.5227272727272727,True,"12+ jogos e 48,75%+ WR",Festa dos Planeswalker,Planeswalker Party,Commander Masters,https://moxfield.com/decks/BYtodI0bP02r4z6UCkNkOg
 Endless Punishment,44,21,7,10,10,16,0.4772727272727273,False,"12+ jogos e 48,75%+ WR",Endless Punishment,Endless Punishment,Duskmourn: House of Horror,https://moxfield.com/decks/eg5J71BzAU-yctY6lRn12Q
 Scions & Spellcraft,44,21,12,5,9,11,0.4772727272727273,False,"12+ jogos e 48,75%+ WR",Scions & Spellcraft,Scions & Spellcraft,Final Fantasy,https://moxfield.com/decks/r_IFt9Gc3UqaULfoAEjVvg
-Temur Roar,38,15,7,8,9,16,0.3947368421052631,False,"12+ jogos e 48,75%+ WR",Temur Roar,Temur Roar,Tarkir Dragonstorm,https://moxfield.com/decks/sao-2xrGqUCIfv46edPgmw
+Temur Roar,38,15,7,8,9,16,0.39473684210526316,False,"12+ jogos e 48,75%+ WR",Temur Roar,Temur Roar,Tarkir Dragonstorm,https://moxfield.com/decks/sao-2xrGqUCIfv46edPgmw
 Turtle Power!,32,11,7,7,6,14,0.34375,False,"12+ jogos e 48,75%+ WR",Turtle Power!,Turtle Power!,Teenage Mutant Ninja Turtles,https://moxfield.com/decks/igKb7qATmkmYaX3M7hB4Sg
 Lorehold Spirit,29,14,2,6,6,13,0.4827586206896552,False,"12+ jogos e 48,75%+ WR",Lorehold Spirit,Lorehold Spirit,Secrets of Strixhaven,https://moxfield.com/decks/u6bBAgiZn0aXxjms4_-J9A
 Dance of the Elements,27,8,6,8,6,13,0.2962962962962963,False,"12+ jogos e 48,75%+ WR",Dance of the Elements,Dance of the Elements,Lorwyn Eclipsed,https://moxfield.com/decks/Z9GXwZyiKkOfR3O5m1rEkw
-Jeskai Striker,26,10,6,6,7,10,0.3846153846153846,False,"12+ jogos e 48,75%+ WR",Jeskai Striker,Jeskai Striker,Tarkir Dragonstorm,https://moxfield.com/decks/GqSQ24NIJkq-144dkab-HQ
+Jeskai Striker,26,10,6,6,7,10,0.38461538461538464,False,"12+ jogos e 48,75%+ WR",Jeskai Striker,Jeskai Striker,Tarkir Dragonstorm,https://moxfield.com/decks/GqSQ24NIJkq-144dkab-HQ
 Virtude e Valor,25,10,4,6,7,11,0.4,False,"12+ jogos e 48,75%+ WR",Virtude e Valor,Virtue and Valor,Wilds of Eldraine,https://moxfield.com/decks/Oo_99oH5K0ifS25Wzu5qLw
 Silverquill Influence,24,8,5,6,5,11,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",Silverquill Influence,Silverquill Influence,Secrets of Strixhaven,https://moxfield.com/decks/g9rcUGSiR02aO2Ozof0rNA
 Animated Army,24,10,4,4,8,10,0.4166666666666667,False,"12+ jogos e 48,75%+ WR",Animated Army,Animated Army,Bloomburrow,https://moxfield.com/decks/IZBQnOST_kWlQtqytb75rg
@@ -16,7 +16,7 @@ Animated Army,24,10,4,4,8,10,0.4166666666666667,False,"12+ jogos e 48,75%+ WR",A
 Prismari Artistry,20,8,1,6,5,11,0.4,False,"12+ jogos e 48,75%+ WR",Prismari Artistry,Prismari Artistry,Secrets of Strixhaven,https://moxfield.com/decks/Fh99bHrQZ0KLu34C2JXu5w
 Squirreled Away,17,9,4,5,6,4,0.5294117647058824,True,"12+ jogos e 48,75%+ WR",Squirreled Away,Squirreled Away,Bloomburrow,https://moxfield.com/decks/4xEJiagwvEGelJy9ojLtZA
 Blight Curse,15,10,3,5,4,2,0.6666666666666666,True,"12+ jogos e 48,75%+ WR",Blight Curse,Blight Curse,Lorwyn Eclipsed,https://moxfield.com/decks/dDoe4mrTwEWH0sP2H7WH4A
-Doom Prevails,14,6,1,4,3,7,0.4285714285714285,False,"12+ jogos e 48,75%+ WR",Doom Prevails,Doom Prevails,Marvel Super Heroes,https://moxfield.com/decks/Jg16IgdT80G3KgLz0vI23g
+Doom Prevails,14,6,1,4,3,7,0.42857142857142855,False,"12+ jogos e 48,75%+ WR",Doom Prevails,Doom Prevails,Marvel Super Heroes,https://moxfield.com/decks/Jg16IgdT80G3KgLz0vI23g
 Quandrix Unlimited,12,8,0,3,3,4,0.6666666666666666,True,"12+ jogos e 48,75%+ WR",Quandrix Unlimited,Quandrix Unlimited,Secrets of Strixhaven,https://moxfield.com/decks/ht3IDMDxnU2VOMi7MAhtFg
 Creative Energy,9,3,1,3,3,5,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",Creative Energy,Creative Energy,Modern Horizons 3,https://moxfield.com/decks/V896XG46-kuKTCBXImt5Cg
 Tricky Terrain,9,0,6,2,3,3,0.0,False,"12+ jogos e 48,75%+ WR",Tricky Terrain,Tricky Terrain,Modern Horizons 3,https://moxfield.com/decks/oZAUJUI4OESC2r8Yz9hhRw
@@ -25,11 +25,11 @@ Saída do Exílio,6,2,2,1,2,2,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",
 Timey-Wimey,6,2,1,2,2,3,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",Timey-Wimey,Timey-Wimey,Doctor Who,https://moxfield.com/decks/weR7hsL3Vk-I2qTNGqfK2w
 Veloci-E-Rápido,6,2,2,1,2,2,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",Veloci-E-Rápido,Veloci-Ramp-Tor,The Lost Caverns of Ixalan,https://moxfield.com/decks/KcPWaLquLkmIOy3XsFHTqQ
 Masters of Evil,6,4,1,2,2,1,0.6666666666666666,False,"12+ jogos e 48,75%+ WR",Masters of Evil,Masters of Evil,Doctor Who,https://moxfield.com/decks/9i25pXMDhES76C-1-gBZKA
-Limit Break,6,1,2,2,2,3,0.1666666666666666,False,"12+ jogos e 48,75%+ WR",Limit Break,Limit Break,Final Fantasy,https://moxfield.com/decks/pTUR6p0yNkOoxDNqo8TMEw
+Limit Break,6,1,2,2,2,3,0.16666666666666666,False,"12+ jogos e 48,75%+ WR",Limit Break,Limit Break,Final Fantasy,https://moxfield.com/decks/pTUR6p0yNkOoxDNqo8TMEw
 Influência Corruptora,6,3,1,1,2,2,0.5,False,"12+ jogos e 48,75%+ WR",Influência Corruptora,Corrupting Influence,Phyrexia: All Will Be One,https://moxfield.com/decks/wRdT-auSDE6XcMJPM0aHDA
 Domínio das Fadinas,6,4,0,1,2,2,0.6666666666666666,False,"12+ jogos e 48,75%+ WR",Domínio das Fadinas,Fae Dominion,Wilds of Eldraine,https://moxfield.com/decks/ErDyBjAnKE6l5TqX6wMxdg
 Abzan Armor,6,2,1,1,2,3,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",Abzan Armor,Abzan Armor,Tarkir Dragonstorm,https://moxfield.com/decks/hdTiRiY5IEyCJFL2BR8cyg
-Enxame Fractius,6,1,0,1,2,5,0.1666666666666666,False,"12+ jogos e 48,75%+ WR",Enxame Fractius,Sliver Swarm,Commander Masters,https://moxfield.com/decks/dnY2YPlJtkalYCkLZ9Q0YQ
+Enxame Fractius,6,1,0,1,2,5,0.16666666666666666,False,"12+ jogos e 48,75%+ WR",Enxame Fractius,Sliver Swarm,Commander Masters,https://moxfield.com/decks/dnY2YPlJtkalYCkLZ9Q0YQ
 Exploradores das Profundezas,6,3,1,2,2,2,0.5,False,"12+ jogos e 48,75%+ WR",Exploradores das Profundezas,Explorers of the Deep,The Lost Caverns of Ixalan,https://moxfield.com/decks/SvrXYfEIn0q5EprNPf0mqQ
 World Shaper,6,2,2,1,2,2,0.3333333333333333,False,"12+ jogos e 48,75%+ WR",World Shaper,World Shaper,Edge of Eternities,https://moxfield.com/decks/n04yWsMGvUCmMQ8ImxJ_0A
 Wakanda Forever,5,2,0,2,2,3,0.4,False,"12+ jogos e 48,75%+ WR",Wakanda Forever,Wakanda Forever,Marvel Super Heroes,https://moxfield.com/decks/sWfwgd1bQUetBcj5gFVaYQ
