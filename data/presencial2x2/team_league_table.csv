@@ -1,18 +1,20 @@
 team_name,team_key,league_points,eventos
-Metusa & Rudzzt,metusa & rudzzt,27,17
-Jorel & Martin,jorel & martin,25,13
-Melk & Sônia,melk & sonia,23,14
+Metusa & Rudzzt,metusa & rudzzt,28,17
+Jorel & Martin,jorel & martin,27,14
+Melk & Sônia,melk & sonia,27,14
 Arthur Castanhari & Murilo Oyafuso,arthur castanhari & murilo oyafuso,16,8
-André & Matheus,andre & matheus,8,6
+Nobru & Tarik,nobru & tarik,11,8
+André & Matheus,andre & matheus,10,7
+Arthur Castanhari & Samy,arthur castanhari & samy,7,4
 Banshee & Jorel,banshee & jorel,7,4
-Nobru & Tarik,nobru & tarik,6,6
+Oscar & Vini,oscar & vini,6,5
+Nathan & Rogério,nathan & rogerio,6,4
 Metusa & Nobru,metusa & nobru,6,2
+Chaca & Susan,chaca & susan,5,4
 Leonardo & Theo,leonardo & theo,5,4
-Arthur Castanhari & Samy,arthur castanhari & samy,5,3
-Oscar & Vini,oscar & vini,4,4
 Banshee & Martin,banshee & martin,4,2
 Carlos Kit & Gustavo Dias,carlos kit & gustavo dias,4,2
-Chaca & Susan,chaca & susan,3,3
+Denilson & Sônia,denilson & sonia,4,2
 André & Zangalli,andre & zangalli,3,2
 Beck & Matheus,beck & matheus,3,2
 Johann & Matheus,johann & matheus,3,2
@@ -22,7 +24,7 @@ Bauer & Langa,bauer & langa,3,1
 Vina & Zangalli,vina & zangalli,3,1
 Beatriz & Rafael,beatriz & rafael,2,2
 Matheus & Romano,matheus & romano,2,2
-Nathan & Rogério,nathan & rogerio,2,2
+Oscar & Vinicius,oscar & vinicius,2,2
 Anthony & Oscar,anthony & oscar,2,1
 Banshee & Luciano Anselmo,banshee & luciano anselmo,2,1
 Banshee & Ruanito,banshee & ruanito,2,1
@@ -50,19 +52,23 @@ Aleksander & Luisa,aleksander & luisa,1,1
 Andre Romano & Matheus,andre romano & matheus,1,1
 André & Theo,andre & theo,1,1
 André Romano & Beck,andre romano & beck,1,1
+Arthur Castanhari & Banshee,arthur castanhari & banshee,1,1
 Arthur Castanhari & Sami,arthur castanhari & sami,1,1
 Augusto & Gabriel,augusto & gabriel,1,1
 Banshee & Gabi,banshee & gabi,1,1
 Baron & Dare,baron & dare,1,1
 Bauer & Kennao,bauer & kennao,1,1
+Bea & Rafa,bea & rafa,1,1
 Beatriz & Rafael Cruz,beatriz & rafael cruz,1,1
 Beck & Gus,beck & gus,1,1
 Beck & Kit,beck & kit,1,1
+Beck & Metusa,beck & metusa,1,1
 Beck & Nathan,beck & nathan,1,1
 Beck & Rogério,beck & rogerio,1,1
 Berka & Du,berka & du,1,1
 Berka & Nobru,berka & nobru,1,1
 Chueiry & Rogério Coelho,chueiry & rogerio coelho,1,1
+Chueiry & Zanga,chueiry & zanga,1,1
 Clausius & Zangalli,clausius & zangalli,1,1
 Coelho & Nathan,coelho & nathan,1,1
 Eduardo & Luís Zangalli,eduardo & luis zangalli,1,1
@@ -71,6 +77,7 @@ Ewerson & Gabriel,ewerson & gabriel,1,1
 Fabi & João Marmentini,fabi & joao marmentini,1,1
 Freire & Pudeulko,freire & pudeulko,1,1
 Guga & Nobru,guga & nobru,1,1
+Gustavo & Martin,gustavo & martin,1,1
 Gustavo Dias & Luciano,gustavo dias & luciano,1,1
 Hermann & João,hermann & joao,1,1
 João Marcelo & Luiz Freiberger,joao marcelo & luiz freiberger,1,1
@@ -80,11 +87,13 @@ Luiz Freiberger & Matheus Herman,luiz freiberger & matheus herman,1,1
 Luiz Henrique & Pietro,luiz henrique & pietro,1,1
 Manfrinato & Melissa,manfrinato & melissa,1,1
 Matheus & Murilo,matheus & murilo,1,1
+Matheus & Nicolas,matheus & nicolas,1,1
+Matheus & Theo,matheus & theo,1,1
 Matheus Diogo & Pedro Diego,matheus diogo & pedro diego,1,1
 Melk & Nobru,melk & nobru,1,1
+Metuda & Rudzzt,metuda & rudzzt,1,1
 Nath & Zubk,nath & zubk,1,1
 Nicolas & Nobru,nicolas & nobru,1,1
-Oscar & Vinicius,oscar & vinicius,1,1
 Oscar & Zangalli,oscar & zangalli,1,1
 Susan & Vinicius,susan & vinicius,1,1
 marcus vinicius werneck esteves & Rafaela Wernerck,marcus vinicius werneck esteves & rafaela wernerck,1,1
