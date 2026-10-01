@@ -15,6 +15,8 @@
   { "tid": "liga-mesao-online-s3-e03", "league": "online" },
   { "tid": "liga-mesao-online-s3-e04", "league": "online" },
   { "tid": "liga-mesao-online-s3-e05", "league": "online" },
+  { "tid": "liga-mesao-online-s3-e06", "league": "online" },
+  { "tid": "liga-mesao-online-s3-e07", "league": "online" },
   { "tid": "liga-mesao-presencial-s1-e01", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s1-e02", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s1-e03", "league": "presencial" },
@@ -43,6 +45,9 @@
   { "tid": "liga-mesao-presencial-s3-e06", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s3-e07", "league": "presencial" },
   { "tid": "liga-mesao-presencial-s3-e08", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e09", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e10", "league": "presencial" },
+  { "tid": "liga-mesao-presencial-s3-e11", "league": "presencial" },
   { "tid": "liga-2x2-online-s1-e01", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s1-e02", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s1-e03", "league": "online2x2", "format": "2x2" },
@@ -59,6 +64,7 @@
   { "tid": "liga-2x2-online-s3-e02", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s3-e03", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-online-s3-e04", "league": "online2x2", "format": "2x2" },
+  { "tid": "liga-2x2-online-s3-e05", "league": "online2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e01-1", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e02", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s1-e04", "league": "presencial2x2", "format": "2x2" },
@@ -81,5 +87,8 @@
   { "tid": "liga-2x2-presencial-s3-e4", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s3-e5", "league": "presencial2x2", "format": "2x2" },
   { "tid": "liga-2x2-presencial-s3-e6-2", "league": "presencial2x2", "format": "2x2" },
-  { "tid": "liga-2x2-presencial-s3-e7", "league": "presencial2x2", "format": "2x2" }
+  { "tid": "liga-2x2-presencial-s3-e7", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e8", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e9", "league": "presencial2x2", "format": "2x2" },
+  { "tid": "liga-2x2-presencial-s3-e10", "league": "presencial2x2", "format": "2x2" }
 ]

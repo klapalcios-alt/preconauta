@@ -1,38 +1,40 @@
 player_name,league_points,eventos,deck_principal
-Jorel,32,18,Turtle Power!
-Metusa,31,21,Jump Scare!
-Martin,31,17,Lorehold Spirit
-Rudzzt,29,18,Jump Scare!
-Melk,29,16,Counter Inteligence
-Sônia,27,16,Veloci-E-Rápido
-Arthur Castanhari,23,14,Turtle Power!
-Matheus,21,18,Domínio das Fadinas
-Banshee,21,12,Prismari Artistry
-Nobru,20,15,Içar Velas
+Metusa,39,24,Jump Scare!
+Jorel,38,21,Turtle Power!
+Rudzzt,37,21,Jump Scare!
+Martin,35,19,Lorehold Spirit
+Sônia,33,18,Veloci-E-Rápido
+Melk,31,16,Counter Inteligence
+Matheus,25,19,Domínio das Fadinas
+Nobru,25,18,Içar Velas
+Arthur Castanhari,25,14,Turtle Power!
+Banshee,25,14,Prismari Artistry
+Zangalli,22,12,Endless Punishment
 Murilo Oyafuso,18,9,Silverquill Influence
-Zangalli,16,9,Endless Punishment
+Oscar,17,13,Temur Roar
+Tarik,16,11,Ameaça Mutante
+Beck,15,12,Içar Velas
 André,13,10,Quandrix Unlimited
-Oscar,13,10,Temur Roar
-Tarik,11,8,Ameaça Mutante
-Beck,10,9,Içar Velas
-Nathan,10,7,Içar Velas
-Gustavo Dias,9,5,Temur Roar
+Nathan,11,8,World Shaper
+Gustavo Dias,10,6,Temur Roar
+Chueiry,9,6,Exploradores das Profundezas
 Theo,7,6,Turtle Power!
+Vini,7,6,Veloci-E-Rápido
 Samy,7,4,Domínio das Fadinas
 Langa,7,3,Içar Velas
 Susan,6,5,Counter Inteligence
-Vini,6,5,Veloci-E-Rápido
+Denilson,6,4,Prismari Artistry
 Luciano,6,4,Limit Break
 Rogério,6,4,Counter Blitz
 Chaca,5,4,Creative Energy
 Leonardo,5,4,Avengers Assemble
-Chueiry,4,3,Festa dos Planeswalker
+Beatriz,4,4,Devorarrrdores de Mentes
 Bauer,4,2,Içar Velas
 Carlos Kit,4,2,Angels: They're Just Like Us but Cooler and With Wings
-Denilson,4,2,Prismari Artistry
 Manfrinato,4,2,Comida e Sociedade
-Beatriz,3,3,Devorarrrdores de Mentes
+Rogerio,3,3,Doom Prevails
 Vinicius,3,3,Silverquill Influence
+Andre Romano,3,2,
 Guga,3,2,Mardu Surge
 Johann,3,2,Dinastias Necron
 Lucas,3,2,Exploradores das Profundezas
@@ -40,10 +42,14 @@ marcus vinicius werneck esteves,3,2,Endless Punishment
 Vina,3,1,Scions & Spellcraft
 Berka,2,2,Death Toll
 Gabriel,2,2,Blight Curse
+Gus,2,2,Içar Velas
+João Vitor Torres,2,2,
 Kit,2,2,Angels: They're Just Like Us but Cooler and With Wings
 Luiz Freiberger,2,2,Dance of the Elements
+Matheus Diogo,2,2,Cavaleiros de Rohan
 Nicolas,2,2,Sultai Arisen
 Rafael,2,2,Family Matters
+Rafael Cruz,2,2,
 Romano,2,2,Quandrix Unlimited
 Anthony,2,1,Exploradores das Profundezas
 Carlos,2,1,Virtude e Valor
@@ -70,7 +76,6 @@ Tony,2,1,Domínio das Fadinas
 Vinicius Chaca,2,1,
 Zangalli pai,2,1,Veloci-E-Rápido
 Aleksander,1,1,
-Andre Romano,1,1,
 André Romano,1,1,
 Augusto,1,1,Counter Inteligence
 Baron,1,1,Virtude e Valor
@@ -86,7 +91,6 @@ Fabi,1,1,Virtude e Valor
 Freire,1,1,
 Gabi,1,1,Squirreled Away
 Gabriel Arents,1,1,Animated Army
-Gus,1,1,Içar Velas
 Gustavo,1,1,Avengers Assemble
 Hermann,1,1,
 João,1,1,
@@ -97,19 +101,18 @@ Luisa,1,1,
 Luiz,1,1,Silverquill Influence
 Luiz Henrique,1,1,Temur Roar
 Luís Zangalli,1,1,
-Matheus Diogo,1,1,
 Matheus Herman,1,1,Cavaleiros de Rohan
 Melissa,1,1,Cavaleiros de Rohan
 Murilo,1,1,Scions & Spellcraft
 Nath,1,1,Perigo Mortal
 Pedro Diego,1,1,
+Pedro Diogo,1,1,Ameaça Mutante
 Pietro,1,1,Cavaleiros de Rohan
 Pudeulko,1,1,
 Rafa,1,1,Turtle Power!
-Rafael Cruz,1,1,
 Rafaela Wernerck,1,1,
-Rogerio,1,1,Counter Inteligence
 Rogério Coelho,1,1,The Fantastic Four
 Sami,1,1,
 Zanga,1,1,
 Zubk,1,1,Devorarrrdores de Mentes
+rogerio,1,1,Jeskai Striker

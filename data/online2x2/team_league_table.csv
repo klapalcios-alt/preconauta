@@ -1,20 +1,21 @@
 team_name,team_key,league_points,eventos
-Arthur Sartori & Marcos Sartori,arthur sartori & marcos sartori,20,12
-Jorel & Martin,jorel & martin,16,11
-Bells & Greowtty,bells & greowtty,13,9
+Arthur Sartori & Marcos Sartori,arthur sartori & marcos sartori,21,13
+Jorel & Martin,jorel & martin,18,12
+Bells & Greowtty,bells & greowtty,14,9
 João Marmentini & Vande,joao marmentini & vande,13,8
 Boone & Reva,boone & reva,10,9
 Juliano & Mateus,juliano & mateus,10,8
 Bauer & Langa,bauer & langa,10,6
+Reva & Vande,reva & vande,9,5
 Carlos & Cássio,carlos & cassio,8,5
-Reva & Vande,reva & vande,6,4
+Felipe & Pinho,felipe & pinho,7,5
 Chueiry & Vicente,chueiry & vicente,5,4
-Carlos & Errejota,carlos & errejota,5,3
 Guilherme & Vicente,guilherme & vicente,5,3
+Guilherme Oliveira & Vicente Daye,guilherme oliveira & vicente daye,5,3
 Samuel & Thiago,samuel & thiago,5,2
 Borini & Vicente,borini & vicente,4,4
-Felipe & Pinho,felipe & pinho,4,4
-Guilherme Oliveira & Vicente Daye,guilherme oliveira & vicente daye,4,3
+Carlos & Errejota,carlos & errejota,4,2
+Carlos Spinola & Thiago Cunha,carlos spinola & thiago cunha,4,2
 Dellani & Martin,dellani & martin,4,2
 Andressa & Carbeauty,andressa & carbeauty,3,1
 Bauer & Gustavo Dias,bauer & gustavo dias,2,2
@@ -23,7 +24,6 @@ Bell & Greowtty,bell & greowtty,2,1
 Carlindo & Marcelo,carlindo & marcelo,2,1
 Carlos & Carlos,carlos & carlos,2,1
 Carlos Spinola & Cássio Brancaleone,carlos spinola & cassio brancaleone,2,1
-Carlos Spinola & Thiago Cunha,carlos spinola & thiago cunha,2,1
 Chueiry & Metusa,chueiry & metusa,2,1
 Crothen & Erick,crothen & erick,2,1
 Elder Mancini & Glaicon,elder mancini & glaicon,2,1
@@ -37,10 +37,11 @@ Zangalli & Zangalli pai,zangalli & zangalli pai,2,1
 Andressa & Carlindo,andressa & carlindo,1,1
 Andressa & Reva,andressa & reva,1,1
 Andressa & Vicente,andressa & vicente,1,1
+Carlos & Rafael,carlos & rafael,1,1
 Carlos & Vande,carlos & vande,1,1
 Daniel & Rodrigo,daniel & rodrigo,1,1
 Daniel Gentil & Marcel Zulian,daniel gentil & marcel zulian,1,1
-Erick & Fabio,erick & fabio,1,1
+Erick & Fábio,erick & fabio,1,1
 Erick & Glauber,erick & glauber,1,1
 Fabio & Luiz,fabio & luiz,1,1
 Felipe Familiar & Langa,felipe familiar & langa,1,1
@@ -53,3 +54,4 @@ Mateus & Matheus,mateus & matheus,1,1
 Rafael Mendes & Rogério Nascimento,rafael mendes & rogerio nascimento,1,1
 Reva & Samuel,reva & samuel,1,1
 Samuel & Thiago Mattos,samuel & thiago mattos,1,1
+Susan Ferreira & Vini Chaca,susan ferreira & vini chaca,1,1

@@ -1,6 +1,61 @@
 tid,tournament_name,start_date,month,raw_team,team_name,team_key,player_1,player_2,deck_1,deck_2,deck_url_1,deck_url_2,deck_name_pt_1,deck_name_pt_2,deck_name_en_1,deck_name_en_2,colecao_1,colecao_2,map_status,missing_players,missing_decks
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Carbeauty & Andressa,Carbeauty & Andressa,andressa & carbeauty,Carbeauty,Andressa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Chueiry & Vicente,Chueiry & Vicente,chueiry & vicente,Chueiry,Vicente,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Felipe Familiar & Langa,Felipe Familiar & Langa,felipe familiar & langa,Felipe Familiar,Langa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Fabio & Luiz,Fábio & Luiz,fabio & luiz,Fabio,Luiz,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Glauber & Erick,Glauber & Erick,erick & glauber,Glauber,Erick,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Juliano & Mateus,Juliano & Mateus,juliano & mateus,Juliano,Mateus,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Marcos Sartori & Bauer,Marcos Sartori & Bauer,bauer & marcos sartori,Marcos Sartori,Bauer,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Martin & Jorel,Martin & Jorel,jorel & martin,Martin,Jorel,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Reva & Boone,Reva & Boone,boone & reva,Reva,Boone,,,,,,,,,,,manual,0,1
 liga-2x2-online-s1-e01,Liga 2x2 Online S1-E01,2026-01-29,2026-01,Samuel Maia & Thiago,Samuel & Thiago,samuel & thiago,Samuel,Thiago,,,,,,,,,,,parsed,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Bauer & Langa,Bauer & Langa,bauer & langa,Bauer,Langa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Carlos & Errejota,Carlos & Errejota,carlos & errejota,Carlos,Errejota,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Chueiry & Vicente,Chueiry & Vicente,chueiry & vicente,Chueiry,Vicente,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Erick & Fábio,Erick & Fábio,erick & fabio,Erick,Fábio,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Gustavo Dias & Udo,Gustavo Dias & Udo,gustavo dias & udo,Gustavo Dias,Udo,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Jorel & Martin,Jorel & Martin,jorel & martin,Jorel,Martin,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Juliano & Mateus,Juliano & Mateus,juliano & mateus,Juliano,Mateus,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Marcelo & Samuel,Marcelo & Samuel,marcelo & samuel,Marcelo,Samuel,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Marcos Sartori & Arthur Sartori,Marcos Sartori & Arthur Sartori,arthur sartori & marcos sartori,Marcos Sartori,Arthur Sartori,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Reva & Boone,Reva & Boone,boone & reva,Reva,Boone,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Samuel Maia & Thiago,Samuel Maia & Thiago,samuel & thiago,Samuel,Thiago,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e02,Liga 2x2 Online S1-E02,2026-02-05,2026-02,Vande & Joao Marmentini,Vande & João Marmentini,joao marmentini & vande,Vande,João Marmentini,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Carlos & Errejota,Carlos & Errejota,carlos & errejota,Carlos,Errejota,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Fernando Boone & Reva,Fernando Boone & Reva,boone & reva,Boone,Reva,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Jorel & Martin,Jorel & Martin,jorel & martin,Jorel,Martin,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Langa & Bauer,Langa & Bauer,bauer & langa,Langa,Bauer,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Marcos Sartori & Arthur Sartori,Marcos Sartori & Arthur Sartori,arthur sartori & marcos sartori,Marcos Sartori,Arthur Sartori,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Mateus & Juliano,Mateus & Juliano,juliano & mateus,Mateus,Juliano,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Vande & João Marmentini,Vande & João Marmentini,joao marmentini & vande,Vande,João Marmentini,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e03,Liga 2x2 Online S1-E03,2026-02-19,2026-02,Vicente & Thiago Borini,Vicente & Thiago Borini,borini & vicente,Vicente,Borini,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Andressa & Carlindo,Andressa & Carlindo,andressa & carlindo,Andressa,Carlindo,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Bauer & Langa,Bauer & Langa,bauer & langa,Bauer,Langa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Boone & Reva,Boone & Reva,boone & reva,Boone,Reva,,,,,,,,,,,manual,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Chueiry & Vicente,Chueiry & Vicente,chueiry & vicente,Chueiry,Vicente,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Glauber & João Marmentini,Glauber & João Marmentini,glauber & joao marmentini,Glauber,João Marmentini,,,,,,,,,,,manual,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Jorel & Martin,Jorel & Martin,jorel & martin,Jorel,Martin,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Marcos Sartori & Arthur Sartori,Marcos Sartori & Arthur Sartori,arthur sartori & marcos sartori,Marcos Sartori,Arthur Sartori,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Mateus & Juliano,Mateus & Juliano,juliano & mateus,Mateus,Juliano,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Rafael & Carlos,Rafael & Carlos,carlos & rafael,Rafael,Carlos,,,,,,,,,,,manual,0,1
 liga-2x2-online-s1-e04,Liga 2x2 Online S1-E04,2026-03-05,2026-03,Zangalli & Zangalli pai,Zangalli & Zangalli pai,zangalli & zangalli pai,Zangalli,Zangalli pai,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Bauer & Langa,Bauer & Langa,bauer & langa,Bauer,Langa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Cássio e Carlos,Cássio & Carlos,carlos & cassio,Cássio,Carlos,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Dellani e Martin,Dellani & Martin,dellani & martin,Dellani,Martin,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Mateus e Juliano,Mateus & Juliano,juliano & mateus,Mateus,Juliano,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Reva e Boone,Reva & Boone,boone & reva,Reva,Boone,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Vande e João Marmentini,Vande & João Marmentini,joao marmentini & vande,Vande,João Marmentini,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Vicente e Andressa,Vicente & Andressa,andressa & vicente,Vicente,Andressa,,,,,,,,,,,manual,0,1
+liga-2x2-online-s1-e05,Liga 2x2 Online S1-E05,2026-03-19,2026-03,Zangas e Vina,Zangas & Vina,vina & zangas,Zangas,Vina,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Bells & Greowtty,Bells & Greowtty,bells & greowtty,Bells,Greowtty,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Guilherme Oliveira & Vicente Daye,Guilherme Oliveira & Vicente Daye,guilherme oliveira & vicente daye,Guilherme Oliveira,Vicente Daye,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Marcelo & Carlindo,Marcelo & Carlindo,carlindo & marcelo,Marcelo,Carlindo,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Marcos Sartori & Arthur Sartori,Marcos Sartori & Arthur Sartori,arthur sartori & marcos sartori,Marcos Sartori,Arthur Sartori,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Martin & Jorel,Martin & Jorel,jorel & martin,Martin,Jorel,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Mateus & Matheus,Mateus & Matheus,mateus & matheus,Mateus,Matheus,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e02,Liga 2x2 Online S3-E02,2026-07-23,2026-07,Reva & Vande,Reva & Vande,reva & vande,Reva,Vande,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e03,Liga 2x2 Online S3-E03,2026-08-06,2026-08,Felipe & Pinho,Felipe & Pinho,felipe & pinho,Felipe,Pinho,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e03,Liga 2x2 Online S3-E03,2026-08-06,2026-08,Guilherme Oliveira & Vicente Daye,Guilherme Oliveira & Vicente Daye,guilherme oliveira & vicente daye,Guilherme Oliveira,Vicente Daye,,,,,,,,,,,manual,0,1
 liga-2x2-online-s3-e03,Liga 2x2 Online S3-E03,2026-08-06,2026-08,Rafael Silva & Kukaowty,Kukaowty & Rafael Silva,kukaowty & rafael silva,Rafael Silva,Kukaowty,,,,,,,,,,,parsed,0,1
+liga-2x2-online-s3-e03,Liga 2x2 Online S3-E03,2026-08-06,2026-08,Reva & Vande,Reva & Vande,reva & vande,Reva,Vande,,,,,,,,,,,manual,0,1
+liga-2x2-online-s3-e03,Liga 2x2 Online S3-E03,2026-08-06,2026-08,Thiago Cunha & Carlos Spinola,Thiago Cunha & Carlos Spinola,carlos spinola & thiago cunha,Thiago Cunha,Carlos Spinola,,,,,,,,,,,manual,0,1
