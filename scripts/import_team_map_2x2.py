@@ -49,10 +49,10 @@ OUTPUT_COLUMNS = [
 COLUMN_ALIASES = {
     "tid": ["tid", "evento", "event", "tournament"],
     "raw_team": ["raw_team", "dupla", "team", "time"],
-    "player_1": ["player_1", "player 1", "jogador 1"],
-    "player_2": ["player_2", "player 2", "jogador 2"],
-    "deck_1": ["deck_1", "deck 1"],
-    "deck_2": ["deck_2", "deck 2"],
+    "player_1": ["player_1", "player 1", "player1", "jogador 1", "jogador1"],
+    "player_2": ["player_2", "player 2", "player2", "jogador 2", "jogador2"],
+    "deck_1": ["deck_1", "deck 1", "deck1"],
+    "deck_2": ["deck_2", "deck 2", "deck2"],
 }
 
 

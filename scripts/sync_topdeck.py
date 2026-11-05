@@ -390,6 +390,13 @@ def parse_two_by_two_raw_team(raw_team: object) -> dict:
     deck_part = None
     if "//" in text:
         team_part, deck_part = re.split(r"\s*//\s*", text, maxsplit=1)
+    else:
+        # Alguns resultados do TopDeck usam "Jogador A & Jogador B - Deck A + Deck B"
+        # em vez do separador habitual "//". Só interpreta o hífen como separador
+        # quando a parte anterior já forma uma dupla, para não dividir nomes válidos.
+        dashed_parts = re.split(r"\s+-\s+", text, maxsplit=1)
+        if len(dashed_parts) == 2 and len(split_two_by_two_values(dashed_parts[0])) >= 2:
+            team_part, deck_part = dashed_parts
 
     players = split_two_by_two_values(team_part)[:2]
     decks = split_two_by_two_values(deck_part)[:2] if deck_part else []
@@ -537,6 +544,10 @@ def resolve_two_by_two_team_info(
         candidate_keys = [raw_key, normalize_team_key(parsed.get("team_name"))]
         if len(parsed["players"]) >= 2:
             candidate_keys.append(two_by_two_player_pair_key(parsed["players"][0], parsed["players"][1]))
+            aliased_players = [
+                resolve_player_alias(player, player_aliases) for player in parsed["players"][:2]
+            ]
+            candidate_keys.append(two_by_two_player_pair_key(*aliased_players))
         for key in dict.fromkeys([key for key in candidate_keys if key]):
             manual = team_map.get((tid_text, key))
             if manual:
