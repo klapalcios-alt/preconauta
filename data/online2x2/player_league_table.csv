@@ -1,10 +1,10 @@
 player_name,league_points,eventos,deck_principal
+Martin,23,16,Lorehold Spirit
 Vande,23,15,Endless Punishment
 Marcos Sartori,22,14,Festa dos Planeswalker
 Arthur Sartori,21,13,Scions & Spellcraft
+Jorel,21,13,Turtle Power!
 Reva,20,17,"Ave, Caesar"
-Martin,20,15,Lorehold Spirit
-Jorel,18,12,Turtle Power!
 Carlos,16,10,Saída do Exílio
 Greowtty,15,10,Blast from the Past
 Bells,14,9,Quandrix Unlimited
@@ -15,19 +15,19 @@ Mateus,11,9,Jeskai Striker
 Boone,10,9,Içar Velas
 Juliano,10,8,Içar Velas
 Langa,10,7,Içar Velas
+Thiago,10,4,Dance of the Elements
+Pinho,9,6,Counter Blitz
 Cássio,8,5,Animated Army
 Samuel,8,4,Prismari Artistry
 Chueiry,7,5,Family Matters
 Felipe,7,5,Tricky Terrain
-Pinho,7,5,Counter Blitz
-Thiago,7,3,Dance of the Elements
+Borini,6,5,Abzan Armor
 Andressa,6,4,Temur Roar
 Erick,6,4,Endless Punishment
 Carlos Spinola,6,3,Devorarrrdores de Mentes
 Guilherme,5,3,Dance of the Elements
 Guilherme Oliveira,5,3,Prismari Artistry
 Vicente Daye,5,3,Doom Prevails
-Borini,4,4,Abzan Armor
 Gustavo Dias,4,4,Quandrix Unlimited
 Dellani,4,2,Festa dos Planeswalker
 Errejota,4,2,
@@ -36,11 +36,13 @@ Carlindo,3,2,
 Marcelo,3,2,
 Rogério Nascimento,3,2,World Shaper
 Carbeauty,3,1,
+Jhony,3,1,Sultai Arisen
 Glauber,2,2,
 Bell,2,1,Virtude e Valor
 Crothen,2,1,Blight Curse
 Cássio Brancaleone,2,1,Prismari Artistry
 Elder Mancini,2,1,Counter Blitz
+Felipe - Silverquill Influence,2,1,
 Glaicon,2,1,Enxame Tiranídeo
 JoÃo Marmentini,2,1,Lorehold Spirit
 Kukaowty,2,1,
@@ -49,6 +51,7 @@ Pedro Boaro,2,1,Silverquill Influence
 Rafael Silva,2,1,
 Romano,2,1,Silverquill Influence
 Vina,2,1,
+Willian,2,1,Temur Roar
 Zangalli,2,1,
 Zangalli pai,2,1,
 Zangas,2,1,
