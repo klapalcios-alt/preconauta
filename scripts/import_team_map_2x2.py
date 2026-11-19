@@ -86,7 +86,7 @@ def read_xlsx_rows(path: Path) -> list[dict]:
         if sheet is None:
             return []
         rel_id = sheet.attrib["{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"]
-        target = rel_map[rel_id]
+        target = rel_map[rel_id].lstrip("/")
         if not target.startswith("xl/"):
             target = f"xl/{target}"
 

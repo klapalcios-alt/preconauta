@@ -377,7 +377,12 @@ def split_two_by_two_values(value: object) -> list[str]:
     text = clean_player_name(value)
     if not text:
         return []
-    parts = re.split(r"\s*(?:&|\+|\be\b|\band\b|,|/)\s*", text, flags=re.IGNORECASE)
+    # Separadores fortes primeiro: evita cortar nomes de deck como
+    # "Scions and Spellcraft" quando a dupla ja usa "&" ou "+".
+    parts = [p.strip() for p in re.split(r"\s*(?:&|\+|,|/)\s*", text) if p and p.strip()]
+    if len(parts) >= 2:
+        return parts
+    parts = re.split(r"\s+(?:e|and)\s+", text, flags=re.IGNORECASE)
     return [p.strip() for p in parts if p and p.strip()]
 
 
@@ -528,6 +533,57 @@ def find_deck_by_name(deck_label: object, deck_map: dict) -> dict | None:
     return None
 
 
+def two_by_two_names_match(a: object, b: object) -> bool:
+    """
+    Compara nomes de jogador de forma tolerante a apelidos/grafia:
+    igual, prefixo ("Andre" ~ "Andre Romano", "Zanga" ~ "Zangalli"),
+    um nome igual a um token do outro ("Castanhari" ~ "Arthur Castanhari")
+    ou grafia muito proxima ("Delani" ~ "Dellani").
+    """
+    ka, kb = normalize_lookup_key(a), normalize_lookup_key(b)
+    if not ka or not kb:
+        return False
+    if ka == kb:
+        return True
+    short, long_ = sorted([ka, kb], key=len)
+    if len(short) >= 3 and long_.startswith(short):
+        return True
+    if short in long_.split():
+        return True
+    from difflib import SequenceMatcher
+
+    return SequenceMatcher(None, ka, kb).ratio() >= 0.85
+
+
+def fuzzy_find_two_by_two_manual(
+    tid: str,
+    players: list[str],
+    team_map: dict[tuple[str, str], dict],
+) -> tuple[dict | None, bool]:
+    """
+    Procura na planilha (mesmo evento) a unica linha cujos DOIS jogadores
+    casam com os jogadores da TopDeck. Retorna (linha, invertido), onde
+    invertido=True indica que player_1 da TopDeck e o player_2 da planilha.
+    """
+    if len(players) < 2:
+        return None, False
+    rows = {}
+    for (map_tid, _), item in team_map.items():
+        if map_tid == tid:
+            rows[id(item)] = item
+
+    matches = []
+    for item in rows.values():
+        m1, m2 = item.get("player_1"), item.get("player_2")
+        if two_by_two_names_match(players[0], m1) and two_by_two_names_match(players[1], m2):
+            matches.append((item, False))
+        elif two_by_two_names_match(players[0], m2) and two_by_two_names_match(players[1], m1):
+            matches.append((item, True))
+    if len(matches) == 1:
+        return matches[0]
+    return None, False
+
+
 def resolve_two_by_two_team_info(
     tid: object,
     raw_team: object,
@@ -552,6 +608,27 @@ def resolve_two_by_two_team_info(
             manual = team_map.get((tid_text, key))
             if manual:
                 break
+
+    if not manual and tid_text and len(parsed["players"]) >= 2:
+        # Planilha com apelido diferente da TopDeck: aproveita so os DECKS da
+        # planilha e mantem os nomes da TopDeck (evita fragmentar jogadores).
+        aliased = [resolve_player_alias(p, player_aliases) for p in parsed["players"][:2]]
+        fuzzy, swapped = fuzzy_find_two_by_two_manual(tid_text, aliased, team_map)
+        if fuzzy:
+            d1, d2 = fuzzy.get("deck_1"), fuzzy.get("deck_2")
+            u1, u2 = fuzzy.get("deck_url_1"), fuzzy.get("deck_url_2")
+            if swapped:
+                d1, d2, u1, u2 = d2, d1, u2, u1
+            manual = {
+                "player_1": aliased[0],
+                "player_2": aliased[1],
+                "deck_1": d1,
+                "deck_2": d2,
+                "deck_url_1": u1,
+                "deck_url_2": u2,
+                "team_name": None,
+                "_fuzzy": True,
+            }
 
     player_1 = clean_player_name(manual.get("player_1") if manual else None) or (
         parsed["players"][0] if len(parsed["players"]) >= 1 else None
@@ -580,7 +657,10 @@ def resolve_two_by_two_team_info(
     canonical_team_name = canonical_two_by_two_team_name(player_1, player_2)
     team_name = clean_player_name(manual.get("team_name") if manual else None) or canonical_team_name or parsed.get("team_name") or raw_team_text
 
-    map_status = "manual" if manual else ("parsed" if player_1 and player_2 else "missing")
+    if manual and manual.get("_fuzzy"):
+        map_status = "manual_fuzzy"
+    else:
+        map_status = "manual" if manual else ("parsed" if player_1 and player_2 else "missing")
     return {
         "tid": tid_text,
         "raw_team": raw_team_text,
@@ -1050,37 +1130,41 @@ def compute_fourth_tiebreak_from_matches(matches_df: pd.DataFrame, standings_df:
 
 def apply_tied_first_place_points(df: pd.DataFrame, tol: float = 1e-9) -> pd.DataFrame:
     """
-    Se houver empate tecnico no topo (points + win_rate + opp_win_rate),
-    todos os empatados recebem 3 pontos de liga.
+    Se houver empate tecnico no topo, todos os empatados recebem 3 pontos de liga.
+
+    Empate so existe se TODOS os criterios disponiveis forem iguais:
+    points, win_rate, opp_win_rate e, quando a TopDeck envia (eventos 2x2/Standard),
+    game_win_rate (GW%) e opp_game_win_rate (OGW%). Por ultimo, o 4o criterio
+    calculado a partir das partidas (opp2_win_rate_val).
     """
     if df.empty:
         return df
 
     has_4th = "opp2_win_rate_val" in df.columns
+    base_cols = ["points_val", "win_rate_val", "opp_win_rate_val"]
+    extra_cols = [c for c in ("game_win_rate_val", "opp_game_win_rate_val") if c in df.columns]
 
     for tid, idx in df.groupby("tid").groups.items():
         group = df.loc[idx]
-        valid = group[["points_val", "win_rate_val", "opp_win_rate_val"]].notna().all(axis=1)
+        valid = group[base_cols].notna().all(axis=1)
         valid_group = group[valid]
         if len(valid_group) < 2:
             continue
 
-        points_cmp = valid_group["points_val"]
-        win_cmp = valid_group["win_rate_val"]
-        opp_cmp = valid_group["opp_win_rate_val"]
+        top_mask = pd.Series(True, index=valid_group.index)
+        cmp_cols = list(base_cols)
+        for col in extra_cols:
+            # So usa GW%/OGW% se o evento tiver o dado para todos os participantes validos.
+            if pd.to_numeric(valid_group[col], errors="coerce").notna().all():
+                cmp_cols.append(col)
 
-        top_points = points_cmp.max()
-        top_mask = points_cmp >= (top_points - tol)
-        if not top_mask.any():
-            continue
+        for col in cmp_cols:
+            values = pd.to_numeric(valid_group[col], errors="coerce")
+            top_val = values[top_mask].max()
+            top_mask = top_mask & (values >= (top_val - tol))
+            if top_mask.sum() < 2:
+                break
 
-        top_win = win_cmp[top_mask].max()
-        top_mask = top_mask & (win_cmp >= (top_win - tol))
-        if not top_mask.any():
-            continue
-
-        top_opp = opp_cmp[top_mask].max()
-        top_mask = top_mask & (opp_cmp >= (top_opp - tol))
         tied_idx = valid_group.index[top_mask]
 
         if len(tied_idx) < 2:
@@ -1153,6 +1237,10 @@ def build_official_event_rank_df(
     df["points_val"] = pd.to_numeric(df.get("points"), errors="coerce")
     df["win_rate_val"] = pd.to_numeric(df.get("win_rate"), errors="coerce")
     df["opp_win_rate_val"] = pd.to_numeric(df.get("opp_win_rate"), errors="coerce")
+    if "game_win_rate" in df.columns:
+        df["game_win_rate_val"] = pd.to_numeric(df["game_win_rate"], errors="coerce")
+    if "opp_game_win_rate" in df.columns:
+        df["opp_game_win_rate_val"] = pd.to_numeric(df["opp_game_win_rate"], errors="coerce")
     df["opp2_win_rate_val"] = pd.NA
     if matches_df is not None and not matches_df.empty:
         fourth_df = compute_fourth_tiebreak_from_matches(matches_df, standings_df)
@@ -1982,6 +2070,20 @@ def main():
                     player_name_by_pid[(tid, pid)] = name
 
                 deck_url = canonicalize_url(extract_deck_url(s))
+                if not (deck_url and deck_url in deck_map):
+                    # Lista colada sem link do Moxfield: tenta achar o precon pelo comandante
+                    # (via deck_aliases.json, ex.: "Pantlaza, Sun-Favored" -> "Veloci-Ramp-Tor").
+                    commander = extract_commanders(s)
+                    hit = None
+                    if commander:
+                        hit = find_deck_by_name(commander, deck_map)
+                        if not hit:
+                            for part in str(commander).split(" / "):
+                                hit = find_deck_by_name(part, deck_map)
+                                if hit:
+                                    break
+                    if hit and hit.get("deck_url"):
+                        deck_url = hit["deck_url"]
                 name_key = normalize_player_name(name)
                 if deck_url:
                     if pid:
@@ -2001,6 +2103,8 @@ def main():
                         "points": s.get("points"),
                         "win_rate": win_rate,
                         "opp_win_rate": opp_wr,
+                        "game_win_rate": s.get("gameWinRate"),
+                        "opp_game_win_rate": s.get("opponentGameWinRate"),
                         "decklist": extract_decklist(s),
                         "commanders": extract_commanders(s),
                     }
@@ -2117,6 +2221,8 @@ def main():
             "points",
             "win_rate",
             "opp_win_rate",
+            "game_win_rate",
+            "opp_game_win_rate",
             "decklist",
             "commanders",
         ]
