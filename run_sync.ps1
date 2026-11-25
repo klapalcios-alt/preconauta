@@ -1,69 +1,43 @@
-$keyPath = Join-Path $PSScriptRoot "topdeck_key.local.txt"
+param(
+    # Reprocessa usando apenas os RAW locais (data/raw), sem chamar a API da TopDeck.
+    [switch]$Offline
+)
 
-function Get-ManualSheetPath {
-    param([string]$FileName)
+$ErrorActionPreference = "Stop"
 
-    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($FileName)
-    $roots = @($PSScriptRoot, (Split-Path -Parent $PSScriptRoot))
-
-    $candidates = @(
-        (Join-Path $PSScriptRoot $FileName),
-        (Join-Path $PSScriptRoot $baseName),
-        (Join-Path (Split-Path -Parent $PSScriptRoot) $FileName),
-        (Join-Path (Split-Path -Parent $PSScriptRoot) $baseName)
-    )
-
-    foreach ($candidate in $candidates) {
-        if (Test-Path $candidate) {
-            return (Resolve-Path $candidate).Path
-        }
-    }
-
-    foreach ($root in $roots) {
-        foreach ($ext in @(".xlsx", ".xlsm", ".csv", ".xls")) {
-            $candidate = Join-Path $root "$baseName$ext"
-            if (Test-Path $candidate) {
-                return (Resolve-Path $candidate).Path
-            }
-        }
-
-        $matches = Get-ChildItem -Path $root -File -ErrorAction SilentlyContinue |
-            Where-Object {
-                $name = $_.Name
-                $base = $_.BaseName
-                $name -eq $FileName -or $name -eq $baseName -or $name -like "$baseName*" -or $base -like "$baseName*"
-            }
-
-        if ($matches) {
-            return (Resolve-Path $matches[0].FullName).Path
-        }
-    }
-
-    return $null
+if (-not (Get-Command python -ErrorAction SilentlyContinue)) {
+    throw "Python nao encontrado no PATH. Instale o Python 3 (python.org) e rode de novo."
+}
+python -c "import pandas, requests" 2>$null
+if ($LASTEXITCODE -ne 0) {
+    throw "Faltam dependencias. Rode: python -m pip install pandas requests"
 }
 
-if (-not $env:TOPDECK_API_KEY) {
-    if (Test-Path $keyPath) {
-        $key = Get-Content -Path $keyPath -Raw
-        $env:TOPDECK_API_KEY = $key.Trim()
-    } else {
+if ($Offline) {
+    $env:TOPDECK_OFFLINE = "1"
+} elseif (-not $env:TOPDECK_API_KEY) {
+    $keyPath = Join-Path $PSScriptRoot "topdeck_key.local.txt"
+    if (-not (Test-Path $keyPath)) {
         throw "Defina TOPDECK_API_KEY no ambiente ou crie topdeck_key.local.txt na raiz do projeto."
     }
+    $env:TOPDECK_API_KEY = (Get-Content -Path $keyPath -Raw).Trim()
 }
 
 Push-Location $PSScriptRoot
 try {
-    foreach ($sheetName in @("2x2 online.xlsx", "2x2 presencial.xlsx")) {
-        $sheetPath = Get-ManualSheetPath $sheetName
-        if ($sheetPath) {
-            Write-Host "Importando $sheetPath"
-            python (Join-Path $PSScriptRoot "scripts/import_team_map_2x2.py") $sheetPath
+    foreach ($sheet in @("2x2 online.xlsx", "2x2 presencial.xlsx")) {
+        if (Test-Path $sheet) {
+            Write-Host "Importando $sheet"
+            python scripts/import_team_map_2x2.py $sheet
+            if ($LASTEXITCODE -ne 0) { throw "Falha ao importar $sheet" }
         } else {
-            Write-Warning "Planilha nao encontrada: $sheetName"
+            Write-Warning "Planilha nao encontrada: $sheet"
         }
     }
 
-    python (Join-Path $PSScriptRoot "scripts/sync_topdeck.py")
+    python scripts/sync_topdeck.py
+    if ($LASTEXITCODE -ne 0) { throw "Falha no sync_topdeck.py" }
 } finally {
+    if ($Offline) { Remove-Item Env:TOPDECK_OFFLINE -ErrorAction SilentlyContinue }
     Pop-Location
 }

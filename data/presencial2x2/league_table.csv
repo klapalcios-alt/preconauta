@@ -1,53 +1,55 @@
 player_name,league_points,eventos,deck_principal
-Metusa,43,29,Jump Scare!
-Jorel,42,25,Turtle Power!
-Rudzzt,41,26,Quandrix Quântica
-Martin,39,22,Lorehold Spirit
-Sônia,38,22,Veloci-E-Rápido
-Melk,34,18,Counter Inteligence
-Matheus,30,23,Domínio das Fadinas
-Banshee,30,18,Prismari Artistry
-Nobru,28,22,Içar Velas
-Arthur Castanhari,27,15,Turtle Power!
-Zangalli,27,15,Endless Punishment
-Murilo Oyafuso,22,11,Silverquill Influence
-Oscar,21,17,Jeskai Striker
-Beck,20,17,Içar Velas
-Tarik,19,15,Ameaça Mutante
-Nathan,15,12,Silverquill Influence
+Metusa,48,31,Jump Scare!
+Jorel,46,27,Turtle Power!
+Rudzzt,45,28,Quandrix Quântica
+Martin,42,23,Lorehold Spirit
+Sônia,40,24,Veloci-E-Rápido
+Melk,36,20,Counter Inteligence
+Banshee,34,20,Multiverse Reforged
+Matheus,32,24,Domínio das Fadinas
+Nobru,32,23,Içar Velas
+Arthur Castanhari,29,16,Turtle Power!
+Zangalli,28,15,Endless Punishment
+Oscar,24,19,Jeskai Striker
+Murilo Oyafuso,24,12,Silverquill Influence
+Tarik,23,16,Ameaça Mutante
+Beck,22,19,Içar Velas
+Nathan,17,13,Silverquill Influence
+Chueiry,15,11,Festa dos Planeswalker
 André,13,10,Quandrix Unlimited
-Chueiry,12,9,Festa dos Planeswalker
-Denilson,11,7,Festa dos Planeswalker
+Denilson,13,9,Festa dos Planeswalker
+Rogério,12,8,Doom Prevails
+Beatriz,11,8,Devorarrrdores de Mentes
+Gustavo Dias,11,7,Temur Roar
 Vini,10,8,Veloci-E-Rápido
-Rogério,10,7,Doom Prevails
-Gustavo Dias,10,6,Temur Roar
-Beatriz,9,7,Devorarrrdores de Mentes
-Susan,7,6,Turtle Power!
-Theo,7,6,Turtle Power!
-Rafael Cruz,7,5,
+Susan,9,7,Turtle Power!
+Rafael Cruz,9,6,
+Dellani,9,5,Temur Roar
+André Romano,8,7,
+Theo,8,7,Turtle Power!
+Chaca,8,6,Creative Energy
+Leonardo,7,6,Avengers Assemble
 Samy,7,4,Domínio das Fadinas
 Langa,7,3,Içar Velas
-André Romano,6,6,
-Chaca,6,5,Creative Energy
-Leonardo,6,5,Avengers Assemble
+Gustavo Alexandre,6,4,Silverquill Influence
 Luciano,6,4,Limit Break
-Dellani,5,3,Temur Roar
 Lucas,5,3,Exploradores das Profundezas
 Gus,4,3,Içar Velas
-Gustavo Alexandre,4,3,Silverquill Influence
 Bauer,4,2,Içar Velas
 Carlos Kit,4,2,Angels: They're Just Like Us but Cooler and With Wings
 Manfrinato,4,2,Comida e Sociedade
+Adriano,3,3,Reign of Dragons
 Matheus Diogo,3,3,Cavaleiros de Rohan
 Rogerio,3,3,Doom Prevails
 Vinicius,3,3,Silverquill Influence
 Andre Romano,3,2,
 Guga,3,2,Mardu Surge
+Gustavo,3,2,Silverquill Influence
 Johann,3,2,Dinastias Necron
 Luiz,3,2,Calling All Angels
+Pedro,3,2,Içar Velas
 marcus vinicius werneck esteves,3,2,Endless Punishment
 Vina,3,1,Scions & Spellcraft
-Adriano,2,2,Veloci-E-Rápido
 Berka,2,2,Death Toll
 Gabriel,2,2,Blight Curse
 João Vitor Torres,2,2,
@@ -77,7 +79,6 @@ Murilo Ferreira,2,1,Içar Velas
 Nakamura,2,1,Virtude e Valor
 Nathalia,2,1,Revival Trance
 Nathalia Tamura,2,1,
-Pedro,2,1,Içar Velas
 Ricardo,2,1,Counter Blitz
 Ruanito,2,1,Turtle Power!
 Susan Ferreira,2,1,
@@ -103,12 +104,12 @@ Freire,1,1,
 Gabi,1,1,Squirreled Away
 Gabriel Arents,1,1,Animated Army
 Guilherme Portela,1,1,
-Gustavo,1,1,Avengers Assemble
 Hermann,1,1,
 João,1,1,
 João Marcelo,1,1,
 João Marmentini,1,1,Squirreled Away
 João Vitor,1,1,Dance of the Elements
+Julio,1,1,Creative Energy
 Kennao,1,1,Temur Roar
 Luisa,1,1,
 Luiz Henrique,1,1,Temur Roar
@@ -124,6 +125,7 @@ Pudeulko,1,1,
 Rafa,1,1,Turtle Power!
 Rafaela Wernerck,1,1,
 Sami,1,1,
+Thomas,1,1,Landing Party
 Vitinho,1,1,Cavaleiros de Rohan
 Zanga,1,1,
 Zubk,1,1,Devorarrrdores de Mentes

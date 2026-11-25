@@ -7,14 +7,13 @@ from pathlib import Path
 
 from sync_topdeck import (
     TEAM_MAP_2X2_PATH,
+    canonical_two_by_two_team_name,
     clean_player_name,
-    find_deck_by_name,
     load_deck_map_csv,
     load_player_aliases,
-    is_placeholder_deck,
     normalize_lookup_key,
+    resolve_manual_deck,
     resolve_player_alias,
-    canonical_two_by_two_team_name,
     two_by_two_player_pair_key,
 )
 
@@ -87,8 +86,8 @@ def read_xlsx_rows(path: Path) -> list[dict]:
             return []
         rel_id = sheet.attrib["{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id"]
         target = rel_map[rel_id]
-        if not target.startswith("xl/"):
-            target = f"xl/{target}"
+        # O alvo pode ser relativo ("worksheets/sheet1.xml") ou absoluto ("/xl/worksheets/sheet1.xml").
+        target = target.lstrip("/") if target.startswith("/") else f"xl/{target}"
 
         root = ET.fromstring(z.read(target))
         rows = []
@@ -128,60 +127,45 @@ def cell_value(cell, shared_strings: list[str]):
     return text
 
 
-def get_value(row: dict, canonical_name: str) -> str | None:
-    lookup = {normalize_lookup_key(key): value for key, value in row.items()}
+def get_value(lookup: dict, canonical_name: str) -> str | None:
+    """lookup: linha da planilha com cabecalhos ja normalizados (normalize_lookup_key)."""
     for alias in COLUMN_ALIASES[canonical_name]:
-        value = lookup.get(normalize_lookup_key(alias))
-        cleaned = clean_player_name(value)
+        cleaned = clean_player_name(lookup.get(normalize_lookup_key(alias)))
         if cleaned:
             return cleaned
     return None
 
 
-def canonical_team_name(player_1: str | None, player_2: str | None) -> str | None:
-    return canonical_two_by_two_team_name(player_1, player_2)
-
-
 def deck_fields(deck_label: str | None, deck_map: dict, slot: int) -> dict:
-    if is_placeholder_deck(deck_label):
-        return {
-            f"deck_{slot}": None,
-            f"deck_url_{slot}": None,
-            f"deck_name_pt_{slot}": None,
-            f"deck_name_en_{slot}": None,
-            f"colecao_{slot}": None,
-        }
-
-    info = find_deck_by_name(deck_label, deck_map) if deck_label else None
-    deck_name_pt = info.get("deck_name_pt") if info else clean_player_name(deck_label)
-    deck_name_en = info.get("deck_name_en") if info else None
+    deck = resolve_manual_deck(deck_label, None, deck_map)
     return {
-        f"deck_{slot}": deck_name_pt,
-        f"deck_url_{slot}": info.get("deck_url") if info else None,
-        f"deck_name_pt_{slot}": deck_name_pt,
-        f"deck_name_en_{slot}": deck_name_en,
-        f"colecao_{slot}": info.get("colecao") if info else None,
+        f"deck_{slot}": deck["deck_key"],
+        f"deck_url_{slot}": deck["deck_url"],
+        f"deck_name_pt_{slot}": deck["deck_name_pt"],
+        f"deck_name_en_{slot}": deck["deck_name_en"],
+        f"colecao_{slot}": deck["colecao"],
     }
 
 
 def build_map_rows(rows: list[dict], deck_map: dict, player_aliases: dict) -> list[dict]:
     out = []
-    for row in rows:
+    for raw_row in rows:
+        row = {normalize_lookup_key(key): value for key, value in raw_row.items()}
         tid = get_value(row, "tid")
         raw_team = get_value(row, "raw_team")
+        if not tid or not raw_team:
+            continue
         player_1 = resolve_player_alias(get_value(row, "player_1"), player_aliases)
         player_2 = resolve_player_alias(get_value(row, "player_2"), player_aliases)
         deck_1_label = get_value(row, "deck_1")
         deck_2_label = get_value(row, "deck_2")
-        if not tid or not raw_team:
-            continue
 
         item = {column: None for column in OUTPUT_COLUMNS}
         item["tid"] = tid
         item["raw_team"] = raw_team
         item["player_1"] = player_1
         item["player_2"] = player_2
-        item["team_name"] = canonical_team_name(player_1, player_2) or clean_player_name(raw_team)
+        item["team_name"] = canonical_two_by_two_team_name(player_1, player_2) or clean_player_name(raw_team)
         item["team_key"] = two_by_two_player_pair_key(player_1, player_2) or normalize_lookup_key(raw_team)
         item.update(deck_fields(deck_1_label, deck_map, 1))
         item.update(deck_fields(deck_2_label, deck_map, 2))
@@ -249,29 +233,10 @@ def resolve_source_path(source: str | Path) -> Path:
     path = Path(source)
     if path.exists():
         return path
-
-    root = Path(__file__).resolve().parent.parent
-    candidates = [
-        path,
-        root / path.name,
-        root / path.stem,
-        root / f"{path.stem}.xlsx",
-        root / f"{path.stem}.csv",
-        root / f"{path.stem}.xlsm",
-    ]
-    for candidate in candidates:
-        if candidate.exists():
-            return candidate
-
-    for ext in [".xlsx", ".xlsm", ".csv", ".xls"]:
-        guessed = root / f"{path.name}{ext}"
-        if guessed.exists():
-            return guessed
-        guessed = root / f"{path.stem}{ext}"
-        if guessed.exists():
-            return guessed
-
-    return path
+    in_root = Path(__file__).resolve().parent.parent / path.name
+    if in_root.exists():
+        return in_root
+    raise SystemExit(f"Planilha nao encontrada: {source}")
 
 
 def main() -> None:

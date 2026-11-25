@@ -21,8 +21,11 @@ Edite `events.json` na raiz com a lista de TIDs e a liga:
 Execute:
 
 ```powershell
-.\run_sync.ps1
+.\run_sync.ps1           # baixa tudo da TopDeck e regenera os dados
+.\run_sync.ps1 -Offline  # so reprocessa usando os RAW locais (rapido, sem API)
 ```
+
+Usa o Python do sistema (sem venv). Dependencias: `python -m pip install pandas requests`.
 
 Antes disso, a chave da TopDeck deve ficar fora do versionamento:
 
@@ -148,7 +151,7 @@ O workflow em `.github/workflows/deploy-pages.yml` publica apenas:
 Isso evita publicar a chave da API e tambem evita expor o cache bruto em `data/raw/`.
 
 ## Observações
-- `deck_map.csv`, `player_aliases.json` e `Team_map_2x2.csv` ficam na raiz e são globais.
+- `Deck_map.csv`, `player_aliases.json` e `Team_map_2x2.csv` ficam na raiz e são globais.
 - `unmapped_decks.csv` inclui: `tid`, `tournament_name`, `start_date`, `player_name`, `deck_url`.
 - `Team_map_2x2.csv` normaliza duplas e decks em eventos 2x2.
 - Para importar planilha manual 2x2: `python scripts/import_team_map_2x2.py "C:\caminho\planilha.xlsx"`.
