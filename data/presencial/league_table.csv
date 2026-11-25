@@ -9,16 +9,16 @@ Carlos Alexandre Vieira Manfrinato,35,26,Renascer da Rebelião
 Eduardo Bueno,35,26,Peace Offering
 Dellani,35,24,Veloci-E-Rápido
 Jorel Rinaldi de Oliveira,34,27,Quandrix Unlimited
-David Carvalho,34,22,https://moxfield.com/decks/a6xg5ghnH0C-IB5PPqTZBQ
+David Carvalho,34,22,"Ave, Caesar"
 Henrique Alexandre Langa,32,20,Reign of Dragons
 Brazza,31,28,As Hostes de Mordor
 Henrique Guzzo Teixeira,30,23,Wakanda Forever
 Paulo Berka,30,19,Endless Punishment
 Gustavo de Cordova Baron,29,20,Turtle Power!
 Sonia Mara,28,17,Veloci-E-Rápido
+André Romano,27,19,Jeskai Striker
 felipe depetriz marques,26,24,Masters of Evil
 Lewy Caron de Lima,26,20,Family Matters
-André Romano,26,18,Jeskai Striker
 Gustavo Dias Gonçalves,24,19,Squirreled Away
 Oscar Hideki Takekawa Toeda,24,17,Scions & Spellcraft
 Murilo Oyafuso,24,16,World Shaper
@@ -47,9 +47,9 @@ Mateus Raganhan Figênio,11,10,Turtle Power!
 Paulo Ricardo De Oliveira Franceschi,10,9,Dance of the Elements
 Guilherme Portela,10,8,Lorehold Spirit
 Rafael Cruz,10,8,Family Matters
+Douglas Matos,9,7,Jump Scare!
 Luiz Freire,8,7,Masters of Evil
 Yan Porto,8,7,Lorehold Spirit
-Douglas matos,8,6,Jump Scare!
 Gabi,8,6,Endless Punishment
 Gabriel Schmidt,8,5,Counter Blitz
 Denilson Luiz Morais Junior,7,4,Death Toll
@@ -57,6 +57,7 @@ CRISTIANO ESTEVAO DE OLIVEIRA CHIQUITI,6,6,Virtude e Valor
 Beatriz Polli,6,5,Domínio das Fadinas
 Adriano Alves,6,4,Prismari Artistry
 Ana Carolina Correa do Nascimento,6,4,Blame Game
+João Vitor Torres,6,4,Dance of the Elements
 Marcus Vinicius,6,4,Saída do Exílio
 Vinicius Tasca,6,4,Dance of the Elements
 Mário Retondo,5,5,Revival Trance
@@ -65,7 +66,6 @@ Matheus Diogo Ribas,5,4,Cavaleiros de Rohan
 marcus vinicius werneck esteves,5,4,Animated Army
 Nathalia Tamura,5,3,Witherbloom Pestilence
 Joaquin Diogo Carvajo Cantarin,4,3,Blight Curse
-João vitor torres,4,3,Dance of the Elements
 Mickael lutz,4,3,Blight Curse
 Osni de Melo Martins Junior,4,3,Witherbloom Pestilence
 Rogerio Coelho,4,3,Içar Velas
@@ -74,6 +74,7 @@ Augusto Schmidt,4,2,Lorehold Spirit
 Leonardo Anghinoni,4,2,Dance of the Elements
 Carlos Kit,3,2,Rituais de Sangue
 Clausius Duque Reis,3,2,Counter Blitz
+Daniel Gentil,3,2,Cacofonia dos Cabaretti
 LETICIA LUCIANI,3,2,Prismari Artistry
 Shaolin Matador de Porco,3,2,Domine as Marés
 Theo Leal,3,2,Sultai Arisen
@@ -92,24 +93,21 @@ nicolas,2,2,Forças do Império
 Andressa,2,1,Temur Roar
 Ball,2,1,Cavaleiros de Rohan
 Brendon Osinski,2,1,The Fantastic Four
-Daniel Gentil,2,1,Cacofonia dos Cabaretti
 Francisco Oliveira,2,1,World Shaper
 Jean de Souza Batista,2,1,Jeskai Striker
-João Vitor Torres,2,1,Comida e Sociedade
 Luis Eduardo,2,1,Scions & Spellcraft
 Martin,2,1,Silverquill Influence
 Melque,2,1,Enxame Fractius
 Nathan Marques,2,1,Lorehold Spirit
 Oscar Toeda,2,1,Miracle Worker
 Ricardo Persi,2,1,Dinastias Necron
-Salu Salu,2,1,https://moxfield.com/decks/a6xg5ghnH0C-IB5PPqTZBQ
+Salu Salu,2,1,"Ave, Caesar"
 Sheldon Tavares,2,1,Ameaça Mutante
 Yuri Sato dos Reis,2,1,Revival Trance
 Zubk,2,1,Silverquill Influence
 ANSELMO GERONASSO JUNIOR,1,1,Turtle Power!
 Adriano,1,1,Prismari Artistry
 Adriano Alvez,1,1,Prismari Artistry
-Andre Romano,1,1,Blight Curse
 Andril de Oliveira de Pontes,1,1,World Shaper
 Antony Strapa,1,1,Exploradores das Profundezas
 Antônio Luiz Vian Oliveira,1,1,Rituais de Sangue
@@ -118,10 +116,8 @@ Bruno Guimarães,1,1,Blight Curse
 Bruno Mendes,1,1,Endless Punishment
 Caique,1,1,Exploradores das Profundezas
 Cristiano Estevão,1,1,Desert Blom
-Daniel gentil,1,1,Cacofonia dos Cabaretti
 Dimas L Camargo,1,1,Fúria Dracônica
 Diogo Motti,1,1,Scions & Spellcraft
-Douglas Matos,1,1,Wakanda Forever
 EDUARDA CRISTINE DE JESUS,1,1,Quandrix Quântica
 Erik Piaseski,1,1,Avengers Assemble
 FRANCISCO SOAR MARCIANO,1,1,Quick Draw
@@ -134,7 +130,7 @@ Gabriel Salgado,1,1,Witherbloom Pestilence
 Gabriel Teixeira,1,1,Domínio das Fadinas
 Gusta,1,1,Limit Break
 Henrique Ferreira,1,1,Counter Blitz
-Henrique Schneider,1,1,https://moxfield.com/decks/a6xg5ghnH0C-IB5PPqTZBQ
+Henrique Schneider,1,1,"Ave, Caesar"
 ISABELA TRANCOSO VIEIRA,1,1,Counter Inteligence
 Igor Rodrigues,1,1,Scions & Spellcraft
 Ingrid Souza,1,1,Temur Roar

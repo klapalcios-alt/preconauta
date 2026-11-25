@@ -115,9 +115,12 @@ Nas ligas 2x2, a regra segue a quantidade de etapas do formato:
 1. Pontos (match points)
 2. Winrate
 3. Opp Winrate
+4. Game Win Rate (GW%) — só ligas 2x2 (Standard)
+5. Opp Game Win Rate (OGW%) — só ligas 2x2 (Standard)
 
-> Observação: Opponent Game Win Rate não existe em Standard Tournament no TopDeck,
-> por isso não é usado.
+> A colocação vem da TopDeck. O "empate técnico no 1º lugar" (todos os empatados recebem 3 pontos)
+> só é aplicado se **todos** os critérios disponíveis forem iguais.
+> Nas ligas EDH (Mesão) a TopDeck não envia GW%/OGW%, então valem os critérios 1–3.
 
 ## Banimento de decks
 Regras de banimento por performance:

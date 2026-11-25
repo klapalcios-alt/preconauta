@@ -1,7 +1,7 @@
 team_name,team_key,league_points,eventos
 Arthur Sartori & Marcos Sartori,arthur sartori & marcos sartori,21,13
 Jorel & Martin,jorel & martin,21,13
-Bells & Greowtty,bells & greowtty,14,9
+Bells & Greowtty,bells & greowtty,15,10
 João Marmentini & Vande,joao marmentini & vande,13,8
 Reva & Vande,reva & vande,11,6
 Boone & Reva,boone & reva,10,9
@@ -9,19 +9,17 @@ Juliano & Mateus,juliano & mateus,10,8
 Bauer & Langa,bauer & langa,10,6
 Carlos & Cássio,carlos & cassio,8,5
 Felipe & Pinho,felipe & pinho,7,5
+Samuel & Thiago,samuel & thiago,6,3
 Chueiry & Vicente,chueiry & vicente,5,4
 Guilherme & Vicente,guilherme & vicente,5,3
 Guilherme Oliveira & Vicente Daye,guilherme oliveira & vicente daye,5,3
-Samuel & Thiago,samuel & thiago,5,2
 Borini & Vicente,borini & vicente,4,4
 Carlos & Errejota,carlos & errejota,4,2
 Carlos Spinola & Thiago Cunha,carlos spinola & thiago cunha,4,2
 Dellani & Martin,dellani & martin,4,2
 Andressa & Carbeauty,andressa & carbeauty,3,1
-Jhony & Thiago Mattos,jhony & thiago mattos,3,1
 Bauer & Gustavo Dias,bauer & gustavo dias,2,2
 Bauer & Marcos Sartori,bauer & marcos sartori,2,1
-Bell & Greowtty,bell & greowtty,2,1
 Borini & Willian,borini & willian,2,1
 Carlindo & Marcelo,carlindo & marcelo,2,1
 Carlos & Carlos,carlos & carlos,2,1
@@ -30,11 +28,12 @@ Chueiry & Metusa,chueiry & metusa,2,1
 Crothen & Erick,crothen & erick,2,1
 Elder Mancini & Glaicon,elder mancini & glaicon,2,1
 Erick & Rogério Nascimento,erick & rogerio nascimento,2,1
-JoÃo Marmentini & Pedro Boaro,joao marmentini & pedro boaro,2,1
+Jhony & Thiago,jhony & thiago,2,1
+João Marmentini & Pedro Boaro,joao marmentini & pedro boaro,2,1
 Kukaowty & Rafael Silva,kukaowty & rafael silva,2,1
 Martin & Romano,martin & romano,2,1
 Thiago & Vande,thiago & vande,2,1
-Vina & Zangas,vina & zangas,2,1
+Vina & Zangalli,vina & zangalli,2,1
 Zangalli & Zangalli pai,zangalli & zangalli pai,2,1
 Andressa & Carlindo,andressa & carlindo,1,1
 Andressa & Reva,andressa & reva,1,1
@@ -55,5 +54,4 @@ Marcelo F. & Renan,marcelo f & renan,1,1
 Mateus & Matheus,mateus & matheus,1,1
 Rafael Mendes & Rogério Nascimento,rafael mendes & rogerio nascimento,1,1
 Reva & Samuel,reva & samuel,1,1
-Samuel & Thiago Mattos,samuel & thiago mattos,1,1
 Susan Ferreira & Vini Chaca,susan ferreira & vini chaca,1,1
