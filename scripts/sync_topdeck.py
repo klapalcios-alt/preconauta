@@ -218,8 +218,9 @@ def fetch_rounds(tid: str) -> list:
     return data if isinstance(data, list) else []
 
 
-def load_event_data(tid: str, raw_path: str, offline_mode: bool) -> dict | None:
-    """Baixa o evento (ou usa o RAW local). Retorna None quando o evento deve ser pulado."""
+def load_event_data(tid: str, raw_path: str, offline_mode: bool, use_cache: bool = False) -> dict | None:
+    """Baixa o evento (ou usa o RAW local). Retorna None quando o evento deve ser pulado.
+    use_cache=True: usa o RAW local se ele existir e so baixa da TopDeck quando nao existir."""
     def read_raw():
         with open(raw_path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -228,12 +229,12 @@ def load_event_data(tid: str, raw_path: str, offline_mode: bool) -> dict | None:
         with open(raw_path, "w", encoding="utf-8") as f:
             json.dump(payload, f, ensure_ascii=False, indent=2)
 
-    if offline_mode:
+    if offline_mode or (use_cache and os.path.exists(raw_path)):
         if not os.path.exists(raw_path):
             print(f"Erro: RAW local ausente para {tid}. Pulando evento.")
             return None
         data = read_raw()
-        print(f"Modo offline: RAW local carregado para {tid}.")
+        print(f"RAW local carregado para {tid}.")
     else:
         try:
             data = fetch_tournament_query(tid)
@@ -1740,6 +1741,10 @@ def main():
         raise SystemExit("Defina TOPDECK_API_KEY no terminal (nao coloque a key no arquivo).")
     if offline_mode:
         print("Modo offline ativo (TOPDECK_OFFLINE=1): usando apenas RAW local.")
+    # TOPDECK_REFRESH="tid1,tid2": baixa so esses eventos (e os que nao tem RAW); o resto vem do cache.
+    refresh_tids = {t for t in re.split(r"[,\s]+", os.getenv("TOPDECK_REFRESH", "")) if t}
+    if refresh_tids and not offline_mode:
+        print(f"Atualizando da TopDeck so: {', '.join(sorted(refresh_tids))} (+ eventos sem RAW local).")
 
     with open("events.json", "r", encoding="utf-8-sig") as f:
         events = json.load(f)
@@ -1777,11 +1782,12 @@ def main():
         for e in league_events:
             tid = str(e["tid"])
             print(f"\n=== Processando: {tid} ===")
-            data = load_event_data(tid, os.path.join(raw_dir, f"{tid}.json"), offline_mode)
+            use_cache = bool(refresh_tids) and tid not in refresh_tids
+            data = load_event_data(tid, os.path.join(raw_dir, f"{tid}.json"), offline_mode, use_cache)
             if data is None:
                 failed_tids.append(tid)
                 continue
-            parse_event(tid, data, aliases, deck_map, offline_mode, ctx)
+            parse_event(tid, data, aliases, deck_map, offline_mode or use_cache, ctx)
 
         df = pd.DataFrame(ctx["standings"]).reindex(columns=STANDINGS_COLS)
         tables_df = pd.DataFrame(ctx["tables"]).reindex(columns=TABLES_COLS)

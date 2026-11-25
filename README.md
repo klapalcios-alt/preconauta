@@ -23,6 +23,7 @@ Execute:
 ```powershell
 .\run_sync.ps1           # baixa tudo da TopDeck e regenera os dados
 .\run_sync.ps1 -Offline  # so reprocessa usando os RAW locais (rapido, sem API)
+.\run_sync.ps1 -Eventos liga-2x2-presencial-s4-e7   # baixa so esse evento (e os sem RAW); resto do cache
 ```
 
 Usa o Python do sistema (sem venv). Dependencias: `python -m pip install pandas requests`.

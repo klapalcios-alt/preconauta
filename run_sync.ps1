@@ -1,6 +1,9 @@
 param(
     # Reprocessa usando apenas os RAW locais (data/raw), sem chamar a API da TopDeck.
-    [switch]$Offline
+    [switch]$Offline,
+    # Baixa da TopDeck so estes eventos (e os que ainda nao tem RAW); o resto vem do cache.
+    # Ex.: .\run_sync.ps1 -Eventos liga-2x2-presencial-s4-e7
+    [string[]]$Eventos
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,6 +25,7 @@ if ($Offline) {
     }
     $env:TOPDECK_API_KEY = (Get-Content -Path $keyPath -Raw).Trim()
 }
+if ($Eventos) { $env:TOPDECK_REFRESH = ($Eventos -join ",") }
 
 Push-Location $PSScriptRoot
 try {
@@ -39,5 +43,6 @@ try {
     if ($LASTEXITCODE -ne 0) { throw "Falha no sync_topdeck.py" }
 } finally {
     if ($Offline) { Remove-Item Env:TOPDECK_OFFLINE -ErrorAction SilentlyContinue }
+    if ($Eventos) { Remove-Item Env:TOPDECK_REFRESH -ErrorAction SilentlyContinue }
     Pop-Location
 }
