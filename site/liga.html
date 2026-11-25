@@ -1337,19 +1337,19 @@
           setPage(1);
         }, [searchTerm, sortPrimary, sortPrimaryDir, quarter, selectedEvents]);
 
-        const filteredPlayers = useMemo(() => {
-          const term = searchTerm.trim().toLowerCase();
-          return players.filter((p) => {
-            const searchOk =
-              !term ||
-              p.name.toLowerCase().includes(term) ||
-              String(p.favoriteDeck || "").toLowerCase().includes(term);
-            return searchOk;
-          });
-        }, [players, searchTerm]);
+        // Classificacao oficial (Liga 2026, desc) de TODOS os jogadores: define campeao e podio,
+        // independente da busca e da ordenacao escolhida na tabela.
+        const standings = useMemo(
+          () =>
+            [...players].sort(
+              (a, b) => compareLeague2026(a, b, "desc") || a.name.localeCompare(b.name, "pt-BR")
+            ),
+          [players]
+        );
 
+        // Ordena todos os jogadores (posicao real) e so depois aplica a busca, que apenas esconde linhas.
         const rankedPlayers = useMemo(() => {
-          const list = [...filteredPlayers];
+          const list = [...players];
           list.sort((a, b) => {
             const primary =
               sortPrimary === "league2026"
@@ -1358,8 +1358,16 @@
             if (primary !== 0) return primary;
             return a.name.localeCompare(b.name, "pt-BR");
           });
-          return list.map((row, idx) => ({ ...row, rank: idx + 1 }));
-        }, [filteredPlayers, sortPrimary, sortPrimaryDir]);
+          const term = searchTerm.trim().toLowerCase();
+          return list
+            .map((row, idx) => ({ ...row, rank: idx + 1 }))
+            .filter(
+              (p) =>
+                !term ||
+                p.name.toLowerCase().includes(term) ||
+                String(p.favoriteDeck || "").toLowerCase().includes(term)
+            );
+        }, [players, searchTerm, sortPrimary, sortPrimaryDir]);
 
 
         const totalPages = Math.max(1, Math.ceil(rankedPlayers.length / pageSize));
@@ -1375,8 +1383,8 @@
         const pageStart = rankedPlayers.length ? (page - 1) * pageSize + 1 : 0;
         const pageEnd = Math.min(page * pageSize, rankedPlayers.length);
 
-        const champion = useMemo(() => rankedPlayers[0] || null, [rankedPlayers]);
-        const top3 = useMemo(() => rankedPlayers.slice(0, 3), [rankedPlayers]);
+        const champion = standings[0] || null;
+        const top3 = useMemo(() => standings.slice(0, 3).map((row, idx) => ({ ...row, rank: idx + 1 })), [standings]);
 
         useEffect(() => {
           document.querySelectorAll("[data-tilt]").forEach(attachTilt);
